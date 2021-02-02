@@ -1,0 +1,13 @@
+.form-container {
+  width: 500px;
+  margin: 200px auto 0 auto;
+}
+
+.uploader-container {
+  margin: 0 auto;
+  width: 500px;
+}
+
+.dzu-dropzone {
+  overflow: inherit !important;
+}
