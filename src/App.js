@@ -5,7 +5,7 @@ import "./App.css";
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Navbar from "./Navbar";
-import Home from './Home';
+import Home from './home/Home';
 
 function App() {
   return (

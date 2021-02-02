@@ -1,0 +1,26 @@
+.form {
+  &-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  &-group-container {
+    width: 500px;
+    margin: 0 auto;
+  }
+  &-group {
+    width: 48%;
+  }
+}
+
+.uploader-container {
+  margin: 0 auto;
+  width: 500px;
+}
+
+.dzu-dropzone {
+  overflow: inherit !important;
+}
+
+.form-group {
+  text-align: left;
+}

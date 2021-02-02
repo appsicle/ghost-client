@@ -3,13 +3,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css";
 import "./Submit.scss";
 
-import Uploader from "../src/Uploader";
+import Uploader from "./Uploader";
 import { Form, FormGroup, FormInput } from "shards-react";
 
 function Submit() {
   return (
-    <div className="form-container">
-      <Form>
+    <div className="form-group-container">
+      <Form className="form-container">
         <FormGroup>
           <label htmlFor="username">First Name</label>
           <FormInput id="username" />
