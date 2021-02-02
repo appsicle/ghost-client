@@ -17,10 +17,35 @@
   width: 500px;
 }
 
-.dzu-dropzone {
-  overflow: inherit !important;
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 120px;
+  overflow: scroll;
+  margin: 0 auto;
+  position: relative;
+  box-sizing: border-box;
+  transition: all .15s linear;
+  border: 2px solid #d9d9d9;
+  border-radius: 4px;
+  overflow: inherit;
+  border: 2px dashed #adadad;
+  border-radius: 4px;
+}
+
+.file-hover {
+  border: 2px dashed blue !important;
+  background-color: white !important;
 }
 
 .form-group {
   text-align: left;
+}
+
+// override component styles
+.dzu-inputLabel {
+  font-family: inherit;
+  font-weight: inherit;
 }
