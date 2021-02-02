@@ -1,11 +1,16 @@
-import Dropzone from "react-dropzone-uploader";
+import Dropzone from 'react-dropzone-uploader';
+import { useState } from 'react';
 
 const MyUploader = () => {
+  const [fileNames, setFileNames] = useState([]);
+
   // specify upload params and url for your files
   const getUploadParams = ({ file, meta }) => {
-    const body = new FormData()
-    body.append('file', file)
-    return { url: "http://localhost:8000" };
+    setFileNames([fileNames].concat(meta.name));
+    console.log(fileNames);
+    const body = new FormData();
+    body.append('file', file);
+    return { url: 'http://localhost:8000' };
   };
 
   // called every time a file's `status` changes
@@ -19,9 +24,18 @@ const MyUploader = () => {
     allFiles.forEach((f) => f.remove());
   };
 
+  const dropzoneText = 'Drop your files here';
+  const dropzoneAddMoreFilesText = 'Add More Files';
+  const dropzoneClasses = {
+    dropzone: 'dropzone',
+    dropzoneActive: 'file-hover',
+  };
+
   return (
     <Dropzone
-      inputContent="Upload Files"
+      classNames={dropzoneClasses}
+      inputContent={dropzoneText}
+      inputLabelWithFiles={dropzoneAddMoreFilesText}
       getUploadParams={getUploadParams}
       onChangeStatus={handleChangeStatus}
       onSubmit={handleSubmit}
