@@ -15,7 +15,7 @@ function Submit() {
           <FormInput id="username" />
         </FormGroup>
         <FormGroup>
-          <label htmlFor="#email">Email</label>
+          <label htmlFor="email">Email</label>
           <FormInput id="email" />
         </FormGroup>
       </Form>

@@ -1,5 +1,5 @@
-import "./Navbar.scss";
-import { Link } from "react-router-dom";
+import './Navbar.scss';
+import { Link } from 'react-router-dom';
 
 // TODO: switch active nav based on state
 function AppNavbar() {
