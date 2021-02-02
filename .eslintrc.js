@@ -18,6 +18,7 @@ module.exports = {
     'react',
   ],
   rules: {
+    'no-console': 'off',
     'jsx-a11y/label-has-associated-control': 'off',
     // suppress errors for missing 'import React' in files
     'react/react-in-jsx-scope': 'off',
