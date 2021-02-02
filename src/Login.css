@@ -1,0 +1,13 @@
+.icon-button {
+  padding: 0;
+  border: 0;
+}
+
+.login-form-container {
+  /* text-align: center; */
+}
+
+.login-modal {
+  padding: 20px;
+  text-align: center;
+}

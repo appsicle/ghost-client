@@ -12,8 +12,16 @@
   }
 }
 
+.textarea {
+  resize: none;
+  height: 100px !important;
+  &-label {
+    float: left;
+  }
+}
+
 .uploader-container {
-  margin: 0 auto;
+  margin: 40px auto 0 auto;
   width: 500px;
 }
 
@@ -36,7 +44,7 @@
 }
 
 .file-hover {
-  border: 2px dashed blue !important;
+  border: 2px dashed #2484ff !important;
   background-color: white !important;
 }
 

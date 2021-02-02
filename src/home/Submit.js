@@ -3,7 +3,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'shards-ui/dist/css/shards.min.css';
 import './Submit.scss';
 
-import { Form, FormGroup, FormInput } from 'shards-react';
+import {
+  Form, FormGroup, FormInput, FormTextarea,
+} from 'shards-react';
 import Uploader from './Uploader';
 
 function Submit() {
@@ -19,6 +21,8 @@ function Submit() {
           <FormInput id="email" />
         </FormGroup>
       </Form>
+      <label className="textarea-label" htmlFor="textarea">Additional Information</label>
+      <FormTextarea className="textarea" />
       <div className="uploader-container">
         <Uploader />
       </div>
