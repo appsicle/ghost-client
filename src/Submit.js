@@ -1,7 +1,7 @@
 import "react-dropzone-uploader/dist/styles.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css";
-import "./Submit.css";
+import "./Submit.scss";
 
 import Uploader from "../src/Uploader";
 import { Form, FormGroup, FormInput } from "shards-react";
@@ -20,7 +20,7 @@ function Submit() {
         </FormGroup>
       </Form>
       <div className="uploader-container">
-        <Uploader></Uploader>
+        <Uploader />
       </div>
     </div>
   );

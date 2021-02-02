@@ -11,6 +11,7 @@
     "react-dropzone-uploader": "^2.11.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "sass": "^1.32.6",
     "shards-react": "^1.0.3",
     "web-vitals": "^0.2.4"
   },

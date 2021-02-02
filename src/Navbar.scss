@@ -1,0 +1,39 @@
+@use 'base';
+
+.branding {
+  width: base.$side-nav-width;
+  padding: 10px 0;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  max-width: base.$layout-width;
+  margin: 0 auto;
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  &-item {
+    padding: 10px 20px;
+  }
+}
+
+.account-controls {
+  width: base.$side-nav-width;
+  &-list {
+    display: flex;
+    list-style: none;
+
+    &-item {
+      padding: 10px 20px;
+    }
+  }
+}
+

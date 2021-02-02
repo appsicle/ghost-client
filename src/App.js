@@ -3,12 +3,28 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css";
 import "./App.css";
 
-import Submit from './Submit';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Navbar from "./Navbar";
+import Home from './Home';
+
 function App() {
   return (
-    <div>
-      <Submit></Submit>
-    </div>
+    <Router>
+      <Navbar />
+      <div>
+        <Switch>
+          <Route exact path="/">
+            <Home></Home>
+          </Route>
+          <Route exact path="/faq">
+            <div>faq</div>
+          </Route>
+          <Route exact path="/pricing">
+            <div>pricing</div>
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
