@@ -1,16 +1,15 @@
 import Dropzone from 'react-dropzone-uploader';
-import { useState } from 'react';
+import axios from 'axios';
 
 const MyUploader = () => {
-  const [fileNames, setFileNames] = useState([]);
-
   // specify upload params and url for your files
-  const getUploadParams = ({ file, meta }) => {
-    setFileNames([fileNames].concat(meta.name));
-    console.log(fileNames);
-    const body = new FormData();
-    body.append('file', file);
-    return { url: 'http://localhost:8000' };
+  const getUploadParams = async ({ file }) => {
+    const res = await axios.get('http://localhost:8000/api/getSignedURL');
+    const { uploadURL, key } = res.data;
+    const fileUrl = `https://ghost-texts.s3.amazonaws.com/${key}`;
+    return {
+      body: file, meta: { fileUrl, ACL: 'public-read' }, url: uploadURL, method: 'PUT',
+    };
   };
 
   // called every time a file's `status` changes
