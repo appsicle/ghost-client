@@ -21,7 +21,10 @@ function App() {
             <Home />
           </Route>
           <Route exact path="/faq">
-            <div>faq</div>
+            <div>
+              faq
+              {process.env.NODE_ENV}
+            </div>
           </Route>
           <Route exact path="/pricing">
             <div>pricing</div>

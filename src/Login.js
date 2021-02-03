@@ -8,7 +8,8 @@ import google from './icons/google.png';
 
 import './Login.css';
 
-const clientId = '100793784258-j2f842an55244esrq79ifbpns55kmb38.apps.googleusercontent.com';
+const clientId = window.env.GOOGLE_CLIENT_ID;
+
 function Login() {
   const dispatch = useDispatch();
   const open = useSelector((state) => state.loginModalReducer.isOpen);

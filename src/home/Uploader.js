@@ -3,12 +3,20 @@ import axios from 'axios';
 
 const MyUploader = () => {
   // specify upload params and url for your files
+  const apiEndpoint = `${
+    process.env.NODE_ENV === 'development'
+      ? window.env.API_ENDPOINT_DEV
+      : window.env.API_ENDPOINT_PROD
+  }/api/getSignedURL`;
   const getUploadParams = async ({ file }) => {
-    const res = await axios.get('http://localhost:8000/api/getSignedURL');
+    const res = await axios.get(apiEndpoint);
     const { uploadURL, key } = res.data;
-    const fileUrl = `https://ghost-texts.s3.amazonaws.com/${key}`;
+    const fileUrl = `${window.env.S3_BUCKET_ENDPOINT}/${key}`;
     return {
-      body: file, meta: { fileUrl, ACL: 'public-read' }, url: uploadURL, method: 'PUT',
+      body: file,
+      meta: { fileUrl, ACL: 'public-read' },
+      url: uploadURL,
+      method: 'PUT',
     };
   };
 
