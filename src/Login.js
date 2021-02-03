@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useGoogleLogin } from 'react-google-login';
 import { Modal, ModalBody, ModalHeader } from 'shards-react';
+import { toggleModal } from './loginSlice';
 import refreshTokenSetup from './utils/refreshToken';
 import google from './icons/google.png';
 
@@ -8,7 +10,9 @@ import './Login.css';
 
 const clientId = '100793784258-j2f842an55244esrq79ifbpns55kmb38.apps.googleusercontent.com';
 function Login() {
-  const [modalOpen, setModalOpen] = useState(true);
+  const dispatch = useDispatch();
+  const open = useSelector((state) => state.loginModalReducer.isOpen);
+
   const onSuccess = (res) => {
     console.log('Login Success: currentUser:', res.profileObj);
     refreshTokenSetup(res);
@@ -27,11 +31,17 @@ function Login() {
   });
 
   const toggle = () => {
-    setModalOpen(!modalOpen);
+    dispatch(toggleModal());
   };
 
   return (
-    <Modal className="login-modal" size="sm" toggle={toggle} centered open={modalOpen}>
+    <Modal
+      className="login-modal"
+      size="sm"
+      toggle={toggle}
+      centered
+      open={open}
+    >
       <ModalHeader>Log in to save your data!</ModalHeader>
       <ModalBody>
         <p>We do not store any of your data</p>

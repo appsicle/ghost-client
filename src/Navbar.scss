@@ -30,10 +30,7 @@
   &-list {
     display: flex;
     list-style: none;
-
-    &-item {
-      padding: 10px 20px;
-    }
+    justify-content: space-between;
   }
 }
 

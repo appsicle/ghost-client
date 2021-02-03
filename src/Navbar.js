@@ -1,10 +1,18 @@
 import './Navbar.scss';
 import { Link } from 'react-router-dom';
+import { Button } from 'shards-react';
+import { useDispatch } from 'react-redux';
+import { toggleModal } from './loginSlice';
+import Login from './Login';
+import './Login.css';
 
 // TODO: switch active nav based on state
 function AppNavbar() {
+  const dispatch = useDispatch();
+
   return (
     <header>
+      <Login />
       <div className="navbar-container">
         <div className="branding">logo</div>
         <div className="nav-links">
@@ -23,10 +31,16 @@ function AppNavbar() {
         <div className="account-controls">
           <ul className="account-controls-list">
             <li className="account-controls-list-item">
-              <Link to="/login">Login</Link>
+              <Button
+                onClick={() => {
+                  dispatch(toggleModal());
+                }}
+              >
+                Log in
+              </Button>
             </li>
             <li className="account-controls-list-item">
-              <Link to="/signup">Sign up</Link>
+              <Button>Sign Up</Button>
             </li>
           </ul>
         </div>
