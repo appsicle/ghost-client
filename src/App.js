@@ -8,12 +8,14 @@ import ReactHeap from 'reactjs-heap';
 // import Navbar from './Navbar';
 import Home from './home/Home';
 import Login from './Login';
+import Tutorial from './Tutorial';
 
 ReactHeap.initialize('497288854');
 
 function App() {
   return (
     <Router>
+      <Tutorial />
       {/* <Navbar /> */}
       <div>
         <Switch>
