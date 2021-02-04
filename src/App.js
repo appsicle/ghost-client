@@ -5,9 +5,10 @@ import './App.css';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ReactHeap from 'reactjs-heap';
-import Navbar from './Navbar';
+import Navbar from './navbar/Navbar';
 import Home from './home/Home';
-import Login from './Login';
+import Login from './navbar/Login';
+import RoleSelection from './RoleSelection';
 
 ReactHeap.initialize('497288854');
 
@@ -31,6 +32,9 @@ function App() {
           </Route>
           <Route exact path="/login">
             <Login />
+          </Route>
+          <Route exact path="/role">
+            <RoleSelection />
           </Route>
         </Switch>
       </div>

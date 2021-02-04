@@ -9,8 +9,13 @@ const loginModal = createSlice({
     toggleModal: (state) => {
       state.isOpen = !state.isOpen;
     },
+    closeModal: (state) => {
+      if (state.isOpen) {
+        state.isOpen = false;
+      }
+    },
   },
 });
 
-export const { toggleModal } = loginModal.actions;
+export const { toggleModal, closeModal } = loginModal.actions;
 export default loginModal.reducer;
