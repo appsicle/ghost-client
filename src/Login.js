@@ -8,7 +8,7 @@ import google from './icons/google.png';
 
 import './Login.css';
 
-const clientId = window.env.GOOGLE_CLIENT_ID;
+const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 function Login() {
   const dispatch = useDispatch();

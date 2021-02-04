@@ -17,8 +17,8 @@ export const postTextMsgs = (
 
   const apiEndpoint = `${
     process.env.NODE_ENV === 'development'
-      ? window.env.API_ENDPOINT_DEV
-      : window.env.API_ENDPOINT_PROD
+      ? process.env.REACT_APP_API_ENDPOINT_DEV
+      : process.env.REACT_APP_API_ENDPOINT_PROD
   }/api/textMsgs/submit`;
 
   console.log({
@@ -42,8 +42,8 @@ export const postTextMsgs = (
 export const getTextMsgs = (id) => {
   const apiEndpoint = `${
     process.env.NODE_ENV === 'development'
-      ? window.env.API_ENDPOINT_DEV
-      : window.env.API_ENDPOINT_PROD
+      ? process.env.REACT_APP_API_ENDPOINT_DEV
+      : process.env.REACT_APP_API_ENDPOINT_PROD
   }/api/textMsgs/retrieve`;
 
   axios.get(`${apiEndpoint}/${id}`);
