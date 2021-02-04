@@ -3,13 +3,13 @@ import axios from 'axios';
 export const postTextMsgs = (
   firstName,
   email,
-  additionalInformation,
+  additionalInfo,
   imageURLs,
 ) => new Promise((resolve, reject) => {
-  if (!firstName || !email || !additionalInformation || !imageURLs) {
+  if (!firstName || !email || !additionalInfo || !imageURLs) {
     reject(
       new Error(
-        `Null fields found: firstName: ${firstName}, email: ${email}, additionalInformation: ${additionalInformation}, imageURLs: ${imageURLs}`,
+        `Null fields found: firstName: ${firstName}, email: ${email}, additionalInfo: ${additionalInfo}, imageURLs: ${imageURLs}`,
       ),
     );
     return;
@@ -24,7 +24,7 @@ export const postTextMsgs = (
   console.log({
     firstName,
     email,
-    additionalInformation,
+    additionalInfo,
     imageURLs,
   });
 
@@ -32,7 +32,7 @@ export const postTextMsgs = (
     .post(`${apiEndpoint}/79823`, {
       firstName,
       email,
-      additionalInformation,
+      additionalInfo,
       imageURLs,
     })
     .then((res) => resolve(res))

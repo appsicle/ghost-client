@@ -14,7 +14,7 @@ import { postTextMsgs } from '../services/TextMsgs';
 function Submit() {
   const [firstName, setFirstName] = useState('');
   const [email, setEmail] = useState('');
-  const [additionalInformation, setAdditionalInformation] = useState('');
+  const [additionalInfo, setAdditionalInfo] = useState('');
   const [imageURLs, setImageURLs] = useState([]);
 
   return (
@@ -42,21 +42,21 @@ function Submit() {
       </label>
       <FormTextarea
         className="textarea"
-        value={additionalInformation}
-        onChange={(e) => setAdditionalInformation(e.target.value)}
+        value={additionalInfo}
+        onChange={(e) => setAdditionalInfo(e.target.value)}
       />
       <div className="uploader-container">
         <Uploader setImageURLs={setImageURLs} />
       </div>
       <Button // TODO: style button (padding)
-        onClick={() => postTextMsgs(firstName, email, additionalInformation, imageURLs)
+        onClick={() => postTextMsgs(firstName, email, additionalInfo, imageURLs)
           .then((res) => {
             // TODO: a better confirmation of success
             alert('success');
             console.log('success', res);
             setFirstName('');
             setEmail('');
-            setAdditionalInformation('');
+            setAdditionalInfo('');
             setImageURLs([]);
           })
           .catch((err) => {
