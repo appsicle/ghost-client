@@ -1,7 +1,8 @@
 import Dropzone from 'react-dropzone-uploader';
 import axios from 'axios';
 
-const MyUploader = () => {
+// TODO: remove files from UI after submission
+const MyUploader = ({ setImageURLs }) => {
   // specify upload params and url for your files
   const apiEndpoint = `${
     process.env.NODE_ENV === 'development'
@@ -23,12 +24,9 @@ const MyUploader = () => {
   // called every time a file's `status` changes
   const handleChangeStatus = ({ meta, file }, status) => {
     console.log(status, meta, file);
-  };
-
-  // receives array of files that are done uploading when submit button is clicked
-  const handleSubmit = (files, allFiles) => {
-    console.log(files.map((f) => f.meta));
-    allFiles.forEach((f) => f.remove());
+    if (status === 'done') {
+      setImageURLs((prev) => [...prev, meta.fileUrl]);
+    }
   };
 
   const dropzoneText = 'Drop your files here';
@@ -45,7 +43,6 @@ const MyUploader = () => {
       inputLabelWithFiles={dropzoneAddMoreFilesText}
       getUploadParams={getUploadParams}
       onChangeStatus={handleChangeStatus}
-      onSubmit={handleSubmit}
       accept="image/*"
     />
   );
