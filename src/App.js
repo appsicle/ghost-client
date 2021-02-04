@@ -5,7 +5,7 @@ import './App.css';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ReactHeap from 'reactjs-heap';
-import Navbar from './Navbar';
+// import Navbar from './Navbar';
 import Home from './home/Home';
 import Login from './Login';
 
@@ -14,7 +14,7 @@ ReactHeap.initialize('497288854');
 function App() {
   return (
     <Router>
-      <Navbar />
+      {/* <Navbar /> */}
       <div>
         <Switch>
           <Route exact path="/">
@@ -23,7 +23,6 @@ function App() {
           <Route exact path="/faq">
             <div>
               faq
-              {process.env.NODE_ENV}
             </div>
           </Route>
           <Route exact path="/pricing">
