@@ -6,8 +6,8 @@ const MyUploader = ({ setImageURLs, imageBucket }) => {
   // specify upload params and url for your files
   const apiEndpoint = `${
     process.env.NODE_ENV === 'development'
-      ? window.env.API_ENDPOINT_DEV
-      : window.env.API_ENDPOINT_PROD
+      ? process.env.REACT_APP_API_ENDPOINT_DEV
+      : process.env.REACT_APP_API_ENDPOINT_PROD
   }/api/getSignedURL`;
   const getUploadParams = async ({ file }) => {
     console.log(file);
@@ -16,7 +16,7 @@ const MyUploader = ({ setImageURLs, imageBucket }) => {
       bucket: imageBucket,
     });
     const { uploadURL, key } = res.data;
-    const fileUrl = `${window.env.S3_BUCKET_ENDPOINT}/${key}`;
+    const fileUrl = `${process.env.REACT_APP_S3_BUCKET_ENDPOINT}/${key}`;
     return {
       body: file,
       meta: { fileUrl, ACL: 'public-read' },
