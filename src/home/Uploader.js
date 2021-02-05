@@ -10,7 +10,8 @@ const MyUploader = ({ setImageURLs }) => {
       : window.env.API_ENDPOINT_PROD
   }/api/getSignedURL`;
   const getUploadParams = async ({ file }) => {
-    const res = await axios.get(apiEndpoint);
+    console.log(file);
+    const res = await axios.post(apiEndpoint, { contentType: file.type });
     const { uploadURL, key } = res.data;
     const fileUrl = `${window.env.S3_BUCKET_ENDPOINT}/${key}`;
     return {
@@ -26,6 +27,9 @@ const MyUploader = ({ setImageURLs }) => {
     console.log(status, meta, file);
     if (status === 'done') {
       setImageURLs((prev) => [...prev, meta.fileUrl]);
+    }
+    if (status === 'removed') {
+      // TODO: Remove file from state
     }
   };
 
