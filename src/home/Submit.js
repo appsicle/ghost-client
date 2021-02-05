@@ -46,7 +46,7 @@ function Submit() {
         onChange={(e) => setAdditionalInfo(e.target.value)}
       />
       <div className="uploader-container">
-        <Uploader setImageURLs={setImageURLs} />
+        <Uploader setImageURLs={setImageURLs} imageBucket="textMsgs" />
       </div>
       <Button // TODO: style button (padding)
         onClick={() => postTextMsgs(firstName, email, additionalInfo, imageURLs)
