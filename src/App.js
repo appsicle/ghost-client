@@ -32,10 +32,10 @@ function App() {
           <Route exact path="/login">
             <Login />
           </Route>
-          <Route exact path="/ethan">
+          <Route exact path="/banana">
             <ReviewerDashboard messageId="601c6dd6afa9cc001ff9339d" />
           </Route>
-          <Route exact path="/andy">
+          <Route exact path="/crayon">
             <ReviewerDashboard messageId="601c6d3fafa9cc001ff9339c" />
           </Route>
         </Switch>
