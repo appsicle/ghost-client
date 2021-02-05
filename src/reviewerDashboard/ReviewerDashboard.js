@@ -56,6 +56,7 @@ function ReviewerDashboard({ messageId }) {
 
   const sendAnswersToServer = async () => {
     const answersObject = {
+      textMsgId: messageId,
       reviewContent: answers,
       imageURLs,
     };
