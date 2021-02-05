@@ -18,8 +18,6 @@ import Uploader from '../home/Uploader';
 import './ReviewerDashboard.css';
 import questions from './reviewerQuestions';
 
-const allIdsList = questions.map((obj) => ({ [obj.id]: '' }));
-const allIdsObject = Object.assign({}, ...allIdsList);
 const apiEndpoint = process.env.NODE_ENV === 'development'
   ? process.env.REACT_APP_API_ENDPOINT_DEV
   : process.env.REACT_APP_API_ENDPOINT_PROD;
@@ -27,9 +25,7 @@ const apiEndpoint = process.env.NODE_ENV === 'development'
 function ReviewerDashboard({ messageId }) {
   const [screenshots, setScreenshots] = useState([]);
   const [imageURLs, setImageURLs] = useState([]);
-  const [answers, setAnswers] = useState({
-    ...allIdsObject,
-  });
+  const [answers, setAnswers] = useState(questions);
 
   useEffect(async () => {
     console.log(answers);
@@ -49,11 +45,9 @@ function ReviewerDashboard({ messageId }) {
   }, []);
 
   const setAnswer = (e) => {
-    setAnswers((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-    console.log(answers);
+    const temp = answers;
+    temp[e.target.name].answer = e.target.value;
+    setAnswers(temp);
   };
 
   const isAllFilledOut = () => Object.values(answers).every(
@@ -61,7 +55,11 @@ function ReviewerDashboard({ messageId }) {
   ) && imageURLs.length;
 
   const sendAnswersToServer = async () => {
-    const answersObject = { ...answers, imageURLs };
+    const answersObject = {
+      reviewContent: answers,
+      imageURLs,
+    };
+    console.log(answersObject);
     const response = await axios.post(
       `${apiEndpoint}/api/textMsgs/review`,
       answersObject,
@@ -94,17 +92,20 @@ function ReviewerDashboard({ messageId }) {
         <p>context:</p>
       </div>
       <Form className="questions-container">
-        {questions.map((questionObject) => (
-          <React.Fragment key={questionObject.id}>
-            <p className={questionObject.id}>{questionObject.question}</p>
-            <FormTextarea name={questionObject.id} onChange={setAnswer} />
+        {questions.map((questionObject, idx) => (
+          <React.Fragment key={questionObject.question}>
+            <p className={questionObject.question}>{questionObject.question}</p>
+            <FormTextarea name={idx} onChange={setAnswer} />
           </React.Fragment>
         ))}
         <label htmlFor=".image">
           Required: Upload a photo of yourself (this is just to verify your
           identity)
         </label>
-        <Uploader setImageURLs={setImageURLs} />
+        <Uploader
+          imageBucket="reviewerProfilePic"
+          setImageURLs={setImageURLs}
+        />
         <Button onClick={sendAnswersToServer} disabled={!isAllFilledOut()}>
           submit
         </Button>
