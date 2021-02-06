@@ -1,0 +1,8 @@
+const userRoles = {
+  VISITOR: 'VISITOR',
+  AUTHENTICATED_VISITOR: 'AUTHENTICATED_VISITOR',
+  REVIEWEE: 'REVIEWEE',
+  REVIEWER: 'REVIEWER',
+};
+
+export default userRoles;

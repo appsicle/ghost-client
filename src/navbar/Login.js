@@ -1,39 +1,57 @@
 import React from 'react';
+// import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useGoogleLogin } from 'react-google-login';
 import { Modal, ModalBody, ModalHeader } from 'shards-react';
-import { toggleModal } from './loginSlice';
-import refreshTokenSetup from './utils/refreshToken';
-import google from './icons/google.png';
+import axios from 'axios';
+import { toggleModal, closeModal } from './loginSlice';
+// import refreshTokenSetup from '../utils/refreshToken';
+import google from '../icons/google.png';
 
 import './Login.css';
 
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+axios.defaults.withCredentials = true;
 
 function Login() {
+  // const history = useHistory();
   const dispatch = useDispatch();
   const open = useSelector((state) => state.loginModalReducer.isOpen);
 
+  const toggle = () => {
+    dispatch(toggleModal());
+  };
+
+  const close = () => {
+    dispatch(closeModal());
+  };
+
   const onSuccess = (res) => {
-    console.log('Login Success: currentUser:', res.profileObj);
-    refreshTokenSetup(res);
+    console.log('Login Success: currentUser:', res.tokenObj);
+    // refreshTokenSetup(res);
+
+    axios
+      .post('http://localhost:8000/api/auth/googleSignin', {
+        idToken: res.tokenObj.id_token,
+      })
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err));
   };
 
   const onFailure = (res) => {
     console.log('Login failed: res:', res);
+    close();
   };
 
+  const scope = 'openid';
   const { signIn } = useGoogleLogin({
+    scope,
     onSuccess,
     onFailure,
     clientId,
     isSignedIn: true,
     accessType: 'offline',
   });
-
-  const toggle = () => {
-    dispatch(toggleModal());
-  };
 
   return (
     <Modal

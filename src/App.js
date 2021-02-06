@@ -5,13 +5,17 @@ import './App.css';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ReactHeap from 'reactjs-heap';
-import Navbar from './Navbar';
+import Navbar from './navbar/Navbar';
 import Home from './home/Home';
-import Login from './Login';
+import RoleSelection from './RoleSelection';
 import Tutorial from './Tutorial';
-import ReviewerDashboard from './reviewerDashboard/ReviewerDashboard';
+import config from './constants';
+import RoleProtectedRoute from './routes/roleProtectedRoute';
 
 ReactHeap.initialize('497288854');
+
+const buyer = <div>buyer</div>;
+const seller = <div>seller</div>;
 
 function App() {
   return (
@@ -29,15 +33,11 @@ function App() {
           <Route exact path="/pricing">
             <div>pricing</div>
           </Route>
-          <Route exact path="/login">
-            <Login />
+          <Route exact path="/role">
+            <RoleSelection />
           </Route>
-          <Route exact path="/banana">
-            <ReviewerDashboard messageId="601c6dd6afa9cc001ff9339d" />
-          </Route>
-          <Route exact path="/crayon">
-            <ReviewerDashboard messageId="601c6d3fafa9cc001ff9339c" />
-          </Route>
+          <RoleProtectedRoute desiredRole={config.REVIEWEE} path="/buyer">{buyer}</RoleProtectedRoute>
+          <RoleProtectedRoute desiredRole={config.REVIEWER} path="/seller">{seller}</RoleProtectedRoute>
         </Switch>
       </div>
     </Router>
