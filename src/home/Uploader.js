@@ -1,17 +1,22 @@
 import Dropzone from 'react-dropzone-uploader';
 import axios from 'axios';
 
-const MyUploader = () => {
+// TODO: remove files from UI after submission
+const MyUploader = ({ setImageURLs, imageBucket }) => {
   // specify upload params and url for your files
   const apiEndpoint = `${
     process.env.NODE_ENV === 'development'
-      ? window.env.API_ENDPOINT_DEV
-      : window.env.API_ENDPOINT_PROD
+      ? process.env.REACT_APP_API_ENDPOINT_DEV
+      : process.env.REACT_APP_API_ENDPOINT_PROD
   }/api/getSignedURL`;
   const getUploadParams = async ({ file }) => {
-    const res = await axios.get(apiEndpoint);
+    console.log(file);
+    const res = await axios.post(apiEndpoint, {
+      contentType: file.type,
+      bucket: imageBucket,
+    });
     const { uploadURL, key } = res.data;
-    const fileUrl = `${window.env.S3_BUCKET_ENDPOINT}/${key}`;
+    const fileUrl = `${process.env.REACT_APP_S3_BUCKET_ENDPOINT}/${key}`;
     return {
       body: file,
       meta: { fileUrl, ACL: 'public-read' },
@@ -23,12 +28,12 @@ const MyUploader = () => {
   // called every time a file's `status` changes
   const handleChangeStatus = ({ meta, file }, status) => {
     console.log(status, meta, file);
-  };
-
-  // receives array of files that are done uploading when submit button is clicked
-  const handleSubmit = (files, allFiles) => {
-    console.log(files.map((f) => f.meta));
-    allFiles.forEach((f) => f.remove());
+    if (status === 'done') {
+      setImageURLs((prev) => [...prev, meta.fileUrl]);
+    }
+    if (status === 'removed') {
+      // TODO: Remove file from state
+    }
   };
 
   const dropzoneText = 'Drop your files here';
@@ -45,7 +50,6 @@ const MyUploader = () => {
       inputLabelWithFiles={dropzoneAddMoreFilesText}
       getUploadParams={getUploadParams}
       onChangeStatus={handleChangeStatus}
-      onSubmit={handleSubmit}
       accept="image/*"
     />
   );

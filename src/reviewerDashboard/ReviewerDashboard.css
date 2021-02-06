@@ -1,0 +1,17 @@
+.reviewer-dashboard-container {
+  margin: 200px auto;
+  width: 700px;
+}
+
+.questions-container p {
+  margin: 0;
+  margin-top: 20px;
+}
+
+.image-container {
+  display: flex;
+}
+
+.card {
+  margin: 0 20px;
+}
