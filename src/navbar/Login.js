@@ -1,11 +1,9 @@
 import React from 'react';
-// import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useGoogleLogin } from 'react-google-login';
 import { Modal, ModalBody, ModalHeader } from 'shards-react';
 import axios from 'axios';
 import { toggleModal, closeModal } from './loginSlice';
-// import refreshTokenSetup from '../utils/refreshToken';
 import google from '../icons/google.png';
 
 import './Login.css';
@@ -14,7 +12,6 @@ const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 axios.defaults.withCredentials = true;
 
 function Login() {
-  // const history = useHistory();
   const dispatch = useDispatch();
   const open = useSelector((state) => state.loginModalReducer.isOpen);
 
@@ -28,7 +25,6 @@ function Login() {
 
   const onSuccess = (res) => {
     console.log('Login Success: currentUser:', res.tokenObj);
-    // refreshTokenSetup(res);
 
     axios
       .post('http://localhost:8000/api/auth/googleSignin', {
@@ -43,9 +39,7 @@ function Login() {
     close();
   };
 
-  const scope = 'openid';
   const { signIn } = useGoogleLogin({
-    scope,
     onSuccess,
     onFailure,
     clientId,
