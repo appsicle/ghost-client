@@ -1,7 +1,8 @@
 const userRoles = {
   VISITOR: 'VISITOR',
-  BUYER: 'BUYER',
-  SELLER: 'SELLER',
+  AUTHENTICATED_VISITOR: 'AUTHENTICATED_VISITOR',
+  REVIEWEE: 'REVIEWEE',
+  REVIEWER: 'REVIEWER',
 };
 
 export default userRoles;
