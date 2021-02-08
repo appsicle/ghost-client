@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = { isOpen: false };
 
-const loginModal = createSlice({
-  name: 'loginModal',
+const roleSelectionModal = createSlice({
+  name: 'roleSelectionModal',
   initialState,
   reducers: {
     toggleModal: (state) => {
@@ -17,5 +17,5 @@ const loginModal = createSlice({
   },
 });
 
-export const { toggleModal, closeModal } = loginModal.actions;
-export default loginModal.reducer;
+export const { toggleModal, closeModal } = roleSelectionModal.actions;
+export default roleSelectionModal.reducer;

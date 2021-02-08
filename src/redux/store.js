@@ -3,13 +3,11 @@ import {
   combineReducers,
 } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
-import loginModalReducer from '../navbar/loginSlice';
-import userRolesReducer from '../user/userSlice';
+import roleSelectionModalReducer from '../navbar/roleSelectionModalSlice';
 
 const store = configureStore({
   reducer: combineReducers({
-    loginModalReducer,
-    userRolesReducer,
+    roleSelectionModalReducer,
     /* favoriteCards: favoriteCardsSlice */
   }),
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
