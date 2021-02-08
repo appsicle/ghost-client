@@ -1,9 +1,3 @@
-// post request on submit, to send object
-// {
-//   5 answers,
-//   image,
-//   id
-// }
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import {
@@ -17,10 +11,9 @@ import {
 import Uploader from '../home/Uploader';
 import './ReviewerDashboard.css';
 import questions from './reviewerQuestions';
+import config from '../config';
 
-const apiEndpoint = process.env.NODE_ENV === 'development'
-  ? process.env.REACT_APP_API_ENDPOINT_DEV
-  : process.env.REACT_APP_API_ENDPOINT_PROD;
+const apiEndpoint = config.apiUrl;
 
 function ReviewerDashboard({ messageId }) {
   const [screenshots, setScreenshots] = useState([]);

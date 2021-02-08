@@ -3,12 +3,12 @@ import {
   combineReducers,
 } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
-import loginModalReducer from '../navbar/loginSlice';
+import roleSelectionModalReducer from '../navbar/roleSelectionModalSlice';
 import userRolesReducer from '../user/userSlice';
 
 const store = configureStore({
   reducer: combineReducers({
-    loginModalReducer,
+    roleSelectionModalReducer,
     userRolesReducer,
     /* favoriteCards: favoriteCardsSlice */
   }),

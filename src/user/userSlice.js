@@ -1,20 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-import userRoles from '../constants';
+import constants from '../constants';
 
-const initialState = { userRole: undefined };
+const initialState = { userRole: constants.VISITOR };
 
 const roles = createSlice({
   name: 'roles',
   initialState,
   reducers: {
     setUserRole: (state, action) => {
-      if (
-        !state.userRole
-        && (action.payload === userRoles.BUYER
-          || action.payload === userRoles.SELLER)
-      ) {
-        state.userRole = action.payload;
-      }
+      state.userRole = action.payload;
     },
   },
 });

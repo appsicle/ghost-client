@@ -1,14 +1,11 @@
 import Dropzone from 'react-dropzone-uploader';
 import axios from 'axios';
+import config from '../config';
 
 // TODO: remove files from UI after submission
 const MyUploader = ({ setImageURLs, imageBucket }) => {
   // specify upload params and url for your files
-  const apiEndpoint = `${
-    process.env.NODE_ENV === 'development'
-      ? process.env.REACT_APP_API_ENDPOINT_DEV
-      : process.env.REACT_APP_API_ENDPOINT_PROD
-  }/api/getSignedURL`;
+  const apiEndpoint = `${config.apiUrl}/api/getSignedURL`;
   const getUploadParams = async ({ file }) => {
     console.log(file);
     const res = await axios.post(apiEndpoint, {

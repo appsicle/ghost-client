@@ -13,6 +13,7 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
+    'implicit-arrow-linebreak': 'off',
     'no-param-reassign': 0,
     'no-console': 'off',
     'jsx-a11y/label-has-associated-control': 'off',
