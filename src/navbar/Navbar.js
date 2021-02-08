@@ -4,11 +4,9 @@ import { Button } from 'shards-react';
 import { useDispatch } from 'react-redux';
 import { toggleModal } from './roleSelectionModalSlice';
 import RoleSelectionModal from './RoleSelectionModal';
-import constants from '../constants';
-import getRole from '../utils/getRole';
 import './GoogleButton.css';
 
-const role = getRole();
+const isLoggedIn = localStorage.getItem('isLoggedIn');
 
 // TODO: switch active nav based on state
 function AppNavbar() {
@@ -24,16 +22,16 @@ function AppNavbar() {
     <div className="account-controls">
       <ul className="account-controls-list">
         <li className="account-controls-list-item">
+          <Button>Log in</Button>
+        </li>
+        <li className="account-controls-list-item">
           <Button
             onClick={() => {
               dispatch(toggleModal());
             }}
           >
-            Log in
+            Sign Up
           </Button>
-        </li>
-        <li className="account-controls-list-item">
-          <Button>Sign Up</Button>
         </li>
       </ul>
     </div>
@@ -57,7 +55,7 @@ function AppNavbar() {
             </li>
           </ul>
         </div>
-        {role === constants.VISITOR ? loginAndSignup : logout}
+        {isLoggedIn ? logout : loginAndSignup}
       </div>
     </header>
   );

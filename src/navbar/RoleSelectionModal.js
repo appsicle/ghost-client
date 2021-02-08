@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Modal, ModalBody, ModalHeader } from 'shards-react';
 import { Link } from 'react-router-dom';
-import { toggleModal } from './roleSelectionModalSlice';
+import { toggleModal, closeModal } from './roleSelectionModalSlice';
 
 function App() {
   const dispatch = useDispatch();
@@ -9,6 +9,10 @@ function App() {
 
   const toggle = () => {
     dispatch(toggleModal());
+  };
+
+  const close = () => {
+    dispatch(closeModal());
   };
 
   return (
@@ -21,8 +25,8 @@ function App() {
     >
       <ModalHeader>Pick a role</ModalHeader>
       <ModalBody>
-        <Link to="/signupReviewee">reviewee</Link>
-        <Link to="/signupReviewer">reviewer</Link>
+        <Link onClick={close} to="/signupReviewee">reviewee</Link>
+        <Link onClick={close} to="/signupReviewer">reviewer</Link>
       </ModalBody>
     </Modal>
   );

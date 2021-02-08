@@ -21,36 +21,34 @@ const seller = <div>seller</div>;
 function App() {
   return (
     <Router>
-      <div>
-        <Switch>
-          <Route exact path="/signupReviewee">
-            <SignupReviewee />
-          </Route>
-          <Route exact path="/signupReviewer">
-            <SignUpReviewer />
-          </Route>
+      <Switch>
+        <Route exact path="/signupReviewee">
+          <SignupReviewee />
+        </Route>
+        <Route exact path="/signupReviewer">
+          <SignUpReviewer />
+        </Route>
 
-          <Layout>
-            <Route exact path="/">
-              home
-            </Route>
-            <Route exact path="/faq">
-              <div>faq</div>
-            </Route>
-            <Route exact path="/pricing">
-              <div>pricing</div>
-            </Route>
-          </Layout>
+        <RoleProtectedRoute desiredRole={config.REVIEWEE} path="/revieweeDashboard">
+          <Tutorial />
+          <Home />
+        </RoleProtectedRoute>
+        <RoleProtectedRoute desiredRole={config.REVIEWER} path="/reviewerDashboard">
+          {seller}
+        </RoleProtectedRoute>
 
-          <RoleProtectedRoute desiredRole={config.REVIEWEE} path="/buyer">
-            <Tutorial />
-            <Home />
-          </RoleProtectedRoute>
-          <RoleProtectedRoute desiredRole={config.REVIEWER} path="/seller">
-            {seller}
-          </RoleProtectedRoute>
-        </Switch>
-      </div>
+        <Layout>
+          <Route exact path="/">
+            home
+          </Route>
+          <Route exact path="/faq">
+            <div>faq</div>
+          </Route>
+          <Route exact path="/pricing">
+            <div>pricing</div>
+          </Route>
+        </Layout>
+      </Switch>
     </Router>
   );
 }

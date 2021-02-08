@@ -1,20 +1,17 @@
 import React from 'react';
 import { useGoogleLogin } from 'react-google-login';
-import axios from 'axios';
-import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 import google from '../icons/google.png';
 import config from '../config';
 import './GoogleButton.css';
-import userService from '../user/userService';
-import { setUserRole } from '../user/userSlice';
+import constants from '../constants';
 
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 axios.defaults.withCredentials = true;
 
-function Login({ desiredRole }) {
-  const dispatch = useDispatch();
+function GoogleButton({ desiredRole }) {
   const history = useHistory();
 
   const onSuccess = (res) => {
@@ -26,14 +23,12 @@ function Login({ desiredRole }) {
       .then((response) => console.log(response))
       .catch((err) => console.log(err));
 
-    const retrieveRole = async () => {
-      const retrievedRole = await userService.getRole();
-      dispatch(setUserRole(retrievedRole.data));
-      localStorage.setItem('userRole', retrievedRole.data);
-    };
-
-    retrieveRole();
-    history.push('/');
+    localStorage.setItem('isLoggedIn', true);
+    if (desiredRole === constants.REVIEWER) {
+      history.push('/reviewerDashboard');
+    } else if (desiredRole === constants.REVIEWEE) {
+      history.push('/revieweeDashboard');
+    }
   };
 
   const onFailure = (res) => {
@@ -57,4 +52,4 @@ function Login({ desiredRole }) {
   );
 }
 
-export default Login;
+export default GoogleButton;
