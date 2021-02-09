@@ -6,7 +6,8 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ReactHeap from 'reactjs-heap';
 import Home from './home/Home';
-import Tutorial from './Tutorial';
+// import Tutorial from './Tutorial';
+import Submit from './home/Submit';
 import config from './constants';
 import RoleProtectedRoute from './routes/roleProtectedRoute';
 import SignupReviewee from './navbar/SignupReviewee';
@@ -30,8 +31,7 @@ function App() {
         </Route>
 
         <RoleProtectedRoute desiredRole={config.REVIEWEE} path="/revieweeDashboard">
-          <Tutorial />
-          <Home />
+          <Submit />
         </RoleProtectedRoute>
         <RoleProtectedRoute desiredRole={config.REVIEWER} path="/reviewerDashboard">
           {seller}
@@ -39,7 +39,7 @@ function App() {
 
         <Layout>
           <Route exact path="/">
-            home
+            <Home />
           </Route>
           <Route exact path="/faq">
             <div>faq</div>

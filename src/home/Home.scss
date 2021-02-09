@@ -1,0 +1,81 @@
+@use '../base';
+
+.home-container {
+  max-width: base.$layout-width;
+  margin: 0 auto;
+}
+
+.jumbotron {
+  &-container {
+    text-align: center;
+    margin: 240px 0;
+    display: flex;
+  }
+  &-image-container {
+    width: 50%;
+  }
+  &-text-container {
+    text-align: center;
+    width: 50%;
+  }
+  &-header-text {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 37px;
+    line-height: 55px;
+  }
+
+  &-sub-header-text {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 26px;
+    line-height: 39px;
+  }
+
+  &-caption {
+    max-width: 300px;
+    margin: 0 auto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 27px;
+    text-align: center;
+  }
+}
+
+.how-it-works {
+  &-container {
+    text-align: center;
+  }
+
+  &-title {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 37px;
+    line-height: 55px;
+  }
+}
+
+.step {
+  &-container {
+    justify-content: space-evenly;
+    display: flex;
+    margin: 115px 0;
+  }
+  &-text {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 27px;
+    max-width: 300px;
+  }
+}
+
+.experts {
+  &-title {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 37px;
+    line-height: 55px;
+  }
+}
