@@ -1,40 +1,46 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import {
-  FormTextarea,
-  Card,
-  CardHeader,
-  CardImg,
-  Form,
-  Button,
-} from 'shards-react';
+import { FormTextarea, Form, Button } from 'shards-react';
+import { uuid } from 'uuidv4';
+import { Carousel } from 'react-responsive-carousel';
 import Uploader from '../home/Uploader';
-import './ReviewerDashboard.css';
 import questions from './reviewerQuestions';
 import config from '../config';
+import './ReviewerDashboard.css';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
-const apiEndpoint = config.apiUrl;
+// FIXME: when getting new data, carousel should always start on slide 1
 
-function ReviewerDashboard({ messageId }) {
+function ReviewerDashboard() {
   const [screenshots, setScreenshots] = useState([]);
   const [imageURLs, setImageURLs] = useState([]);
   const [answers, setAnswers] = useState(questions);
+  const [messageId, setMessageId] = useState(undefined);
 
-  useEffect(async () => {
-    console.log(answers);
-    const response = await axios.get(
-      `${apiEndpoint}/api/textMsgs/retrieve/${messageId}`,
+  const getAndSetNextReviewee = async () => {
+    const nextReviewee = await axios.post(
+      `${config.apiUrl}/api/textMsgs/getNext`,
     );
-    const images = response.data.retrievedTextMsg.imageURLs;
-
-    const temp = [];
-    for (let i = 0; i < images.length; i += 1) {
-      temp.push({
-        id: i + 1,
-        url: images[i],
-      });
+    if (nextReviewee && nextReviewee.data) {
+      console.log(nextReviewee.data);
+      setMessageId(nextReviewee.data.id);
+      setScreenshots(nextReviewee.data.imageURLs);
+    } else {
+      setMessageId(undefined);
+      setScreenshots([]);
     }
-    setScreenshots(temp);
+  };
+
+  const refreshDatabase = async () => {
+    await axios.post(`${config.apiUrl}/api/textMsgs/_clear`, {
+      reviewerId: 'c7ac1f6f-44de-4685-b561-227bc3a36bc4',
+      review: false,
+      seen: true,
+    });
+  };
+
+  useEffect(() => {
+    getAndSetNextReviewee();
   }, []);
 
   const setAnswer = (e) => {
@@ -43,9 +49,10 @@ function ReviewerDashboard({ messageId }) {
     setAnswers(temp);
   };
 
-  const isAllFilledOut = () => Object.values(answers).every(
-    (answer) => answer !== '' && answer !== undefined,
-  ) && imageURLs.length;
+  const isAllFilledOut = () =>
+    Object.values(answers).every(
+      (answer) => answer !== '' && answer !== undefined,
+    ) && imageURLs.length;
 
   const sendAnswersToServer = async () => {
     const answersObject = {
@@ -55,7 +62,7 @@ function ReviewerDashboard({ messageId }) {
     };
     console.log(answersObject);
     const response = await axios.post(
-      `${apiEndpoint}/api/textMsgs/review`,
+      `${config.apiUrl}/api/textMsgs/review`,
       answersObject,
     );
     console.log(response);
@@ -64,6 +71,8 @@ function ReviewerDashboard({ messageId }) {
   return (
     <div className="reviewer-dashboard-container">
       <div className="reviewer-tutorial">
+        <Button onClick={getAndSetNextReviewee}>get more</Button>
+        <Button onClick={refreshDatabase}>refresh db for albert</Button>
         <h4>
           The conversations below are from the point of view of a guy that got
           ghosted/rejected by a girl he was interested in.
@@ -71,17 +80,18 @@ function ReviewerDashboard({ messageId }) {
           Click photo to expand
         </h4>
       </div>
-      <div className="image-container">
-        {screenshots.map((obj) => (
-          <Card key={obj.id} style={{ maxWidth: '450px' }}>
-            <CardHeader>
-              Photo
-              {obj.id}
-            </CardHeader>
-            <CardImg onClick={() => window.open(obj.url)} src={obj.url} />
-          </Card>
-        ))}
-      </div>
+      {screenshots.length ? (
+        <Carousel centerMode>
+          {screenshots.map((url) => (
+            <div key={uuid()}>
+              <img src={url} alt="" />
+              <p>screenshot</p>
+            </div>
+          ))}
+        </Carousel>
+      ) : (
+        <p>come back later</p>
+      )}
       <div className="context-container">
         <p>context:</p>
       </div>

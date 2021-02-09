@@ -15,11 +15,11 @@ import SignupReviewee from './navbar/SignupReviewee';
 import Layout from './Layout';
 import SignUpReviewer from './navbar/SignupReviewer';
 import Login from './navbar/Login';
+import ReviewerDashboard from './reviewerDashboard/ReviewerDashboard';
 
 ReactHeap.initialize('497288854');
 
 // const buyer = <div>buyer</div>;
-const seller = <div>seller</div>;
 axios.defaults.withCredentials = true;
 
 function App() {
@@ -40,7 +40,7 @@ function App() {
           <Submit />
         </RoleProtectedRoute>
         <RoleProtectedRoute desiredRole={config.REVIEWER} path="/reviewerDashboard">
-          {seller}
+          <ReviewerDashboard />
         </RoleProtectedRoute>
 
         <Layout>
