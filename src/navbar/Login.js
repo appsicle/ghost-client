@@ -2,21 +2,20 @@ import React from 'react';
 import { Form } from 'shards-react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import Login from './GoogleButton';
+import GoogleButton from './GoogleButton';
 import constants from '../constants';
 import config from '../config';
 
-function SignUp() {
+function Login() {
   const history = useHistory();
 
   const onSuccess = (res) => {
     axios
-      .post(`${config.apiUrl}/api/auth/googleSignup`, {
+      .post(`${config.apiUrl}/api/auth/googleSignin`, {
         idToken: res.tokenObj.id_token,
-        desiredRole: constants.REVIEWEE,
       })
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
         const { role } = response.data;
         localStorage.setItem('isLoggedIn', true);
         if (role === constants.REVIEWER) {
@@ -33,9 +32,9 @@ function SignUp() {
 
   return (
     <Form>
-      <Login onSuccess={onSuccess} desiredRole={constants.REVIEWEE} />
+      <GoogleButton onSuccess={onSuccess} desiredRole={constants.REVIEWEE} />
     </Form>
   );
 }
 
-export default SignUp;
+export default Login;
