@@ -5,18 +5,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { toggleModal } from './roleSelectionModalSlice';
 import RoleSelectionModal from './RoleSelectionModal';
-import Logout from './Logout';
+import Profile from './Profile';
 import './GoogleButton.css';
 
 // TODO: switch active nav based on state
 function AppNavbar() {
+  const defaultProfilePath = '../icons/guest_user.svg';
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [name, setName] = useState(undefined);
+  const [profileURL, setProfileURL] = useState(defaultProfilePath);
   const dispatch = useDispatch();
   const open = useSelector((state) => state.roleSelectionModalReducer.isOpen);
   const history = useHistory();
 
   useEffect(() => {
     setIsLoggedIn(localStorage.getItem('isLoggedIn'));
+    setName(localStorage.getItem('name'));
+    setProfileURL(localStorage.getItem('profile'));
   }, []);
 
   const onLogoutSuccess = () => {
@@ -29,9 +35,10 @@ function AppNavbar() {
     <div className="account-controls">
       <ul className="account-controls-list">
         <li className="account-controls-list-item">
-          <Button onClick={() => {
-            history.push('/login');
-          }}
+          <Button
+            onClick={() => {
+              history.push('/login');
+            }}
           >
             Log in
           </Button>
@@ -70,7 +77,15 @@ function AppNavbar() {
             </li>
           </ul>
         </div>
-        {isLoggedIn ? <Logout logout={onLogoutSuccess} /> : loginAndSignup}
+        {isLoggedIn ? (
+          <Profile
+            name={name}
+            profileURL={profileURL}
+            onLogoutSuccess={onLogoutSuccess}
+          />
+        ) : (
+          loginAndSignup
+        )}
       </div>
     </header>
   );

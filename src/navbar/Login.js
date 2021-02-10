@@ -9,15 +9,19 @@ import config from '../config';
 function Login() {
   const history = useHistory();
 
+  // FIXME: redirect is broken. Fix immediately
   const onSuccess = (res) => {
     axios
       .post(`${config.apiUrl}/api/auth/googleSignin`, {
         idToken: res.tokenObj.id_token,
       })
       .then((response) => {
-        console.log(response.data);
-        const { role } = response.data;
+        const { givenName, imageUrl } = res.profileObj; // set items for user profile
+        localStorage.setItem('name', givenName);
+        localStorage.setItem('profile', imageUrl);
         localStorage.setItem('isLoggedIn', true);
+
+        const { role } = response.data;
         if (role === constants.REVIEWER) {
           history.push('/reviewerDashboard');
         } else if (role === constants.REVIEWEE) {

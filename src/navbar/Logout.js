@@ -1,15 +1,24 @@
-import { GoogleLogout } from 'react-google-login';
+import { useGoogleLogout } from 'react-google-login';
 
-function Logout({ logout }) {
+const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+
+function Logout({ onLogoutSuccess }) {
+  const onFailure = () => {
+    console.log('failure');
+  };
+
+  const { signOut } = useGoogleLogout({
+    onFailure,
+    clientId,
+    onLogoutSuccess,
+  });
+
   return (
-    <GoogleLogout
-      clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-      buttonText="Logout"
-      onLogoutSuccess={logout}
-      onFailure={() => {
-        console.log('logout failed');
-      }}
-    />
+    <div className="login-form-container">
+      <button type="button" onClick={signOut} className="icon-button">
+        Logout
+      </button>
+    </div>
   );
 }
 
