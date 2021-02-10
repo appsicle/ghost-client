@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { FormTextarea, Form, Button } from 'shards-react';
 import { uuid } from 'uuidv4';
 import { Carousel } from 'react-responsive-carousel';
-import Uploader from '../home/Uploader';
+import Uploader from '../common/Uploader';
 import questions from './reviewerQuestions';
 import config from '../config';
 import './ReviewerDashboard.css';

@@ -2,24 +2,28 @@ import './Navbar.scss';
 import { Link, useHistory } from 'react-router-dom';
 import { Button } from 'shards-react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 import { toggleModal } from './roleSelectionModalSlice';
 import RoleSelectionModal from './RoleSelectionModal';
-
+import Logout from './Logout';
 import './GoogleButton.css';
-
-const isLoggedIn = localStorage.getItem('isLoggedIn');
 
 // TODO: switch active nav based on state
 function AppNavbar() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const dispatch = useDispatch();
   const open = useSelector((state) => state.roleSelectionModalReducer.isOpen);
   const history = useHistory();
 
-  const logout = (
-    <div className="logout-button-container">
-      <Button>Logout</Button>
-    </div>
-  );
+  useEffect(() => {
+    setIsLoggedIn(localStorage.getItem('isLoggedIn'));
+  }, []);
+
+  const onLogoutSuccess = () => {
+    console.log('successful logout');
+    localStorage.removeItem('isLoggedIn');
+    setIsLoggedIn(false);
+  };
 
   const loginAndSignup = (
     <div className="account-controls">
@@ -66,7 +70,7 @@ function AppNavbar() {
             </li>
           </ul>
         </div>
-        {isLoggedIn ? logout : loginAndSignup}
+        {isLoggedIn ? <Logout logout={onLogoutSuccess} /> : loginAndSignup}
       </div>
     </header>
   );

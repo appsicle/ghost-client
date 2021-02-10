@@ -1,0 +1,52 @@
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 170px;
+  overflow: scroll;
+  margin: 0 auto;
+  position: relative;
+  box-sizing: border-box;
+  transition: all 0.15s linear;
+  border: 2px solid #d9d9d9;
+  border-radius: 4px;
+  overflow: inherit;
+  border: 2px dashed #d6d6d6;
+  border-radius: 22px;
+
+  &-icon {
+    max-height: 75px;
+    max-width: 75px;
+  }
+
+  &-text {
+    line-height: 21px;
+    margin: 0;
+
+    &-container {
+      text-align: center;
+    }
+  }
+
+  &-header {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  &-subheader {
+    font-size: 12px;
+    font-weight: 400;
+  }
+}
+
+.file-hover {
+  border: 2px dashed #2484ff !important;
+  background-color: white !important;
+}
+
+// override component styles
+.dzu-inputLabel {
+  font-family: inherit;
+  font-weight: inherit;
+}

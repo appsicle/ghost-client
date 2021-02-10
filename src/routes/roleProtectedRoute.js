@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import userService from '../user/userService';
+import Spinner from '../common/Spinner';
 
 const RoleProtectedRoute = ({ desiredRole, path, children }) => {
   const [role, setRole] = useState(undefined);
@@ -12,11 +13,10 @@ const RoleProtectedRoute = ({ desiredRole, path, children }) => {
     };
     fetchRole();
   }, []);
-  // const role = 'REVIEWEE';
 
   return (
     <>
-      {role !== undefined ? (
+      {role ? (
         <Route
           path={path}
           render={() =>
@@ -27,7 +27,7 @@ const RoleProtectedRoute = ({ desiredRole, path, children }) => {
             ))}
         />
       ) : (
-        <p>loading</p>
+        <Spinner />
       )}
     </>
   );

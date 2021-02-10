@@ -1,0 +1,50 @@
+.form {
+  &-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  &-group-container {
+    width: 500px;
+    margin: 0 auto;
+  }
+  &-group {
+    width: 48%;
+  }
+}
+
+.explanation {
+  &-label {
+    float: left;
+    margin-right: 20px;
+  }
+  &-textarea {
+    margin: 40px 0;
+    resize: none;
+    height: 100px !important;
+  }
+  &-submit {
+    margin: 0 auto;
+    &-container {
+      text-align: center;
+    }
+  }
+}
+
+.uploader {
+  &-title {
+    font-size: 19px;
+    font-weight: 400;
+    margin-right: 20px;
+    &-container {
+      display: flex;
+    }
+  }
+  &-container {
+    margin: 80px auto;
+    width: 500px;
+  }
+}
+
+.form-group {
+  text-align: left;
+}

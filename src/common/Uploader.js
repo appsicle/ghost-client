@@ -1,6 +1,8 @@
 import Dropzone from 'react-dropzone-uploader';
 import axios from 'axios';
 import config from '../config';
+import uploaderIcon from '../icons/chatting.svg';
+import './Uploader.scss';
 
 // TODO: remove files from UI after submission
 const MyUploader = ({ setImageURLs, imageBucket }) => {
@@ -33,7 +35,13 @@ const MyUploader = ({ setImageURLs, imageBucket }) => {
     }
   };
 
-  const dropzoneText = 'Drop your files here';
+  const dropzoneText = (
+    <div className="dropzone-text-container">
+      <img className="dropzone-icon" src={uploaderIcon} alt="chatting" />
+      <h4 className="dropzone-text dropzone-header">Drag &amp; drop images</h4>
+      <h6 className="dropzone-text dropzone-subheader">or click to upload</h6>
+    </div>
+  );
   const dropzoneAddMoreFilesText = 'Add More Files';
   const dropzoneClasses = {
     dropzone: 'dropzone',

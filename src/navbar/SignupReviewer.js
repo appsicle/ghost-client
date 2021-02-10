@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import GoogleButton from './GoogleButton';
 
-import Uploader from '../home/Uploader';
+import Uploader from '../common/Uploader';
 import constants from '../constants';
 import config from '../config';
 
