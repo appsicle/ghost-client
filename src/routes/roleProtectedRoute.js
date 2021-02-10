@@ -10,6 +10,7 @@ const RoleProtectedRoute = ({ desiredRole, path, children }) => {
     const fetchRole = async () => {
       try {
         const result = await userService.getRole();
+        console.log('fetching role before authorized route...', result);
         setRole(result.data);
       } catch (err) {
         console.log(err);
