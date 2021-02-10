@@ -68,6 +68,22 @@
     font-size: 18px;
     line-height: 27px;
     max-width: 300px;
+
+    &-container {
+      padding-top: 20px;
+    }
+  }
+
+  &-example-image {
+    width: 470px;
+    border-radius: 20px;
+    // box-shadow: 10px 10px 5px 6px rgba(220 220 220 / 75%);
+-webkit-box-shadow: 17px 26px 6px 6px rgba(220 220 220 / 75%);
+// -moz-box-shadow: 10px 10px 5px 6px rgba(220 220 220 / 75%);
+  }
+
+  &-two {
+    transform: translateX(-10px);
   }
 }
 

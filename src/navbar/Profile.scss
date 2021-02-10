@@ -1,8 +1,6 @@
-.user {
-  &-name {
-    // margin-left: 20px;
-  }
+@use '../base';
 
+.user {
   &-profile {
     &-container {
       border-radius: 20px;
@@ -27,6 +25,7 @@
 }
 
 .nav-profile-container {
+  width: base.$side-nav-width;
   padding: 10px 5px;
   display: flex;
 }

@@ -1,4 +1,8 @@
 .dropdown {
+  &-icon {
+    width: 21px;
+    margin-right: 5px;
+  }
   &-menu-container {
     position: relative;
     display: flex;
@@ -22,7 +26,6 @@
       box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
     }
     span {
-      // font-weight: 700;
       vertical-align: middle;
       font-size: 14px;
       margin: 0 10px;
@@ -39,7 +42,6 @@
     position: absolute;
     top: 60px;
     right: 0;
-    width: 300px;
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
     opacity: 0;
     visibility: hidden;
@@ -51,11 +53,19 @@
       margin: 0;
     }
     li {
-      a {
+      a,
+      button {
         text-decoration: none;
         color: #333333;
         padding: 15px 20px;
         display: block;
+        border: 0;
+        background-color: inherit;
+        font-weight: 100;
+      }
+
+      &:hover {
+        background-color: whitesmoke;
       }
     }
   }
