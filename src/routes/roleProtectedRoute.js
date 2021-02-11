@@ -1,24 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Route, Redirect, useHistory } from 'react-router-dom';
-import userService from '../user/userService';
 import Spinner from '../common/Spinner';
+import useRole from '../hooks/useRole';
 
 const RoleProtectedRoute = ({ desiredRole, path, children }) => {
-  const [role, setRole] = useState(undefined);
   const history = useHistory();
+  const { role, roleError } = useRole();
+
   useEffect(() => {
-    const fetchRole = async () => {
-      try {
-        const result = await userService.getRole();
-        console.log('fetching role before authorized route...', result);
-        setRole(result.data);
-      } catch (err) {
-        console.log(err);
-        history.push('/');
-      }
-    };
-    fetchRole();
-  }, []);
+    if (roleError) history.push('/');
+  }, [roleError]);
 
   return (
     <>
