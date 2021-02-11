@@ -2,7 +2,7 @@ import './Home.scss';
 import { Button } from 'shards-react';
 import headerImg from '../images/home-header.svg';
 import stepOneExample from '../images/step-one-example.svg';
-import badText from '../images/home-bad-text.png';
+import badText from '../images/textmsg.png';
 
 function Home() {
   return (
