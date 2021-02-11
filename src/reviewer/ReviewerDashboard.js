@@ -1,9 +1,10 @@
+/* eslint-disable no-alert */
+/* eslint-disable no-underscore-dangle */
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { FormTextarea, Form, Button } from 'shards-react';
 import { uuid } from 'uuidv4';
 import { Carousel } from 'react-responsive-carousel';
-import Uploader from '../common/Uploader';
 import questions from './reviewerQuestions';
 import config from '../config';
 import './ReviewerDashboard.css';
@@ -13,7 +14,6 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 function ReviewerDashboard() {
   const [screenshots, setScreenshots] = useState([]);
-  const [imageURLs, setImageURLs] = useState([]);
   const [answers, setAnswers] = useState(questions);
   const [messageId, setMessageId] = useState(undefined);
 
@@ -23,7 +23,7 @@ function ReviewerDashboard() {
     );
     if (nextReviewee && nextReviewee.data) {
       console.log(nextReviewee.data);
-      setMessageId(nextReviewee.data.id);
+      setMessageId(nextReviewee.data._id);
       setScreenshots(nextReviewee.data.imageURLs);
     } else {
       setMessageId(undefined);
@@ -52,20 +52,24 @@ function ReviewerDashboard() {
   const isAllFilledOut = () =>
     Object.values(answers).every(
       (answer) => answer !== '' && answer !== undefined,
-    ) && imageURLs.length;
+    );
 
-  const sendAnswersToServer = async () => {
+  const sendAnswersToServer = () => {
     const answersObject = {
       textMsgId: messageId,
       reviewContent: answers,
-      imageURLs,
     };
     console.log(answersObject);
-    const response = await axios.post(
+    axios.post(
       `${config.apiUrl}/api/textMsgs/review`,
       answersObject,
-    );
-    console.log(response);
+    ).then((response) => {
+      console.log(response);
+      alert('success');
+    }).catch((err) => {
+      console.error(err);
+      alert('error');
+    });
   };
 
   return (
@@ -102,14 +106,6 @@ function ReviewerDashboard() {
             <FormTextarea name={idx} onChange={setAnswer} />
           </React.Fragment>
         ))}
-        <label htmlFor=".image">
-          Required: Upload a photo of yourself (this is just to verify your
-          identity)
-        </label>
-        <Uploader
-          imageBucket="reviewerProfilePic"
-          setImageURLs={setImageURLs}
-        />
         <Button onClick={sendAnswersToServer} disabled={!isAllFilledOut()}>
           submit
         </Button>
