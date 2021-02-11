@@ -31,6 +31,8 @@ function AppNavbar() {
     console.log('successful logout');
     await UserService.logout();
     localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('name');
+    localStorage.removeItem('profile');
     setIsLoggedIn(false);
     history.push('/');
   };

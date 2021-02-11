@@ -26,7 +26,9 @@ function SignUp() {
       })
       .then((response) => {
         console.log(response);
-        const { role } = response.data;
+        const { role, name, profilePic } = response.data;
+        localStorage.setItem('name', name);
+        localStorage.setItem('profile', profilePic);
         localStorage.setItem('isLoggedIn', true);
         if (role === constants.REVIEWER) {
           history.push('/reviewerDashboard');

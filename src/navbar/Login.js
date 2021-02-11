@@ -16,12 +16,10 @@ function Login() {
         idToken: res.tokenObj.id_token,
       })
       .then((response) => {
-        const { givenName, imageUrl } = res.profileObj; // set items for user profile
-        localStorage.setItem('name', givenName);
-        localStorage.setItem('profile', imageUrl);
+        const { role, name, profilePic } = response.data;
+        localStorage.setItem('name', name);
+        localStorage.setItem('profile', profilePic);
         localStorage.setItem('isLoggedIn', true);
-
-        const { role } = response.data;
         if (role === constants.REVIEWER) {
           history.push('/reviewerDashboard');
         } else if (role === constants.REVIEWEE) {
