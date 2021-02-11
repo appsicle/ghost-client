@@ -5,7 +5,7 @@ import uploaderIcon from '../icons/chatting.svg';
 import './Uploader.scss';
 
 // TODO: remove files from UI after submission
-const MyUploader = ({ setImageURLs, imageBucket }) => {
+const MyUploader = ({ setImageURLs, imageBucket, maxFiles = 10 }) => {
   // specify upload params and url for your files
   const apiEndpoint = `${config.apiUrl}/api/getSignedURL`;
   const getUploadParams = async ({ file }) => {
@@ -31,7 +31,7 @@ const MyUploader = ({ setImageURLs, imageBucket }) => {
       setImageURLs((prev) => [...prev, meta.fileUrl]);
     }
     if (status === 'removed') {
-      // TODO: Remove file from state
+      setImageURLs((prev) => prev.filter((fileUrl) => fileUrl !== meta.fileUrl));
     }
   };
 
@@ -56,6 +56,7 @@ const MyUploader = ({ setImageURLs, imageBucket }) => {
       getUploadParams={getUploadParams}
       onChangeStatus={handleChangeStatus}
       accept="image/*"
+      maxFiles={maxFiles}
     />
   );
 };

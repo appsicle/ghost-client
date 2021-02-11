@@ -11,7 +11,10 @@ import config from '../config';
 
 function SignUp() {
   const [imageURLs, setImageURLs] = useState([]);
-  const [bio, setBio] = useState(undefined);
+  const [bio, setBio] = useState('');
+  const [age, setAge] = useState(null);
+  const [ethnicity, setEthnicity] = useState('');
+  const [location, setLocation] = useState('');
   const history = useHistory();
   // test that it works for signing up
   // clean up onsuccess into a function
@@ -21,6 +24,11 @@ function SignUp() {
       .post(`${config.apiUrl}/api/auth/googleSignup`, {
         idToken: res.tokenObj.id_token,
         desiredRole: constants.REVIEWER,
+        bio,
+        age,
+        ethnicity,
+        location,
+        profilePic: imageURLs[0],
       })
       .then((response) => {
         console.log(response);
@@ -41,9 +49,36 @@ function SignUp() {
     <Form>
       <FormGroup>
         <label htmlFor="#bio">Bio</label>
-        <FormInput id="#bio" placeholder="bio" />
+        <FormInput
+          id="#bio"
+          placeholder="bio"
+          value={bio}
+          onChange={(e) => setBio(e.target.value)}
+        />
+        <label htmlFor="#age">Age</label>
+        <FormInput
+          id="#age"
+          placeholder="age"
+          type="number"
+          value={age}
+          onChange={(e) => setAge(e.target.value)}
+        />
+        <label htmlFor="#ethnicity">Ethnicity</label>
+        <FormInput
+          id="#ethnicity"
+          placeholder="ethnicity"
+          value={ethnicity}
+          onChange={(e) => setEthnicity(e.target.value)}
+        />
+        <label htmlFor="#location">Location</label>
+        <FormInput
+          id="#location"
+          placeholder="location"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+        />
       </FormGroup>
-      <Uploader imageBucket="reviewerProfilePic" setImageURLs={setImageURLs} />
+      <Uploader imageBucket="reviewerProfilePic" setImageURLs={setImageURLs} maxFiles={1} />
       <GoogleButton onSuccess={onSuccess} desiredRole={constants.REVIEWER} />
     </Form>
   );
