@@ -11,8 +11,6 @@ import { postTextMsgs } from '../services/TextMsgs';
 import TipBubble from '../common/TipBubble';
 
 function RevieweeDashboard() {
-  const [firstName, setFirstName] = useState('');
-  const [email, setEmail] = useState('');
   const [additionalInfo, setAdditionalInfo] = useState('');
   const [imageURLs, setImageURLs] = useState([]);
 
@@ -50,13 +48,11 @@ function RevieweeDashboard() {
         <Button // TODO: style button (padding)
           className="explanation-submit"
           onClick={() =>
-            postTextMsgs(firstName, email, additionalInfo, imageURLs)
+            postTextMsgs(additionalInfo, imageURLs)
               .then((res) => {
                 // TODO: a better confirmation of success
                 alert('success');
                 console.log('success', res);
-                setFirstName('');
-                setEmail('');
                 setAdditionalInfo('');
                 setImageURLs([]);
               })
