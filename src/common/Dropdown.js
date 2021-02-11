@@ -1,14 +1,32 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import './Dropdown.scss';
 import useDetectOutsideClick from '../hooks/useDetectOutsideClick';
 import Logout from '../navbar/Logout';
 import dashboardIcon from '../icons/dropdown_dashboard.svg';
 import settingsIcon from '../icons/dropdown_settings.svg';
 
+import useRole from '../hooks/useRole';
+
 function Dropdown({ name, profileURL, onLogoutSuccess }) {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const onClick = () => setIsActive(!isActive);
+
+  const { role, roleError } = useRole();
+  const [dashboardLink, setDashboardLink] = useState('/');
+
+  useEffect(() => {
+    switch (role) {
+      case 'REVIEWEE':
+        setDashboardLink('/RevieweeDashboard');
+        break;
+      case 'REVIEWER':
+        setDashboardLink('/ReviewerDashboard');
+        break;
+      default:
+        setDashboardLink('/');
+    }
+  }, [role, roleError]);
 
   // TODO: convert to higher order component
 
@@ -29,7 +47,7 @@ function Dropdown({ name, profileURL, onLogoutSuccess }) {
         >
           <ul>
             <li className="underlined">
-              <a href="/">
+              <a href={dashboardLink}>
                 <img
                   className="dropdown-icon"
                   src={dashboardIcon}
