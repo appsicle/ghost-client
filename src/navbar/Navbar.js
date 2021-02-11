@@ -7,6 +7,7 @@ import { toggleModal } from './roleSelectionModalSlice';
 import RoleSelectionModal from './RoleSelectionModal';
 import Profile from './Profile';
 import './GoogleButton.css';
+import UserService from '../user/userService';
 
 // TODO: switch active nav based on state
 function AppNavbar() {
@@ -25,10 +26,13 @@ function AppNavbar() {
     setProfileURL(localStorage.getItem('profile'));
   }, []);
 
-  const onLogoutSuccess = () => {
+  // TODO: feels sus that it could fail after saying it succeeded
+  const onLogoutSuccess = async () => {
     console.log('successful logout');
+    await UserService.logout();
     localStorage.removeItem('isLoggedIn');
     setIsLoggedIn(false);
+    history.push('/');
   };
 
   const loginAndSignup = (
