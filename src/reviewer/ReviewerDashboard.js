@@ -11,7 +11,7 @@ import './ReviewerDashboard.css';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 // FIXME: when getting new data, carousel should always start on slide 1
-
+// TODO: clear answers field after submission
 function ReviewerDashboard() {
   const [textMsgObj, setTextMsgObj] = useState(null);
   const [answers, setAnswers] = useState(questions);
@@ -28,11 +28,15 @@ function ReviewerDashboard() {
     }
   };
 
-  const refreshDatabase = async () => {
-    await axios.post(`${config.apiUrl}/api/textMsgs/_clear`, {
-      reviewerId: 'c7ac1f6f-44de-4685-b561-227bc3a36bc4',
-      review: false,
-      seen: true,
+  const flagTextMsg = (textMsgId, category) => {
+    axios.post(`${config.apiUrl}/api/textMsgs/flag`, {
+      textMsgId, category,
+    }).then((res) => {
+      console.log(res);
+      getAndSetNextReviewee();
+      setAnswers(questions);
+    }).catch((err) => {
+      console.log(err);
     });
   };
 
@@ -63,6 +67,7 @@ function ReviewerDashboard() {
     ).then((response) => {
       console.log(response);
       alert('success');
+      getAndSetNextReviewee();
     }).catch((err) => {
       console.error(err);
       alert('error');
@@ -73,8 +78,9 @@ function ReviewerDashboard() {
   return (
     <div className="reviewer-dashboard-container">
       <div className="reviewer-tutorial">
-        <Button onClick={getAndSetNextReviewee}>get more</Button>
-        <Button onClick={refreshDatabase}>refresh db for albert</Button>
+        <Button theme="danger" onClick={() => flagTextMsg(textMsgObj._id, 'inappropriate')}>Flag</Button>
+        <Button theme="warning" onClick={() => flagTextMsg(textMsgObj._id, 'needs more context')}>Needs more context</Button>
+        <Button theme="light" onClick={() => flagTextMsg(textMsgObj._id, 'skip')}>Skip</Button>
         <h4>
           The conversations below are from the point of view of a guy that got
           ghosted/rejected by a girl he was interested in.
