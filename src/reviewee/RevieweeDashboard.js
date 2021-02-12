@@ -1,72 +1,77 @@
-/* eslint-disable no-alert */
-import 'react-dropzone-uploader/dist/styles.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'shards-ui/dist/css/shards.min.css';
+/* eslint-disable no-underscore-dangle */
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import { uuid } from 'uuidv4';
+import config from '../config';
+import ContentDisplay from './Carousel';
 import './RevieweeDashboard.scss';
+import RevieweeDashboard from './RevieweeForm';
 
-import React, { useState } from 'react';
-import { FormTextarea, Button } from 'shards-react';
-import Uploader from '../common/Uploader';
-import { postTextMsgs } from '../services/TextMsgs';
-import TipBubble from '../common/TipBubble';
+const SUBMIT = 'SUBMIT';
+const SUBMIT2 = 'SUBMIT2';
 
-function RevieweeDashboard() {
-  const [additionalInfo, setAdditionalInfo] = useState('');
-  const [imageURLs, setImageURLs] = useState([]);
+const displaySelectedTab = (displayId, pastSubmissions) => {
+  switch (displayId) {
+    case SUBMIT:
+      return <RevieweeDashboard />;
+    case SUBMIT2:
+      return <p>2</p>;
+    default:
+      return pastSubmissions.map((submission) =>
+        (submission._id === displayId ? (
+          <ContentDisplay images={submission.imageURLs} />
+        ) : null));
+  }
+};
+
+const revieweeDashboard = () => {
+  const [displayId, setDisplayId] = useState(SUBMIT);
+  const [pastSubmissions, setPastSubmissions] = useState([]);
+
+  useEffect(() => {
+    const getPastSubmissions = async () => {
+      const response = await axios.get(`${config.apiUrl}/api/textMsgs/reviews`);
+      console.log(response.data);
+      setPastSubmissions(response.data);
+    };
+    getPastSubmissions();
+  }, []);
 
   return (
-    <div className="form-group-container">
-      <div className="uploader-container">
-        <div className="uploader-title-container">
-          <h5 className="uploader-title">Upload Screenshots</h5>
-          <TipBubble
-            elementId="uploader-tooltip"
-            color="#c4c4c4"
-            innerText="?"
-            tooltipText="text1"
-          />
-        </div>
-        <Uploader setImageURLs={setImageURLs} imageBucket="textMsgs" />
+    <div className="reviewee-dashboard-container">
+      <div className="sidebar-container">
+        <ul className="sidebar">
+          <li className="sidebar-item">
+            <button type="button" onClick={() => setDisplayId(SUBMIT)}>
+              Upload Screenshots
+            </button>
+          </li>
+          <li className="sidebar-item">
+            <button type="button" onClick={() => setDisplayId(SUBMIT2)}>
+              Upload Dating Profile
+            </button>
+          </li>
+          <h4 className="sidebar-subtitle">Past Submissions</h4>
+          {pastSubmissions.map((submission, idx) => (
+            <li className="sidebar-item" key={uuid()}>
+              <button
+                type="button"
+                onClick={() => {
+                  setDisplayId(submission._id);
+                }}
+              >
+                Submission #
+                {idx + 1}
+              </button>
+            </li>
+          ))}
+        </ul>
       </div>
-      <label className="explanation-label" htmlFor="textarea">
-        Additional Comments
-      </label>
-      <div>
-        <TipBubble
-          elementId="explanation-tooltip"
-          color="#c4c4c4"
-          innerText="?"
-          tooltipText="text1"
-        />
-      </div>
-      <FormTextarea
-        className="explanation-textarea"
-        value={additionalInfo}
-        onChange={(e) => setAdditionalInfo(e.target.value)}
-      />
-      <div className="explanation-submit-container">
-        <Button // TODO: style button (padding)
-          className="explanation-submit"
-          onClick={() =>
-            postTextMsgs(additionalInfo, imageURLs)
-              .then((res) => {
-                // TODO: a better confirmation of success
-                alert('success');
-                console.log('success', res);
-                setAdditionalInfo('');
-                setImageURLs([]);
-              })
-              .catch((err) => {
-                // TODO: a better confirmation of failure
-                alert('failed');
-                console.error(err);
-              })}
-        >
-          Submit
-        </Button>
+      <div className="reviewee-dashboard-content">
+        {displaySelectedTab(displayId, pastSubmissions)}
       </div>
     </div>
   );
-}
+};
 
-export default RevieweeDashboard;
+export default revieweeDashboard;

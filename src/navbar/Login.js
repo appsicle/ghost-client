@@ -16,6 +16,7 @@ function Login() {
         idToken: res.tokenObj.id_token,
       })
       .then((response) => {
+        console.log(response.data);
         const { role, name, profilePic } = response.data;
         localStorage.setItem('name', name);
         localStorage.setItem('profile', profilePic);

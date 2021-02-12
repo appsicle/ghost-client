@@ -31,14 +31,6 @@ function ReviewerDashboard() {
     }
   };
 
-  const refreshDatabase = async () => {
-    await axios.post(`${config.apiUrl}/api/textMsgs/_clear`, {
-      reviewerId: 'c7ac1f6f-44de-4685-b561-227bc3a36bc4',
-      review: false,
-      seen: true,
-    });
-  };
-
   useEffect(() => {
     getAndSetNextReviewee();
   }, []);
@@ -76,7 +68,6 @@ function ReviewerDashboard() {
     <div className="reviewer-dashboard-container">
       <div className="reviewer-tutorial">
         <Button onClick={getAndSetNextReviewee}>get more</Button>
-        <Button onClick={refreshDatabase}>refresh db for albert</Button>
         <h4>
           The conversations below are from the point of view of a guy that got
           ghosted/rejected by a girl he was interested in.

@@ -1,11 +1,13 @@
 import Dropzone from 'react-dropzone-uploader';
 import axios from 'axios';
 import config from '../config';
-import uploaderIcon from '../icons/chatting.svg';
+import uploaderIcon from '../icons/default_upload.svg';
 import './Uploader.scss';
 
 // TODO: remove files from UI after submission
-const MyUploader = ({ setImageURLs, imageBucket, maxFiles = 10 }) => {
+const MyUploader = ({
+  setImageURLs, imageBucket, maxFiles = 10, displayedImage = uploaderIcon,
+}) => {
   // specify upload params and url for your files
   const apiEndpoint = `${config.apiUrl}/api/getSignedURL`;
   const getUploadParams = async ({ file }) => {
@@ -37,7 +39,7 @@ const MyUploader = ({ setImageURLs, imageBucket, maxFiles = 10 }) => {
 
   const dropzoneText = (
     <div className="dropzone-text-container">
-      <img className="dropzone-icon" src={uploaderIcon} alt="chatting" />
+      <img className="dropzone-icon" src={displayedImage} alt="chatting" />
       <h4 className="dropzone-text dropzone-header">Drag &amp; drop images</h4>
       <h6 className="dropzone-text dropzone-subheader">or click to upload</h6>
     </div>

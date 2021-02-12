@@ -1,50 +1,29 @@
-.form {
+.reviewee-dashboard {
   &-container {
     display: flex;
-    justify-content: space-between;
   }
-  &-group-container {
-    width: 500px;
-    margin: 0 auto;
-  }
-  &-group {
-    width: 48%;
+  &-content {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
-
-.explanation {
-  &-label {
-    float: left;
-    margin-right: 20px;
-  }
-  &-textarea {
-    margin: 40px 0;
-    resize: none;
-    height: 100px !important;
-  }
-  &-submit {
-    margin: 0 auto;
-    &-container {
-      text-align: center;
-    }
-  }
-}
-
-.uploader {
-  &-title {
-    font-size: 19px;
-    font-weight: 400;
-    margin-right: 20px;
-    &-container {
-      display: flex;
-    }
-  }
+.sidebar {
   &-container {
-    margin: 80px auto;
-    width: 500px;
+    display: inline;
   }
-}
-
-.form-group {
-  text-align: left;
+  &-item {
+    list-style: none;
+    color: black;
+    padding: 10px 0;
+    button {
+      background-color: inherit;
+      border: none;
+      padding: 0;
+      font-weight: 600;
+    }
+  }
+  &-subtitle {
+    font-size: 14px;
+  }
 }

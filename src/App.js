@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ReactHeap from 'reactjs-heap';
 import axios from 'axios';
 import Home from './home/Home';
-import RevieweeDashboard from './reviewee/RevieweeDashboard';
+// import RevieweeDashboard from './reviewee/RevieweeDashboard';
 import config from './constants';
 import RoleProtectedRoute from './routes/roleProtectedRoute';
 import SignupReviewee from './navbar/SignupReviewee';
@@ -15,6 +15,7 @@ import Layout from './common/Layout';
 import SignUpReviewer from './navbar/SignupReviewer';
 import Login from './navbar/Login';
 import ReviewerDashboard from './reviewer/ReviewerDashboard';
+import Main from './reviewee/RevieweeDashboard';
 
 ReactHeap.initialize('497288854');
 
@@ -41,7 +42,7 @@ function App() {
         >
           <>
             <Layout>
-              <RevieweeDashboard />
+              <Main />
             </Layout>
           </>
         </RoleProtectedRoute>
