@@ -19,7 +19,7 @@ const displaySelectedTab = (displayId, pastSubmissions) => {
     default:
       return pastSubmissions.map((submission) =>
         (submission._id === displayId ? (
-          <ContentDisplay images={submission.imageURLs} />
+          <ContentDisplay images={submission.imageURLs} reviews={submission.reviews} />
         ) : null));
   }
 };
@@ -61,6 +61,7 @@ const revieweeDashboard = () => {
                 }}
               >
                 Submission #
+                {submission.status === 'reviewed' ? 'reviewed' : null}
                 {idx + 1}
               </button>
             </li>
