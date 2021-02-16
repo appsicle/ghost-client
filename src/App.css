@@ -1,3 +1,47 @@
 * {
   font-family: Poppins;
 }
+
+.title {
+  text-align: center;
+  color: white;
+  font-size: 72px;
+  margin-bottom: 80px;
+}
+
+body {
+  background-color: black;
+}
+
+.main-container {
+  margin: 200px auto;
+  max-width: 1200px;
+  background-color: black;
+}
+
+.tagline {
+  text-align: center;
+  font-size: 2em;
+  color: white;
+}
+
+.submit {
+  max-width:  600px;
+  margin: 80px auto 0 auto;
+}
+
+.highlight {
+  color: blue;
+}
+
+.image-container {
+  margin-top: 80px;
+}
+
+.image-container img {
+  max-width: 500px;
+}
+
+.right {
+  float: right;
+}

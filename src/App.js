@@ -3,72 +3,53 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'shards-ui/dist/css/shards.min.css';
 import './App.css';
 
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ReactHeap from 'reactjs-heap';
 import axios from 'axios';
-import Home from './home/Home';
-// import RevieweeDashboard from './reviewee/RevieweeDashboard';
-import config from './constants';
-import RoleProtectedRoute from './routes/roleProtectedRoute';
-import SignupReviewee from './navbar/SignupReviewee';
-import Layout from './common/Layout';
-import SignUpReviewer from './navbar/SignupReviewer';
-import Login from './navbar/Login';
-import ReviewerDashboard from './reviewer/ReviewerDashboard';
-import Main from './reviewee/RevieweeDashboard';
+import {
+  InputGroup,
+  InputGroupAddon,
+  FormInput,
+  Button,
+} from 'shards-react';
+import config from './config';
+import image1 from './images/campaign1.png';
+import image2 from './images/campaign2.png';
 
-ReactHeap.initialize('497288854');
+ReactHeap.initialize(config.heapUrl);
 
-// const buyer = <div>buyer</div>;
 axios.defaults.withCredentials = true;
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/login">
-          <Login />
-        </Route>
-        <Route exact path="/signupReviewee">
-          <SignupReviewee />
-        </Route>
-        <Route exact path="/signupReviewer">
-          <SignUpReviewer />
-        </Route>
-
-        <RoleProtectedRoute
-          desiredRole={config.REVIEWEE}
-          path="/revieweeDashboard"
-        >
-          <>
-            <Layout>
-              <Main />
-            </Layout>
-          </>
-        </RoleProtectedRoute>
-        <RoleProtectedRoute
-          desiredRole={config.REVIEWER}
-          path="/reviewerDashboard"
-        >
-          <>
-            <Layout>
-              <ReviewerDashboard />
-            </Layout>
-          </>
-        </RoleProtectedRoute>
-        <Layout>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route exact path="/faq">
-            <div>faq</div>
-          </Route>
-          <Route exact path="/pricing">
-            <div>pricing</div>
-          </Route>
-        </Layout>
-      </Switch>
-    </Router>
+    <>
+      <div className="main-container">
+        <h1 className="title">
+          Heighten
+        </h1>
+        <h1 className="tagline">
+          Dating profile and text message insight from
+          {' '}
+          <u>real</u>
+          {' '}
+          women. Stop getting
+          ghosted,
+          {' '}
+          <span className="highlight">heighten</span>
+          {' '}
+          your game.
+        </h1>
+        <InputGroup className="submit">
+          <FormInput placeholder="Email Address" />
+          <InputGroupAddon type="append">
+            <Button theme="success">Join the waitlist now!</Button>
+          </InputGroupAddon>
+        </InputGroup>
+        <div className="image-container">
+          <img className="right" src={image1} alt="" />
+          <img src={image2} alt="" />
+        </div>
+      </div>
+    </>
   );
 }
 
