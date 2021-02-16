@@ -17,8 +17,8 @@
 .subtitle {
   text-align: center;
   color: black;
-  font-size: 2.8em;
-  padding-bottom: 30px;
+  font-size: 2.8rem;
+  padding-bottom: 80px;
 }
 
 body {
@@ -62,10 +62,15 @@ body {
 
 @media (max-width: 600px) {
   .submit {
-    width: 400px;
+    width: 350px;
   }
 
   .image {
     float: unset;
+  }
+
+  .tagline {
+    font-size: 1.5em;
+    margin: 0 20px;
   }
 }

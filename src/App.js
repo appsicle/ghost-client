@@ -76,7 +76,7 @@ function App() {
     <>
       <Particles params={params} />
       <Alert theme="success" dismissible={dismiss} open={visible}>
-        Success! Thanks for joining the waitlist!
+        Success! You will be notified when we launch! See you very soon!
       </Alert>
       <Alert theme="danger" dismissible={dismissError} open={error}>
         Oops! Something went wrong... Make sure you are using a valid email address.
@@ -95,7 +95,7 @@ function App() {
           />
           <InputGroupAddon type="append">
             <Button disabled={!email} onClick={onSubmit} theme="success">
-              Join the waitlist now!
+              Join the waitlist!
             </Button>
           </InputGroupAddon>
         </InputGroup>
