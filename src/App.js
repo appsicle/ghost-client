@@ -6,14 +6,9 @@ import './App.css';
 import ReactHeap from 'reactjs-heap';
 import axios from 'axios';
 import {
-  InputGroup,
-  InputGroupAddon,
-  FormInput,
-  Button,
+  InputGroup, InputGroupAddon, FormInput, Button,
 } from 'shards-react';
 import config from './config';
-import image1 from './images/campaign1.png';
-import image2 from './images/campaign2.png';
 
 ReactHeap.initialize(config.heapUrl);
 
@@ -23,20 +18,19 @@ function App() {
   return (
     <>
       <div className="main-container">
-        <h1 className="title">
-          Heighten
-        </h1>
+        <h1 className="title">Heighten</h1>
         <h1 className="tagline">
           Dating profile and text message insight from
           {' '}
           <u>real</u>
           {' '}
-          women. Stop getting
-          ghosted,
+          women. Stop
+          getting ghosted,
           {' '}
           <span className="highlight">heighten</span>
           {' '}
-          your game.
+          your
+          game.
         </h1>
         <InputGroup className="submit">
           <FormInput placeholder="Email Address" />
@@ -45,8 +39,17 @@ function App() {
           </InputGroupAddon>
         </InputGroup>
         <div className="image-container">
-          <img className="right" src={image1} alt="" />
-          <img src={image2} alt="" />
+          <img
+            className="left"
+            src="https://heighten-assets.s3-us-west-1.amazonaws.com/campaign2.png"
+            alt=""
+          />
+          <img
+            className="right"
+            src="https://heighten-assets.s3-us-west-1.amazonaws.com/campaign1.png"
+            alt=""
+          />
+
         </div>
       </div>
     </>
