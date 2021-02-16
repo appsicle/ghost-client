@@ -1,29 +1,36 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, FormInput, FormGroup } from 'shards-react';
-import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import GoogleButton from './GoogleButton';
+import GoogleLoginButton from './GoogleLoginButton';
+import UserService from '../user/userService';
 
 import Uploader from '../common/Uploader';
 import constants from '../constants';
-import config from '../config';
 
 function SignUp() {
   const [imageURLs, setImageURLs] = useState([]);
   const [bio, setBio] = useState('');
+  const [metSignupReq, setMetSignupReq] = useState(false);
   const history = useHistory();
   // test that it works for signing up
   // clean up onsuccess into a function
 
+  useEffect(() => {
+    if (bio && imageURLs.length !== 0) {
+      setMetSignupReq(true);
+    } else {
+      setMetSignupReq(false);
+    }
+  }, [bio, imageURLs]);
+
   const onSuccess = (res) => {
-    axios
-      .post(`${config.apiUrl}/api/auth/googleSignup`, {
-        idToken: res.tokenObj.id_token,
-        desiredRole: constants.REVIEWER,
-        bio,
-        profilePic: imageURLs[0],
-      })
+    UserService.signUpWithGoogle({
+      idToken: res.tokenObj.id_token,
+      desiredRole: constants.REVIEWER,
+      bio,
+      profilePic: imageURLs[0],
+    })
       .then((response) => {
         console.log(response);
         const { role, name, profilePic } = response.data;
@@ -52,8 +59,12 @@ function SignUp() {
           onChange={(e) => setBio(e.target.value)}
         />
       </FormGroup>
-      <Uploader imageBucket="reviewerProfilePic" setImageURLs={setImageURLs} maxFiles={1} />
-      <GoogleButton onSuccess={onSuccess} desiredRole={constants.REVIEWER} />
+      <Uploader
+        imageBucket="reviewerProfilePic"
+        setImageURLs={setImageURLs}
+        maxFiles={1}
+      />
+      <GoogleLoginButton onSuccess={onSuccess} disabled={!metSignupReq} />
     </Form>
   );
 }

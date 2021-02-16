@@ -1,29 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, FormInput, FormGroup } from 'shards-react';
-import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import Login from './GoogleButton';
+import GoogleLoginButton from './GoogleLoginButton';
+import UserService from '../user/userService';
+
 import Uploader from '../common/Uploader';
 import constants from '../constants';
-import config from '../config';
 
 function SignUp() {
   const history = useHistory();
   const [imageURLs, setImageURLs] = useState([]);
-  const [age, setAge] = useState(null);
+  const [age, setAge] = useState('');
   const [ethnicity, setEthnicity] = useState('');
   const [location, setLocation] = useState('');
+  const [metSignupReq, setMetSignupReq] = useState(false);
+
+  useEffect(() => {
+    if (age && ethnicity && location && imageURLs.length !== 0) {
+      setMetSignupReq(true);
+    } else {
+      setMetSignupReq(false);
+    }
+  }, [age, ethnicity, location, imageURLs]);
 
   const onSuccess = (res) => {
-    axios
-      .post(`${config.apiUrl}/api/auth/googleSignup`, {
-        idToken: res.tokenObj.id_token,
-        desiredRole: constants.REVIEWEE,
-        age,
-        ethnicity,
-        location,
-        profilePic: imageURLs[0],
-      })
+    UserService.signUpWithGoogle({
+      idToken: res.tokenObj.id_token,
+      desiredRole: constants.REVIEWEE,
+      age,
+      ethnicity,
+      location,
+      profilePic: imageURLs[0],
+    })
       .then((response) => {
         console.log(response);
         const { role, name, profilePic } = response.data;
@@ -68,8 +76,12 @@ function SignUp() {
           onChange={(e) => setLocation(e.target.value)}
         />
       </FormGroup>
-      <Uploader imageBucket="reviewerProfilePic" setImageURLs={setImageURLs} maxFiles={1} />
-      <Login onSuccess={onSuccess} desiredRole={constants.REVIEWEE} />
+      <Uploader
+        imageBucket="reviewerProfilePic"
+        setImageURLs={setImageURLs}
+        maxFiles={1}
+      />
+      <GoogleLoginButton onSuccess={onSuccess} disabled={!metSignupReq} />
     </Form>
   );
 }

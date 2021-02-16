@@ -6,7 +6,7 @@ import './GoogleButton.css';
 
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
-function GoogleButton({ onSuccess }) {
+function GoogleButton({ onSuccess, disabled = false }) {
   const onFailure = (res) => {
     console.log('Login failed: res:', res);
   };
@@ -15,13 +15,17 @@ function GoogleButton({ onSuccess }) {
     onSuccess,
     onFailure,
     clientId,
-    isSignedIn: true,
     accessType: 'offline',
   });
 
   return (
     <div className="login-form-container">
-      <button type="button" onClick={signIn} className="icon-button">
+      <button
+        type="button"
+        onClick={signIn}
+        className="icon-button"
+        disabled={disabled}
+      >
         <img src={google} alt="googlelogin" className="icon" />
       </button>
     </div>
