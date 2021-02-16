@@ -6,7 +6,7 @@ import './App.css';
 import ReactHeap from 'reactjs-heap';
 import axios from 'axios';
 import {
-  InputGroup, InputGroupAddon, FormInput, Button,
+  InputGroup, InputGroupAddon, FormInput, Button, Alert,
 } from 'shards-react';
 import { useState } from 'react';
 import Particles from 'react-particles-js';
@@ -47,18 +47,40 @@ const params = {
 };
 function App() {
   const [email, setEmail] = useState(null);
+  const [visible, setVisible] = useState(false);
+  const [error, setError] = useState(false);
+
+  const dismiss = () => {
+    setVisible(false);
+  };
+
+  const dismissError = () => {
+    setError(false);
+  };
 
   const onChange = (e) => {
     setEmail(e.target.value);
   };
 
   const onSubmit = async () => {
-    await axios.post(`${config.apiUrl}/waitlist`, { email });
+    setError(false);
+    try {
+      await axios.post(`${config.apiUrl}/waitlist`, { email });
+      setVisible(true);
+    } catch (err) {
+      setError(true);
+    }
   };
 
   return (
     <>
       <Particles params={params} />
+      <Alert theme="success" dismissible={dismiss} open={visible}>
+        Success! Thanks for joining the waitlist!
+      </Alert>
+      <Alert theme="danger" dismissible={dismissError} open={error}>
+        Oops! Something went wrong... Make sure you are using a valid email address.
+      </Alert>
       <div className="main-container">
         <h1 className="title">Got ghosted?</h1>
         <h2 className="subtitle">Find out why.</h2>
