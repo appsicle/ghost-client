@@ -16,11 +16,20 @@ import {
 import { useState } from 'react';
 import Particles from 'react-particles-js';
 import ReactGA from 'react-ga';
+import ReactPixel from 'react-facebook-pixel';
 import config from './config';
 
 ReactHeap.initialize(config.heapUrl);
 ReactGA.initialize(config.googleAnalyticsUrl);
 ReactGA.pageview(window.location.pathname + window.location.search);
+
+const options = {
+  autoConfig: true, // set pixel's autoConfig. More info: https://developers.facebook.com/docs/facebook-pixel/advanced/
+  debug: true, // enable logs
+};
+
+ReactPixel.init('540516417190184', {}, options);
+ReactPixel.pageView(); // For tracking page view
 
 axios.defaults.withCredentials = true;
 
