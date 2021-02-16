@@ -9,9 +9,12 @@ import {
   InputGroup, InputGroupAddon, FormInput, Button,
 } from 'shards-react';
 import Particles from 'react-particles-js';
+import ReactGA from 'react-ga';
 import config from './config';
 
 ReactHeap.initialize(config.heapUrl);
+ReactGA.initialize(config.googleAnalyticsUrl);
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 axios.defaults.withCredentials = true;
 
