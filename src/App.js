@@ -8,6 +8,7 @@ import axios from 'axios';
 import {
   InputGroup, InputGroupAddon, FormInput, Button,
 } from 'shards-react';
+import { useState } from 'react';
 import Particles from 'react-particles-js';
 import ReactGA from 'react-ga';
 import config from './config';
@@ -45,6 +46,16 @@ const params = {
   },
 };
 function App() {
+  const [email, setEmail] = useState(null);
+
+  const onChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const onSubmit = async () => {
+    await axios.post(`${config.apiUrl}/waitlist`, { email });
+  };
+
   return (
     <>
       <Particles params={params} />
@@ -52,14 +63,18 @@ function App() {
         <h1 className="title">Got ghosted?</h1>
         <h2 className="subtitle">Find out why.</h2>
         <h1 className="tagline">
-          Get dating profile and text message
-          insight from real women
-
+          Get dating profile and text message insight from real women
         </h1>
         <InputGroup size="lg" className="submit">
-          <FormInput style={{ height: '100%' }} placeholder="Email Address" />
+          <FormInput
+            style={{ height: '100%' }}
+            onChange={onChange}
+            placeholder="Email Address"
+          />
           <InputGroupAddon type="append">
-            <Button theme="success">Join the waitlist now!</Button>
+            <Button disabled={!email} onClick={onSubmit} theme="success">
+              Join the waitlist now!
+            </Button>
           </InputGroupAddon>
         </InputGroup>
         <div className="image-container">
