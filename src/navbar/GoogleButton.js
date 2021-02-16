@@ -1,6 +1,6 @@
 import React from 'react';
 import { useGoogleLogin } from 'react-google-login';
-import google from '../images/google.png';
+import { googleIcon } from '../icons/links';
 
 import './GoogleButton.css';
 
@@ -22,7 +22,7 @@ function GoogleButton({ onSuccess }) {
   return (
     <div className="login-form-container">
       <button type="button" onClick={signIn} className="icon-button">
-        <img src={google} alt="googlelogin" className="icon" />
+        <img src={googleIcon} alt="googlelogin" className="icon" />
       </button>
     </div>
   );

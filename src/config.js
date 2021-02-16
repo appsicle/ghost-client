@@ -3,4 +3,6 @@ module.exports = {
     process.env.NODE_ENV === 'development'
       ? process.env.REACT_APP_API_ENDPOINT_DEV
       : process.env.REACT_APP_API_ENDPOINT_PROD,
+  heapUrl: process.env.NODE_ENV === 'development'
+    ? process.env.REACT_APP_HEAP_DEV : process.env.REACT_APP_HEAP_PROD,
 };

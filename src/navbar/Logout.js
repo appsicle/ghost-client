@@ -1,5 +1,5 @@
 import { useGoogleLogout } from 'react-google-login';
-import logoutIcon from '../icons/dropdown_logout.svg';
+import { dropdownLogout } from '../icons/links';
 
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
@@ -16,7 +16,7 @@ function Logout({ onLogoutSuccess }) {
 
   return (
     <button type="button" onClick={signOut}>
-      <img className="dropdown-icon" src={logoutIcon} alt="logout" />
+      <img className="dropdown-icon" src={dropdownLogout} alt="logout" />
       Logout
     </button>
   );

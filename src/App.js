@@ -7,8 +7,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ReactHeap from 'reactjs-heap';
 import axios from 'axios';
 import Home from './home/Home';
-// import RevieweeDashboard from './reviewee/RevieweeDashboard';
-import config from './constants';
+import constants from './constants';
 import RoleProtectedRoute from './routes/roleProtectedRoute';
 import SignupReviewee from './navbar/SignupReviewee';
 import Layout from './common/Layout';
@@ -16,12 +15,13 @@ import SignUpReviewer from './navbar/SignupReviewer';
 import Login from './navbar/Login';
 import ReviewerDashboard from './reviewer/ReviewerDashboard';
 import Main from './reviewee/RevieweeDashboard';
+import config from './config';
 
-ReactHeap.initialize('497288854');
+console.log(config);
 
-// const buyer = <div>buyer</div>;
+ReactHeap.initialize(config.heapUrl);
+
 axios.defaults.withCredentials = true;
-
 function App() {
   return (
     <Router>
@@ -35,9 +35,8 @@ function App() {
         <Route exact path="/signupReviewer">
           <SignUpReviewer />
         </Route>
-
         <RoleProtectedRoute
-          desiredRole={config.REVIEWEE}
+          desiredRole={constants.REVIEWEE}
           path="/revieweeDashboard"
         >
           <>
@@ -47,7 +46,7 @@ function App() {
           </>
         </RoleProtectedRoute>
         <RoleProtectedRoute
-          desiredRole={config.REVIEWER}
+          desiredRole={constants.REVIEWER}
           path="/reviewerDashboard"
         >
           <>

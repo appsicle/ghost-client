@@ -2,9 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import './Dropdown.scss';
 import useDetectOutsideClick from '../hooks/useDetectOutsideClick';
 import Logout from '../navbar/Logout';
-import dashboardIcon from '../icons/dropdown_dashboard.svg';
-import settingsIcon from '../icons/dropdown_settings.svg';
-
+import { dropdownDashboard, dropdownSettings } from '../icons/links';
 import useRole from '../hooks/useRole';
 
 function Dropdown({ name, profileURL, onLogoutSuccess }) {
@@ -50,7 +48,7 @@ function Dropdown({ name, profileURL, onLogoutSuccess }) {
               <a href={dashboardLink}>
                 <img
                   className="dropdown-icon"
-                  src={dashboardIcon}
+                  src={dropdownDashboard}
                   alt="dashboard"
                 />
                 Dashboard
@@ -61,7 +59,7 @@ function Dropdown({ name, profileURL, onLogoutSuccess }) {
                 {' '}
                 <img
                   className="dropdown-icon"
-                  src={settingsIcon}
+                  src={dropdownSettings}
                   alt="settings"
                 />
                 Settings

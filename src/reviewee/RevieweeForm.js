@@ -9,7 +9,7 @@ import { FormTextarea, Button } from 'shards-react';
 import Uploader from '../common/Uploader';
 import { postTextMsgs } from '../services/TextMsgs';
 import TipBubble from '../common/TipBubble';
-import chat from '../icons/text_upload.svg';
+import { textUpload } from '../icons/links';
 
 function RevieweeDashboard() {
   const [additionalInfo, setAdditionalInfo] = useState('');
@@ -27,7 +27,7 @@ function RevieweeDashboard() {
             tooltipText="text1"
           />
         </div>
-        <Uploader setImageURLs={setImageURLs} imageBucket="textMsgs" displayedImage={chat} />
+        <Uploader setImageURLs={setImageURLs} imageBucket="textMsgs" displayedImage={textUpload} />
       </div>
       <label className="explanation-label" htmlFor="textarea">
         Additional Comments

@@ -1,8 +1,6 @@
 import './Home.scss';
 import { Button } from 'shards-react';
-import headerImg from '../images/home-header.svg';
-import stepOneExample from '../images/step-one-example.svg';
-import badText from '../images/textmsg.png';
+import { homeHeader, textMsg, stepOneExample } from '../images/links';
 
 function Home() {
   return (
@@ -17,7 +15,7 @@ function Home() {
           </h5>
         </div>
         <div className="jumboton-image-container">
-          <img src={headerImg} alt="texting" />
+          <img src={homeHeader} alt="texting" />
         </div>
       </section>
       <section className="how-it-works-container">
@@ -28,7 +26,7 @@ function Home() {
               1. Upload any screenshots of past conversations that went wrong
             </h5>
           </div>
-          <img className="step-example-image" src={badText} alt="" />
+          <img className="step-example-image" src={textMsg} alt="" />
         </div>
         <div className="step-container">
           <img className="step-example" src={stepOneExample} alt="" />
