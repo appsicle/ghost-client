@@ -8,15 +8,36 @@ import axios from 'axios';
 import {
   InputGroup, InputGroupAddon, FormInput, Button,
 } from 'shards-react';
+import Particles from 'react-particles-js';
 import config from './config';
 
 ReactHeap.initialize(config.heapUrl);
 
 axios.defaults.withCredentials = true;
 
+const params = {
+  particles: {
+    number: {
+      value: 70,
+    },
+    size: {
+      value: 2,
+    },
+  },
+  interactivity: {
+    events: {
+      onhover: {
+        enable: true,
+        mode: 'repulse',
+      },
+    },
+  },
+
+};
 function App() {
   return (
     <>
+      <Particles params={params} />
       <div className="main-container">
         <h1 className="title">Heighten</h1>
         <h1 className="tagline">
@@ -49,7 +70,6 @@ function App() {
             src="https://heighten-assets.s3-us-west-1.amazonaws.com/campaign1.png"
             alt=""
           />
-
         </div>
       </div>
     </>

@@ -2,6 +2,16 @@
   font-family: Poppins;
 }
 
+#tsparticles {
+  /* position: absolute; */
+}
+
+.tsparticles-canvas-el {
+  position: absolute;
+  z-index: -9999;
+
+}
+
 .title {
   text-align: center;
   color: white;
@@ -14,6 +24,7 @@ body {
 }
 
 .main-container {
+  z-index: 2324;
   margin: 200px auto;
   max-width: 1200px;
   background-color: black;
