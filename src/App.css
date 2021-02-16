@@ -10,15 +10,15 @@
 .title {
   text-align: center;
   color: black;
-  font-size: 72px;
-  padding: 80px 0 40px 0;
+  font-size: 4em;
+  padding: 80px 0 10px 0;
 }
 
 .subtitle {
   text-align: center;
   color: black;
-  font-size: 48px;
-  padding-bottom: 60px;
+  font-size: 2.8em;
+  padding-bottom: 30px;
 }
 
 body {
@@ -29,7 +29,6 @@ body {
   z-index: 2324;
   margin: 0 auto;
   max-width: 1400px;
-  /* background-color: white; */
 }
 
 .tagline {
@@ -44,13 +43,29 @@ body {
 }
 
 .highlight {
-  color: #c7c7ff;;
+  color: #c7c7ff;
 }
 
 .image-container {
   margin-top: 80px;
+  text-align: center;
+  padding-bottom: 40px;
 }
 
 .image {
   max-width: 100%;
+}
+
+.left {
+  padding-right: 20px;
+}
+
+@media (max-width: 600px) {
+  .submit {
+    width: 400px;
+  }
+
+  .image {
+    float: unset;
+  }
 }
