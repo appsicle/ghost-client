@@ -8,14 +8,13 @@ import RoleSelectionModal from './RoleSelectionModal';
 import Profile from './Profile';
 import './GoogleButton.css';
 import UserService from '../user/userService';
+import { guestUser } from '../icons/links';
 
 // TODO: switch active nav based on state
 function AppNavbar() {
-  const defaultProfilePath = '../icons/guest_user.svg';
-
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [name, setName] = useState(undefined);
-  const [profileURL, setProfileURL] = useState(defaultProfilePath);
+  const [profileURL, setProfileURL] = useState(guestUser);
   const dispatch = useDispatch();
   const open = useSelector((state) => state.roleSelectionModalReducer.isOpen);
   const history = useHistory();

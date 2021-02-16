@@ -1,12 +1,12 @@
 import Dropzone from 'react-dropzone-uploader';
 import axios from 'axios';
 import config from '../config';
-import uploaderIcon from '../icons/default_upload.svg';
+import { defaultUpload } from '../icons/links';
 import './Uploader.scss';
 
 // TODO: remove files from UI after submission
 const MyUploader = ({
-  setImageURLs, imageBucket, maxFiles = 10, displayedImage = uploaderIcon,
+  setImageURLs, imageBucket, maxFiles = 10, displayedImage = defaultUpload,
 }) => {
   // specify upload params and url for your files
   const apiEndpoint = `${config.apiUrl}/api/getSignedURL`;

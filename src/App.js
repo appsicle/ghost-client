@@ -53,13 +53,8 @@ function App() {
         </InputGroup>
         <div className="image-container">
           <img
-            className="left"
-            src="https://heighten-assets.s3-us-west-1.amazonaws.com/campaign2.png"
-            alt=""
-          />
-          <img
-            className="right"
-            src="https://heighten-assets.s3-us-west-1.amazonaws.com/campaign1.png"
+            className="image"
+            src="https://heighten-assets.s3-us-west-1.amazonaws.com/campaign/campaign.png"
             alt=""
           />
         </div>
