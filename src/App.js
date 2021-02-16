@@ -32,29 +32,21 @@ const params = {
       },
     },
   },
-
 };
 function App() {
   return (
     <>
       <Particles params={params} />
       <div className="main-container">
-        <h1 className="title">Heighten</h1>
+        <h1 className="title">Got ghosted?</h1>
+        <h2 className="subtitle">Find out why.</h2>
         <h1 className="tagline">
-          Dating profile and text message insight from
-          {' '}
-          <u>real</u>
-          {' '}
-          women. Stop
-          getting ghosted,
-          {' '}
-          <span className="highlight">heighten</span>
-          {' '}
-          your
-          game.
+          Get dating profile and text message
+          insight from real women
+
         </h1>
-        <InputGroup className="submit">
-          <FormInput placeholder="Email Address" />
+        <InputGroup size="lg" className="submit">
+          <FormInput style={{ height: '100%' }} placeholder="Email Address" />
           <InputGroupAddon type="append">
             <Button theme="success">Join the waitlist now!</Button>
           </InputGroupAddon>

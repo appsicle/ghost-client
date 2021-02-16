@@ -16,7 +16,14 @@
   text-align: center;
   color: white;
   font-size: 72px;
-  margin-bottom: 80px;
+  margin-bottom: 40px;
+}
+
+.subtitle {
+  text-align: center;
+  color: white;
+  font-size: 48px;
+  margin-bottom: 60px;
 }
 
 body {
