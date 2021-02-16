@@ -11,6 +11,7 @@ import {
   FormInput,
   Button,
   Alert,
+  Form,
 } from 'shards-react';
 import { useState } from 'react';
 import Particles from 'react-particles-js';
@@ -71,7 +72,8 @@ function App() {
     setEmail(e.target.value);
   };
 
-  const onSubmit = async () => {
+  const onSubmit = async (e) => {
+    e.preventDefault();
     setError(false);
     setDuplicateError(false);
     setVisible(false);
@@ -80,15 +82,17 @@ function App() {
       setVisible(true);
       setEmail('');
     } catch (err) {
-      switch (err.response.status) {
-        case 400:
-          setError(true);
-          break;
-        case 409:
-          setDuplicateError(true);
-          break;
-        default:
-          break;
+      if (err.response && err.response.status) {
+        switch (err.response.status) {
+          case 400:
+            setError(true);
+            break;
+          case 409:
+            setDuplicateError(true);
+            break;
+          default:
+            break;
+        }
       }
     }
   };
@@ -116,19 +120,22 @@ function App() {
         <h1 className="tagline">
           Get dating profile and text message insight from real women
         </h1>
-        <InputGroup size="lg" className="submit">
-          <FormInput
-            style={{ height: '100%' }}
-            value={email}
-            onChange={onChange}
-            placeholder="Email Address"
-          />
-          <InputGroupAddon type="append">
-            <Button disabled={!email} onClick={onSubmit} theme="success">
-              Join the waitlist!
-            </Button>
-          </InputGroupAddon>
-        </InputGroup>
+        <Form onSubmit={onSubmit}>
+          <InputGroup size="lg" className="submit">
+            <FormInput
+              style={{ height: '100%' }}
+              value={email}
+              onChange={onChange}
+              placeholder="Email Address"
+            />
+            <InputGroupAddon type="append">
+              <Button type="submit" disabled={!email} theme="success">
+                Join the waitlist!
+              </Button>
+            </InputGroupAddon>
+          </InputGroup>
+        </Form>
+
         <div className="image-container">
           <img
             className="image left"
