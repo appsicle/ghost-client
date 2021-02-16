@@ -1,8 +1,41 @@
 import axios from 'axios';
 import config from '../config';
 
-const getRole = async () => axios.get(`${config.apiUrl}/api/user/role`);
+const getRole = () =>
+  new Promise((resolve, reject) => {
+    axios
+      .get(`${config.apiUrl}/api/user/role`)
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
+  });
 
-const logout = async () => axios.get(`${config.apiUrl}/api/auth/logout`);
+const logout = () =>
+  new Promise((resolve, reject) => {
+    axios
+      .get(`${config.apiUrl}/api/auth/logout`)
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
+  });
 
-export default { getRole, logout };
+const loginWithGoogle = (body) =>
+  new Promise((resolve, reject) => {
+    axios
+      .post(`${config.apiUrl}/api/auth/googleSignin`, body)
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
+  });
+
+const signUpWithGoogle = (body) =>
+  new Promise((resolve, reject) => {
+    axios
+      .post(`${config.apiUrl}/api/auth/googleSignUp`, body)
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
+  });
+
+export default {
+  getRole,
+  logout,
+  loginWithGoogle,
+  signUpWithGoogle,
+};

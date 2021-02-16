@@ -6,20 +6,18 @@ const ReviewsDisplay = ({ reviews }) => (
   <div>
     {reviews.map((review) => (
       <div>
-        <img className="reviewer-profile-image" src={review.reviewerObj.profilePic} alt="" />
-
-        {review.reviewContent.map((content) => (
-          <>
-            <h1>{content.question}</h1>
-            <h4>{content.answer}</h4>
-          </>
-        ))}
+        <img
+          className="reviewer-profile-image"
+          src={review.reviewerObj.profilePic}
+          alt=""
+        />
+        <h4>{review.reviewContent}</h4>
       </div>
     ))}
   </div>
 );
 
-const ContentDisplay = ({ images, reviews }) => (
+const ContentDisplay = ({ images, additionalInfo, reviews }) => (
   <div className="carousel-container">
     <Carousel centerMode>
       {images.map((url) => (
@@ -29,7 +27,13 @@ const ContentDisplay = ({ images, reviews }) => (
         </div>
       ))}
     </Carousel>
-    {reviews.length ? <ReviewsDisplay reviews={reviews} /> : <h1>waiting to be reviewed</h1>}
+    <h3>Your additional comments</h3>
+    <p>{additionalInfo}</p>
+    {reviews.length ? (
+      <ReviewsDisplay reviews={reviews} />
+    ) : (
+      <h1>waiting to be reviewed</h1>
+    )}
   </div>
 );
 

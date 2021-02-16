@@ -19,7 +19,11 @@ const displaySelectedTab = (displayId, pastSubmissions) => {
     default:
       return pastSubmissions.map((submission) =>
         (submission._id === displayId ? (
-          <ContentDisplay images={submission.imageURLs} reviews={submission.reviews} />
+          <ContentDisplay
+            images={submission.imageURLs}
+            additionalInfo={submission.additionalInfo}
+            reviews={submission.reviews}
+          />
         ) : null));
   }
 };

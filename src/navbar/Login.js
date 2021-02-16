@@ -1,20 +1,15 @@
 import React from 'react';
 import { Form } from 'shards-react';
-import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import GoogleButton from './GoogleButton';
+import GoogleLoginButton from './GoogleLoginButton';
 import constants from '../constants';
-import config from '../config';
+import UserService from '../user/userService';
 
 function Login() {
   const history = useHistory();
 
-  // FIXME: redirect is broken. Fix immediately
   const onSuccess = (res) => {
-    axios
-      .post(`${config.apiUrl}/api/auth/googleSignin`, {
-        idToken: res.tokenObj.id_token,
-      })
+    UserService.loginWithGoogle({ idToken: res.tokenObj.id_token })
       .then((response) => {
         console.log(response.data);
         const { role, name, profilePic } = response.data;
@@ -35,7 +30,7 @@ function Login() {
 
   return (
     <Form>
-      <GoogleButton onSuccess={onSuccess} desiredRole={constants.REVIEWEE} />
+      <GoogleLoginButton onSuccess={onSuccess} />
     </Form>
   );
 }

@@ -17,11 +17,9 @@ import ReviewerDashboard from './reviewer/ReviewerDashboard';
 import Main from './reviewee/RevieweeDashboard';
 import config from './config';
 
-console.log(config);
-
 ReactHeap.initialize(config.heapUrl);
-
 axios.defaults.withCredentials = true;
+
 function App() {
   return (
     <Router>
