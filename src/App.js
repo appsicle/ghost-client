@@ -6,7 +6,11 @@ import './App.css';
 import ReactHeap from 'reactjs-heap';
 import axios from 'axios';
 import {
-  InputGroup, InputGroupAddon, FormInput, Button, Alert,
+  InputGroup,
+  InputGroupAddon,
+  FormInput,
+  Button,
+  Alert,
 } from 'shards-react';
 import { useState } from 'react';
 import Particles from 'react-particles-js';
@@ -49,6 +53,7 @@ function App() {
   const [email, setEmail] = useState(null);
   const [visible, setVisible] = useState(false);
   const [error, setError] = useState(false);
+  const [duplicateError, setDuplicateError] = useState(false);
 
   const dismiss = () => {
     setVisible(false);
@@ -58,17 +63,33 @@ function App() {
     setError(false);
   };
 
+  const dismissDuplicateError = () => {
+    setDuplicateError(false);
+  };
+
   const onChange = (e) => {
     setEmail(e.target.value);
   };
 
   const onSubmit = async () => {
     setError(false);
+    setDuplicateError(false);
+    setVisible(false);
     try {
       await axios.post(`${config.apiUrl}/waitlist`, { email });
       setVisible(true);
+      setEmail('');
     } catch (err) {
-      setError(true);
+      switch (err.response.status) {
+        case 400:
+          setError(true);
+          break;
+        case 409:
+          setDuplicateError(true);
+          break;
+        default:
+          break;
+      }
     }
   };
 
@@ -79,7 +100,15 @@ function App() {
         Success! You will be notified when we launch! See you very soon!
       </Alert>
       <Alert theme="danger" dismissible={dismissError} open={error}>
-        Oops! Something went wrong... Make sure you are using a valid email address.
+        Oops! Something went wrong... Make sure you are using a valid email
+        address.
+      </Alert>
+      <Alert
+        theme="danger"
+        dismissible={dismissDuplicateError}
+        open={duplicateError}
+      >
+        You are already on this list!
       </Alert>
       <div className="main-container">
         <h1 className="title">Got ghosted?</h1>
@@ -90,6 +119,7 @@ function App() {
         <InputGroup size="lg" className="submit">
           <FormInput
             style={{ height: '100%' }}
+            value={email}
             onChange={onChange}
             placeholder="Email Address"
           />
