@@ -9,33 +9,33 @@
 
 .title {
   text-align: center;
-  color: white;
+  color: black;
   font-size: 72px;
   padding: 80px 0 40px 0;
 }
 
 .subtitle {
   text-align: center;
-  color: white;
+  color: black;
   font-size: 48px;
   padding-bottom: 60px;
 }
 
 body {
-  background-color: black;
+  background-color: white;
 }
 
 .main-container {
   z-index: 2324;
   margin: 0 auto;
   max-width: 1400px;
-  background-color: black;
+  /* background-color: white; */
 }
 
 .tagline {
   text-align: center;
   font-size: 2em;
-  color: white;
+  color: black;
 }
 
 .submit {

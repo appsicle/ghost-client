@@ -18,10 +18,18 @@ axios.defaults.withCredentials = true;
 const params = {
   particles: {
     number: {
-      value: 70,
+      value: 100,
     },
     size: {
-      value: 2,
+      value: 1,
+    },
+    color: '#888888',
+    links: {
+      color: '#bbbbbb',
+      distance: 150,
+      enable: true,
+      opacity: 0.5,
+      width: 1,
     },
   },
   interactivity: {
