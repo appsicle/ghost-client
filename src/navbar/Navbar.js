@@ -4,7 +4,9 @@ import { Button } from 'shards-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { toggleModal } from './roleSelectionModalSlice';
+import { toggleSigninModal } from '../signinModal/signInModalSlice';
 import RoleSelectionModal from './RoleSelectionModal';
+import SigninModal from '../signinModal/SigninModal';
 import Profile from './Profile';
 import './GoogleButton.css';
 import UserService from '../user/userService';
@@ -57,6 +59,15 @@ function AppNavbar() {
             Sign Up
           </Button>
         </li>
+        <li className="account-controls-list-item">
+          <Button
+            onClick={() => {
+              dispatch(toggleSigninModal());
+            }}
+          >
+            Test
+          </Button>
+        </li>
       </ul>
     </div>
   );
@@ -64,6 +75,7 @@ function AppNavbar() {
   return (
     <header>
       <RoleSelectionModal />
+      <SigninModal />
       <div className="navbar-container">
         <div className="branding">
           logo

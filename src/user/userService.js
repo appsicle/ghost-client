@@ -33,9 +33,18 @@ const signUpWithGoogle = (body) =>
       .catch((err) => reject(err));
   });
 
+const login = (body) =>
+  new Promise((resolve, reject) => {
+    axios
+      .post(`${config.apiUrl}/api/auth/signin`, body)
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
+  });
+
 export default {
   getRole,
   logout,
   loginWithGoogle,
   signUpWithGoogle,
+  login,
 };
