@@ -4,7 +4,8 @@ const dropdownLogout = 'https://heighten-assets.s3-us-west-1.amazonaws.com/icons
 const dropdownSettings = 'https://heighten-assets.s3-us-west-1.amazonaws.com/icons/dropdown_settings.svg';
 const googleIcon = 'https://heighten-assets.s3-us-west-1.amazonaws.com/icons/google.png';
 const guestUser = 'https://heighten-assets.s3-us-west-1.amazonaws.com/icons/guest_user.svg';
-const textUpload = 'text_upload.svg';
+const textUpload = 'https://heighten-assets.s3-us-west-1.amazonaws.com/icons/text_upload.svg';
+const logo = 'https://heighten-assets.s3-us-west-1.amazonaws.com/icons/logo.svg';
 
 export {
   defaultUpload,
@@ -14,4 +15,5 @@ export {
   googleIcon,
   guestUser,
   textUpload,
+  logo,
 };

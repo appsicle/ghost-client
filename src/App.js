@@ -57,11 +57,8 @@ function App() {
           <Route exact path="/">
             <Home />
           </Route>
-          <Route exact path="/faq">
-            <div>faq</div>
-          </Route>
-          <Route exact path="/pricing">
-            <div>pricing</div>
+          <Route exact path="/about">
+            <div>about</div>
           </Route>
         </Layout>
       </Switch>
