@@ -3,8 +3,8 @@ import { Link, useHistory } from 'react-router-dom';
 import { Button } from 'shards-react';
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { toggleModal } from './roleSelectionModalSlice';
-import { toggleSigninModal } from '../signinModal/signInModalSlice';
+// import { toggleModal } from './roleSelectionModalSlice';
+import { openLoginModal, openSignupModal } from '../signinModal/signInModalSlice';
 import RoleSelectionModal from './RoleSelectionModal';
 import SigninModal from '../signinModal/SigninModal';
 import Profile from './Profile';
@@ -39,7 +39,7 @@ function AppNavbar() {
   const loginAndSignup = (
     <div className="account-controls">
       <ul className="account-controls-list">
-        <li className="account-controls-list-item">
+        {/* <li className="account-controls-list-item">
           <Button
             onClick={() => {
               history.push('/login');
@@ -56,14 +56,23 @@ function AppNavbar() {
           >
             Sign Up
           </Button>
+        </li> */}
+        <li className="account-controls-list-item">
+          <Button
+            onClick={() => {
+              dispatch(openLoginModal());
+            }}
+          >
+            Log in
+          </Button>
         </li>
         <li className="account-controls-list-item">
           <Button
             onClick={() => {
-              dispatch(toggleSigninModal());
+              dispatch(openSignupModal());
             }}
           >
-            Test
+            Sign up
           </Button>
         </li>
       </ul>

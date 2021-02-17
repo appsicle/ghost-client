@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable no-alert */
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -5,12 +7,11 @@ import { useHistory } from 'react-router-dom';
 import {
   Modal,
   ModalBody,
-  ModalHeader,
   Form,
   FormInput,
   Button,
 } from 'shards-react';
-import { closeSigninModal } from './signInModalSlice';
+import { closeSigninModal, changeModalContent } from './signInModalSlice';
 import GoogleLoginButton from '../navbar/GoogleLoginButton';
 import UserService from '../user/userService';
 import constants from '../constants';
@@ -18,6 +19,7 @@ import constants from '../constants';
 function App() {
   const dispatch = useDispatch();
   const open = useSelector((state) => state.signinModalReducer.isOpen);
+  const isLogin = useSelector((state) => state.signinModalReducer.isLogin);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -60,7 +62,7 @@ function App() {
     [],
   );
 
-  return (
+  const login = (
     <Modal
       className="login-modal"
       size="sm"
@@ -68,7 +70,6 @@ function App() {
       centered
       open={open}
     >
-      <ModalHeader>Login</ModalHeader>
       <GoogleLoginButton onSuccess={signInWithGoogle} />
       or
       <ModalBody>
@@ -86,9 +87,45 @@ function App() {
             onChange={(e) => setPassword(e.target.value)}
           />
           <Button type="submit">Log in</Button>
+          <button type="button" onClick={() => { console.log('clicked'); dispatch(changeModalContent()); }}>No account? create one</button>
         </Form>
       </ModalBody>
     </Modal>
+  );
+
+  const signup = (
+    <Modal
+      className="login-modal"
+      size="sm"
+      toggle={() => dispatch(closeSigninModal())}
+      centered
+      open={open}
+    >
+      <GoogleLoginButton onSuccess={signInWithGoogle} />
+      or
+      <ModalBody>
+        <Form onSubmit={() => signInWithEmail(email, password)}>
+          <FormInput
+            id="#email"
+            placeholder="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <FormInput
+            id="#password"
+            placeholder="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Button type="submit">Sign up</Button>
+          <button type="button" onClick={() => { console.log('clicked'); dispatch(changeModalContent()); }}>Have an account? log in</button>
+        </Form>
+      </ModalBody>
+    </Modal>
+  );
+
+  return (
+    isLogin ? login : signup
   );
 }
 
