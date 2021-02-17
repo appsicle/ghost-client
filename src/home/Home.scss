@@ -23,15 +23,15 @@
     font-weight: 500;
     font-size: 37px;
     line-height: 55px;
+    margin: 0;
   }
-
   &-sub-header-text {
     font-style: normal;
     font-weight: normal;
     font-size: 26px;
     line-height: 39px;
+    margin-bottom: 30px;
   }
-
   &-caption {
     max-width: 300px;
     margin: 0 auto;
@@ -40,6 +40,9 @@
     font-size: 18px;
     line-height: 27px;
     text-align: center;
+  }
+  &-button {
+    margin-top: 20px;
   }
 }
 
@@ -77,13 +80,16 @@
   &-example-image {
     width: 470px;
     border-radius: 20px;
-    // box-shadow: 10px 10px 5px 6px rgba(220 220 220 / 75%);
--webkit-box-shadow: 17px 26px 6px 6px rgba(220 220 220 / 75%);
-// -moz-box-shadow: 10px 10px 5px 6px rgba(220 220 220 / 75%);
+    box-shadow: 17px 26px 6px 6px rgba(220 220 220 / 75%);
+    -webkit-box-shadow: 17px 26px 6px 6px rgba(220 220 220 / 75%);
   }
 
   &-two {
     transform: translateX(-10px);
+    &-example-image {
+      max-width: 204;
+      max-height: 105px;
+    }
   }
 }
 

@@ -1,7 +1,7 @@
 import './Navbar.scss';
 import { Link, useHistory } from 'react-router-dom';
 import { Button } from 'shards-react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { toggleModal } from './roleSelectionModalSlice';
 import { toggleSigninModal } from '../signinModal/signInModalSlice';
@@ -10,15 +10,13 @@ import SigninModal from '../signinModal/SigninModal';
 import Profile from './Profile';
 import './GoogleButton.css';
 import UserService from '../user/userService';
-import { guestUser } from '../icons/links';
+import { guestUser, logo } from '../icons/links';
 
-// TODO: switch active nav based on state
 function AppNavbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [name, setName] = useState(undefined);
   const [profileURL, setProfileURL] = useState(guestUser);
   const dispatch = useDispatch();
-  const open = useSelector((state) => state.roleSelectionModalReducer.isOpen);
   const history = useHistory();
 
   useEffect(() => {
@@ -77,9 +75,9 @@ function AppNavbar() {
       <RoleSelectionModal />
       <SigninModal />
       <div className="navbar-container">
-        <div className="branding">
-          logo
-          {open.toString()}
+        <div className="branding-container">
+          <img className="branding" src={logo} alt="" />
+          <span className="branding-title">Heighten</span>
         </div>
         <div className="nav-links">
           <ul className="nav-list">
@@ -87,10 +85,10 @@ function AppNavbar() {
               <Link to="/">Home</Link>
             </li>
             <li className="nav-list-item">
-              <Link to="/faq">How it Works</Link>
+              <a href="/#how-it-works">How it Works</a>
             </li>
             <li className="nav-list-item">
-              <Link to="/pricing">Pricing</Link>
+              <Link to="/about">About</Link>
             </li>
           </ul>
         </div>

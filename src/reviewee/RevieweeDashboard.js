@@ -5,17 +5,17 @@ import { uuid } from 'uuidv4';
 import config from '../config';
 import ContentDisplay from './Carousel';
 import './RevieweeDashboard.scss';
-import RevieweeDashboard from './RevieweeForm';
+import RevieweeForm from './RevieweeForm';
 
-const SUBMIT = 'SUBMIT';
-const SUBMIT2 = 'SUBMIT2';
+const DATING_PROFILE = 'DATING_PROFILE';
+const TEXT = 'TEXT';
 
 const displaySelectedTab = (displayId, pastSubmissions) => {
   switch (displayId) {
-    case SUBMIT:
-      return <RevieweeDashboard />;
-    case SUBMIT2:
-      return <p>2</p>;
+    case DATING_PROFILE:
+      return <RevieweeForm />;
+    case TEXT:
+      return <RevieweeForm />;
     default:
       return pastSubmissions.map((submission) =>
         (submission._id === displayId ? (
@@ -29,7 +29,7 @@ const displaySelectedTab = (displayId, pastSubmissions) => {
 };
 
 const revieweeDashboard = () => {
-  const [displayId, setDisplayId] = useState(SUBMIT);
+  const [displayId, setDisplayId] = useState(DATING_PROFILE);
   const [pastSubmissions, setPastSubmissions] = useState([]);
 
   useEffect(() => {
@@ -45,19 +45,19 @@ const revieweeDashboard = () => {
     <div className="reviewee-dashboard-container">
       <div className="sidebar-container">
         <ul className="sidebar">
-          <li className="sidebar-item">
-            <button type="button" onClick={() => setDisplayId(SUBMIT)}>
-              Upload Screenshots
+          <li className={`sidebar-item ${DATING_PROFILE === displayId ? 'sidebar-item-active' : null}`}>
+            <button type="button" onClick={() => setDisplayId(DATING_PROFILE)}>
+              Review Dating Profile
             </button>
           </li>
-          <li className="sidebar-item">
-            <button type="button" onClick={() => setDisplayId(SUBMIT2)}>
-              Upload Dating Profile
+          <li className={`sidebar-item ${TEXT === displayId ? 'sidebar-item-active' : null}`}>
+            <button type="button" onClick={() => setDisplayId(TEXT)}>
+              Review Text Messages
             </button>
           </li>
           <h4 className="sidebar-subtitle">Past Submissions</h4>
           {pastSubmissions.map((submission, idx) => (
-            <li className="sidebar-item" key={uuid()}>
+            <li className={`sidebar-item ${submission._id === displayId ? 'sidebar-item-active' : null}`} key={uuid()}>
               <button
                 type="button"
                 onClick={() => {

@@ -19,15 +19,13 @@ const ReviewsDisplay = ({ reviews }) => (
 
 const ContentDisplay = ({ images, additionalInfo, reviews }) => (
   <div className="carousel-container">
-    <Carousel centerMode>
+    <Carousel centerMode dynamicHeight renderThumbs={() => false}>
       {images.map((url) => (
         <div key={uuid()}>
           <img src={url} alt="" />
-          <p>screenshot</p>
         </div>
       ))}
     </Carousel>
-    <h3>Your additional comments</h3>
     <p>{additionalInfo}</p>
     {reviews.length ? (
       <ReviewsDisplay reviews={reviews} />

@@ -24,20 +24,20 @@ function RevieweeDashboard() {
             elementId="uploader-tooltip"
             color="#c4c4c4"
             innerText="?"
-            tooltipText="text1"
+            tooltipText="Make sure your screenshots are clear and visible for others to read!"
           />
         </div>
         <Uploader setImageURLs={setImageURLs} imageBucket="textMsgs" displayedImage={textUpload} />
       </div>
       <label className="explanation-label" htmlFor="textarea">
-        Additional Comments
+        Background information / details
       </label>
       <div>
         <TipBubble
           elementId="explanation-tooltip"
           color="#c4c4c4"
           innerText="?"
-          tooltipText="text1"
+          tooltipText="Please explain the context behind what you are uploading and any additional information."
         />
       </div>
       <FormTextarea
@@ -48,6 +48,7 @@ function RevieweeDashboard() {
       <div className="explanation-submit-container">
         <Button // TODO: style button (padding)
           className="explanation-submit"
+          disabled={!additionalInfo}
           onClick={() =>
             postTextMsgs(additionalInfo, imageURLs)
               .then((res) => {
