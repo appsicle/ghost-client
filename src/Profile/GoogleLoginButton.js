@@ -1,5 +1,5 @@
 import React from 'react';
-import { useGoogleLogin } from 'react-google-login';
+import { useGoogleLogin, GoogleLogin } from 'react-google-login';
 import { googleIcon } from '../icons/links';
 
 import './GoogleButton.css';
@@ -20,14 +20,20 @@ function GoogleButton({ onSuccess, disabled = false }) {
 
   return (
     <div className="login-form-container">
-      <button
+      {/* <button
         type="button"
         onClick={signIn}
         className="icon-button"
         disabled={disabled}
       >
         <img src={googleIcon} alt="googlelogin" className="icon" />
-      </button>
+      </button> */}
+      <GoogleLogin
+        onSuccess={onSuccess}
+        onFailure={onFailure}
+        clientId={clientId}
+        // accessType="offline"
+      />
     </div>
   );
 }

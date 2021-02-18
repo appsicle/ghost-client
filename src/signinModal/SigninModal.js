@@ -1,18 +1,10 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable no-alert */
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import {
-  Modal,
-  ModalBody,
-  Form,
-  FormInput,
-  Button,
-} from 'shards-react';
+import { Modal, ModalBody, Form, FormInput, Button } from 'shards-react';
 import { closeSigninModal, changeModalContent } from './signInModalSlice';
-import GoogleLoginButton from '../navbar/GoogleLoginButton';
+import GoogleLoginButton from '../Profile/GoogleLoginButton';
 import UserService from '../user/userService';
 import constants from '../constants';
 
@@ -30,10 +22,7 @@ function App() {
     UserService.loginWithGoogle({ idToken: res.tokenObj.id_token })
       .then((response) => {
         console.log(response.data);
-        const { role, name, profilePic } = response.data;
-        localStorage.setItem('name', name);
-        localStorage.setItem('profile', profilePic);
-        localStorage.setItem('isLoggedIn', true);
+        const { role } = response.data;
         if (role === constants.REVIEWER) {
           history.push('/reviewerDashboard');
         } else if (role === constants.REVIEWEE) {
@@ -87,7 +76,15 @@ function App() {
             onChange={(e) => setPassword(e.target.value)}
           />
           <Button type="submit">Log in</Button>
-          <button type="button" onClick={() => { console.log('clicked'); dispatch(changeModalContent()); }}>No account? create one</button>
+          <button
+            type="button"
+            onClick={() => {
+              console.log('clicked');
+              dispatch(changeModalContent());
+            }}
+          >
+            No account? create one
+          </button>
         </Form>
       </ModalBody>
     </Modal>
@@ -118,15 +115,21 @@ function App() {
             onChange={(e) => setPassword(e.target.value)}
           />
           <Button type="submit">Sign up</Button>
-          <button type="button" onClick={() => { console.log('clicked'); dispatch(changeModalContent()); }}>Have an account? log in</button>
+          <button
+            type="button"
+            onClick={() => {
+              console.log('clicked');
+              dispatch(changeModalContent());
+            }}
+          >
+            Have an account? log in
+          </button>
         </Form>
       </ModalBody>
     </Modal>
   );
 
-  return (
-    isLogin ? login : signup
-  );
+  return isLogin ? login : signup;
 }
 
 export default App;

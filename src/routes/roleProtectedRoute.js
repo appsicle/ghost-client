@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import { Route, Redirect, useHistory } from 'react-router-dom';
 import Spinner from '../common/Spinner';
-import useRole from '../hooks/useRole';
+import useProfile from '../hooks/useProfile';
 
 const RoleProtectedRoute = ({ desiredRole, path, children }) => {
   const history = useHistory();
-  const { role, roleError } = useRole();
+  const {role, profileError} = useProfile();
 
   useEffect(() => {
-    if (roleError) history.push('/');
-  }, [roleError]);
+    if (profileError) history.push('/');
+  }, [profileError]);
 
   return (
     <>

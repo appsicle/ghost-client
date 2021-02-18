@@ -1,5 +1,5 @@
 import './Navbar.scss';
-import Profile from './Profile';
+import Profile from '../Profile/Profile';
 import { logo } from '../icons/links';
 import { Link } from 'react-router-dom';
 

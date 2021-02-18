@@ -18,7 +18,7 @@ import config from './config';
 import SHCLayout from './common/SHCLayout';
 import RevieweeDashboardSidebar from './reviewee/RevieweeDashboardSidebar';
 import RevieweeDashboardContent from './reviewee/RevieweeDashboardContent';
-import Profile from './navbar/Profile';
+import Profile from './Profile/Profile';
 
 ReactHeap.initialize(config.heapUrl);
 axios.defaults.withCredentials = true;
