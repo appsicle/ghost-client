@@ -6,11 +6,9 @@ import config from '../config';
 import ContentDisplay from './Carousel';
 import './RevieweeDashboard.scss';
 import RevieweeForm from './RevieweeForm';
-import SubmitANewRequest from './SubmitANewRequest';
 
 const DATING_PROFILE = 'DATING_PROFILE';
 const TEXT = 'TEXT';
-const NEW_REQUEST = 'NEW_REQUEST';
 
 const displaySelectedTab = (displayId, pastSubmissions) => {
   switch (displayId) {
@@ -18,8 +16,6 @@ const displaySelectedTab = (displayId, pastSubmissions) => {
       return <RevieweeForm />;
     case TEXT:
       return <RevieweeForm />;
-    case NEW_REQUEST:
-      return <SubmitANewRequest />;
     default:
       return pastSubmissions.map((submission) =>
         submission._id === displayId ? (
@@ -34,7 +30,7 @@ const displaySelectedTab = (displayId, pastSubmissions) => {
 };
 
 const revieweeDashboard = () => {
-  const [displayId, setDisplayId] = useState(NEW_REQUEST);
+  const [displayId, setDisplayId] = useState(DATING_PROFILE);
   const [pastSubmissions, setPastSubmissions] = useState([]);
 
   useEffect(() => {

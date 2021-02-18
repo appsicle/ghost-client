@@ -5,11 +5,13 @@ import {
 import logger from 'redux-logger';
 import roleSelectionModalReducer from '../navbar/roleSelectionModalSlice';
 import signinModalReducer from '../signinModal/signInModalSlice';
+import revieweeTabNavSlice from '../reviewee/revieweeTabNavSlice';
 
 const store = configureStore({
   reducer: combineReducers({
     roleSelectionModalReducer,
     signinModalReducer,
+    revieweeTabNavSlice,
     /* favoriteCards: favoriteCardsSlice */
   }),
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),

@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './reviewee-dashboard-new-request.scss';
-import { Card } from 'shards-react';
+
+// TODO: use s3
 import TextMsgImg from './asset1.png';
+import DatingImg from './asset2.png';
 
 const RevieweeDashboardNewRequest = () => {
-  const [page, setPage] = useState(1);
-
   return (
     <div className="reviewee-dashboard-new-request-container">
       <h2>Submit a new Request</h2>
       <div className="reviewee-dashboard-new-request-card-container">
-        <Card className="reviewee-dashboard-new-request-card">
+        <button className="reviewee-dashboard-new-request-card">
           <img src={TextMsgImg} />
-          <p>pic1</p>
-        </Card>
-        <Card className="reviewee-dashboard-new-request-card">
-          <img src={TextMsgImg} />
-          <p>pic2</p>
-        </Card>
+          <h5>Text Message</h5>
+        </button>
+        <button className="reviewee-dashboard-new-request-card">
+          <img src={DatingImg} />
+          <h5>Dating Profile</h5>
+        </button>
       </div>
     </div>
   );
