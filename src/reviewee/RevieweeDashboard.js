@@ -18,14 +18,13 @@ const displaySelectedTab = (displayId, pastSubmissions) => {
       return <RevieweeForm />;
     default:
       return pastSubmissions.map((submission) =>
-        submission._id === displayId ? (
+        (submission._id === displayId ? (
           <ContentDisplay
             images={submission.imageURLs}
             additionalInfo={submission.additionalInfo}
             reviews={submission.reviews}
           />
-        ) : null,
-      );
+        ) : null));
   }
 };
 

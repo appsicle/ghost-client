@@ -1,3 +1,5 @@
+/* eslint-disable react/button-has-type */
+/* eslint-disable jsx-a11y/alt-text */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -54,8 +56,7 @@ const RevieweeDashboardSidebar = () => {
           Past Submissions
         </span>
       </button>
-    </div>
-  );
-};
+  </div>
+);
 
 export default RevieweeDashboardSidebar;
