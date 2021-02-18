@@ -16,6 +16,9 @@ import Login from './navbar/Login';
 import ReviewerDashboard from './reviewer/ReviewerDashboard';
 import Main from './reviewee/RevieweeDashboard';
 import config from './config';
+import SHCLayout from './common/SHCLayout';
+import RevieweeDashboardSidebar from './reviewee/RevieweeDashboardSidebar';
+import RevieweeDashboardContent from './reviewee/RevieweeDashboardContent';
 
 ReactHeap.initialize(config.heapUrl);
 axios.defaults.withCredentials = true;
@@ -32,6 +35,13 @@ function App() {
         </Route>
         <Route exact path="/signupReviewer">
           <SignUpReviewer />
+        </Route>
+        <Route exact path="/test">
+          <SHCLayout
+            Sidebar={<RevieweeDashboardSidebar />}
+            Header={<p>header</p>}
+            Content={<RevieweeDashboardContent />}
+          />
         </Route>
         <RoleProtectedRoute
           desiredRole={constants.REVIEWEE}

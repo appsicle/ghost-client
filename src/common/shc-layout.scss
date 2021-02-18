@@ -1,0 +1,37 @@
+@use '../base';
+
+.shc-layout {
+    &-container {
+        display: flex;
+        height: 100vh;
+        max-width: base.$layout-width;
+        margin: auto;
+        /* background-color: gray; */
+    }
+
+    &-sidebar {
+        height: 100%;
+        width: base.$side-nav-width;
+        padding: 24px;
+        /* background-color: black; */
+    }
+
+    &-not-sidebar {
+        display: flex;
+        flex-flow: column;
+        flex-grow: 1;
+        /* background-color: green; */
+    }
+
+    &-header {
+        display: flex;
+        height: 100px;
+        /* background-color: blue; */
+    }
+
+    &-contents {
+        display: flex;
+        flex-grow: 1;
+        /* background-color: yellow; */
+    }
+}
