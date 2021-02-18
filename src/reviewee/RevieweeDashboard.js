@@ -6,7 +6,6 @@ import config from '../config';
 import ContentDisplay from './Carousel';
 import './RevieweeDashboard.scss';
 import RevieweeForm from './RevieweeForm';
-import SubmitANewRequest from './SubmitANewRequest';
 
 const DATING_PROFILE = 'DATING_PROFILE';
 const TEXT = 'TEXT';
@@ -19,17 +18,17 @@ const displaySelectedTab = (displayId, pastSubmissions) => {
     case TEXT:
       return <RevieweeForm />;
     case NEW_REQUEST:
-      return <SubmitANewRequest />;
+      // return <SubmitANewRequest />;
+      return <h1>hi</h1>;
     default:
       return pastSubmissions.map((submission) =>
-        submission._id === displayId ? (
+        (submission._id === displayId ? (
           <ContentDisplay
             images={submission.imageURLs}
             additionalInfo={submission.additionalInfo}
             reviews={submission.reviews}
           />
-        ) : null,
-      );
+        ) : null));
   }
 };
 

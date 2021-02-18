@@ -1,4 +1,12 @@
 .form {
+  &-card-container {
+    width: 80%;
+    box-shadow: 0px 0px 22px rgba(0, 0, 0, 0.09);
+    border-radius: 36px;
+    margin: 0 auto 80px auto;
+    padding: 50px 0;
+    height: fit-content;
+  }
   &-container {
     display: flex;
     justify-content: space-between;
@@ -13,14 +21,10 @@
 }
 
 .explanation {
-  &-label {
-    float: left;
-    margin-right: 20px;
-  }
   &-textarea {
-    margin: 20px 0;
     resize: none;
     height: 100px !important;
+    margin-bottom: 37px;
   }
   &-submit {
     margin: 0 auto;
@@ -37,11 +41,36 @@
     margin-right: 20px;
     &-container {
       display: flex;
+      margin-bottom: 16px;
     }
   }
   &-container {
-    margin: 80px auto;
+    margin: 0 auto 80px auto;
     width: 500px;
+  }
+
+  &-form {
+    &-title {
+      text-align: center;
+      margin-bottom: 36px;
+      font-weight: 600;
+      font-size: 21px;
+      line-height: 31px;
+
+      &-container {
+        margin-bottom: 41px;
+      }
+      &-label {
+        margin-bottom: 13px;
+        font-size: 17px;
+        line-height: 25px;
+        &-caption {
+          font-size: 14px;
+          line-height: 21px;
+          color: #7C7C7C;
+        }
+      }
+    }
   }
 }
 
