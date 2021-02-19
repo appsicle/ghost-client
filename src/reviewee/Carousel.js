@@ -20,7 +20,14 @@ const ReviewsDisplay = ({ reviews }) => (
   </>
 );
 
-const ContentDisplay = ({ images, additionalInfo, reviews }) => {
+const ContentDisplay = ({ submission }) => {
+  const {
+    additionalInfo,
+    reviews,
+    imageURLs: images,
+    title = 'Submission',
+    type,
+  } = submission;
   const items = images.map((url) => (
     <img
       style={{ marginBottom: images.length <= 1 ? '20px' : '0' }}
@@ -28,11 +35,14 @@ const ContentDisplay = ({ images, additionalInfo, reviews }) => {
       src={url}
     />
   ));
+  // TODO: Fix magic strings
   return (
     <div className="carousel-container">
-      <h4 className="carousel-title">Convo with Jessica</h4>
+      <h4 className="carousel-title">{title}</h4>
       <h4 className="carousel-your-submission">Your Submission</h4>
-      <h4 className="carousel-submission-type">Text Submission</h4>
+      <h4 className="carousel-submission-type">
+        {type === 'TEXT_MSG' ? 'Text Submission' : 'Dating Profile Submission'}
+      </h4>
       <AliceCarousel
         disableButtonsControls={items.length <= 1}
         disableDotsControls={items.length <= 1}

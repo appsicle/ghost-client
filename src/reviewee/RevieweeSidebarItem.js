@@ -15,6 +15,25 @@ const RevieweeSidebarItem = ({ submission, displayId, onClick }) => {
       icon = reviewed;
       break;
   }
+  const dateSubmitted = new Date(submission.createdAt);
+
+  const getFormattedDate = (createdAt) =>
+    `${createdAt.getMonth() + 1}/${createdAt.getDay()}/${createdAt.getFullYear() % 100}`;
+
+  const getFormattedTime = (createdAt) => {
+    let hours = createdAt.getHours();
+    let minutes = createdAt.getMinutes();
+    const ampm = hours >= 12 ? 'pm' : 'am';
+    hours %= 12;
+    hours = hours || 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? `0${minutes}` : minutes;
+    const strTime = `${hours}:${minutes} ${ampm}`;
+    return strTime;
+  };
+
+  const formattedDate = getFormattedDate(dateSubmitted);
+  const formattedTime = getFormattedTime(dateSubmitted);
+
   return (
     <button
       type="button"
@@ -25,9 +44,12 @@ const RevieweeSidebarItem = ({ submission, displayId, onClick }) => {
     >
       <img src={icon} alt={submission.status} />
       <div className="sidebar-item-title-container">
-        <h5 className="sidebar-item-title">Coversation with Jessica</h5>
+        <h5 className="sidebar-item-title">{submission.title}</h5>
       </div>
-      <h5 className="sidebar-item-date">10/23/20</h5>
+      <div className="sidebar-item-date-container">
+        <h5 className="sidebar-item-date">{formattedDate}</h5>
+        <h5 className="sidebar-item-date">{formattedTime}</h5>
+      </div>
     </button>
   );
 };
