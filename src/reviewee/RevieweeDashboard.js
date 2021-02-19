@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-underscore-dangle */
 import axios from 'axios';
 import { useState, useEffect } from 'react';
@@ -5,38 +6,30 @@ import { uuid } from 'uuidv4';
 import config from '../config';
 import ContentDisplay from './Carousel';
 import './RevieweeDashboard.scss';
-import RevieweeForm from './RevieweeForm';
+import RevieweeSidebarItem from './RevieweeSidebarItem';
 
-const DATING_PROFILE = 'DATING_PROFILE';
-const TEXT = 'TEXT';
-
-const displaySelectedTab = (displayId, pastSubmissions) => {
-  switch (displayId) {
-    case DATING_PROFILE:
-      return <RevieweeForm />;
-    case TEXT:
-      return <RevieweeForm />;
-    default:
-      return pastSubmissions.map((submission) =>
-        (submission._id === displayId ? (
-          <ContentDisplay
-            images={submission.imageURLs}
-            additionalInfo={submission.additionalInfo}
-            reviews={submission.reviews}
-          />
-        ) : null));
-  }
-};
+const displaySelectedTab = (displayId, pastSubmissions) => pastSubmissions.map((submission) =>
+  (submission._id === displayId ? (
+    <ContentDisplay
+      images={submission.imageURLs}
+      additionalInfo={submission.additionalInfo}
+      reviews={submission.reviews}
+    />
+  ) : null));
 
 const revieweeDashboard = () => {
-  const [displayId, setDisplayId] = useState(DATING_PROFILE);
+  const [displayId, setDisplayId] = useState(null);
   const [pastSubmissions, setPastSubmissions] = useState([]);
 
   useEffect(() => {
     const getPastSubmissions = async () => {
       const response = await axios.get(`${config.apiUrl}/api/textMsgs/reviews`);
+      console.log('here');
       console.log(response.data);
       setPastSubmissions(response.data);
+      if (response.data) {
+        setDisplayId(response.data[0]._id);
+      }
     };
     getPastSubmissions();
   }, []);
@@ -45,44 +38,15 @@ const revieweeDashboard = () => {
     <div className="reviewee-dashboard-container">
       <div className="sidebar-container">
         <ul className="sidebar">
-          <li
-            className={`sidebar-item ${
-              DATING_PROFILE === displayId ? 'sidebar-item-active' : null
-            }`}
-          >
-            <button type="button" onClick={() => setDisplayId(DATING_PROFILE)}>
-              Review Dating Profile
-            </button>
-          </li>
-          <li
-            className={`sidebar-item ${
-              TEXT === displayId ? 'sidebar-item-active' : null
-            }`}
-          >
-            <button type="button" onClick={() => setDisplayId(TEXT)}>
-              Review Text Messages
-            </button>
-          </li>
-          <h4 className="sidebar-subtitle">Past Submissions</h4>
-          {pastSubmissions.map((submission, idx) => (
-            <li
-              className={`sidebar-item ${
-                submission._id === displayId ? 'sidebar-item-active' : null
-              }`}
+          <h4 className="sidebar-subtitle">Pending</h4>
+          {pastSubmissions.length ? pastSubmissions.map((submission) => (
+            <RevieweeSidebarItem
+              onClick={() => setDisplayId(submission._id)}
               key={uuid()}
-            >
-              <button
-                type="button"
-                onClick={() => {
-                  setDisplayId(submission._id);
-                }}
-              >
-                Submission #
-                {submission.status === 'reviewed' ? 'reviewed' : null}
-                {idx + 1}
-              </button>
-            </li>
-          ))}
+              submission={submission}
+              displayId={displayId}
+            />
+          )) : null }
         </ul>
       </div>
       <div className="reviewee-dashboard-content">

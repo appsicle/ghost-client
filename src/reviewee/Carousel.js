@@ -1,6 +1,8 @@
-import { Carousel } from 'react-responsive-carousel';
 import { uuid } from 'uuidv4';
 import './Carousel.scss';
+import AliceCarousel from 'react-alice-carousel';
+import 'react-alice-carousel/lib/alice-carousel.css';
+import empty from './empty.svg';
 
 const ReviewsDisplay = ({ reviews }) => (
   <div>
@@ -17,22 +19,33 @@ const ReviewsDisplay = ({ reviews }) => (
   </div>
 );
 
-const ContentDisplay = ({ images, additionalInfo, reviews }) => (
-  <div className="carousel-container">
-    <Carousel centerMode dynamicHeight renderThumbs={() => false}>
-      {images.map((url) => (
-        <div key={uuid()}>
-          <img src={url} alt="" />
-        </div>
-      ))}
-    </Carousel>
-    <p>{additionalInfo}</p>
-    {reviews.length ? (
-      <ReviewsDisplay reviews={reviews} />
-    ) : (
-      <h1>waiting to be reviewed</h1>
-    )}
-  </div>
-);
+const ContentDisplay = ({ images, additionalInfo, reviews }) => {
+  const items = images.map((url) => <img src={url} />);
+  return (
+    <div className="carousel-container">
+      <h4 className="carousel-title">Convo with Jessica</h4>
+      <h4 className="carousel-your-submission">Your Submission</h4>
+      <h4 className="carousel-submission-type">Text Submission</h4>
+      <AliceCarousel items={items} />
+
+      <div className="carousel-background-info-container">
+        <p>{additionalInfo}</p>
+      </div>
+      <div className="carousel-feedback-container">
+        <h4 className="carousel-feedback-title">Reviewer Feedback</h4>
+        {reviews.length ? (
+        <ReviewsDisplay reviews={reviews} />
+      ) : (
+        <div className="carousel-feedback-empty">
+          <img className="carousel-feedback-empty-image" src={empty} alt=""/>
+          <h4>Nothing to see at the moment...</h4>
+          <h6>We’re still working on it – check back later!</h6>
+        </div> 
+      )}
+      </div>
+      
+    </div>
+  );
+};
 
 export default ContentDisplay;

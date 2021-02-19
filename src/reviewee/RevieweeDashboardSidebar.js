@@ -56,7 +56,8 @@ const RevieweeDashboardSidebar = () => {
           Past Submissions
         </span>
       </button>
-  </div>
-);
+    </div>
+  );
+};
 
 export default RevieweeDashboardSidebar;

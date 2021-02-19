@@ -3,7 +3,6 @@ import { Link, useHistory } from 'react-router-dom';
 import { Button } from 'shards-react';
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
-// import { toggleModal } from './roleSelectionModalSlice';
 import { openLoginModal, openSignupModal } from '../signinModal/signInModalSlice';
 import RoleSelectionModal from './RoleSelectionModal';
 import SigninModal from '../signinModal/SigninModal';
