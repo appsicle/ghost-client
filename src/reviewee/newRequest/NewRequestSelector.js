@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import './reviewee-dashboard-new-request-select-type.scss';
-import { toNewRequestTextMsg, toNewRequestDating } from './revieweeTabNavSlice';
-import { submitText, submitProfile } from '../icons/links';
+import './NewRequestSelector.scss';
+import { toNewRequestTextMsg, toNewRequestDating } from '../revieweeTabNavSlice';
+import { submitText, submitProfile } from '../../icons/links';
 
 const RevieweeDashboardNewRequestSelectType = () => {
   const dispatch = useDispatch();

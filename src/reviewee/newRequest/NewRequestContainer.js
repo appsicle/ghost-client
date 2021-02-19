@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import RevieweeDashboardNewRequestSelectType from './RevieweeDashboardNewRequestSelectType';
+import RevieweeDashboardNewRequestSelectType from './NewRequestSelector';
 import RevieweeNewRequestForm from './RevieweeNewRequestForm';
-import { REVIEWEE_NEW_REQUEST_NAV_OPTIONS } from './revieweeTabNavSlice';
+import { REVIEWEE_NEW_REQUEST_NAV_OPTIONS } from '../revieweeTabNavSlice';
 
 const RevieweeDashboardNewRequest = () => {
   const newRequestNav = useSelector(

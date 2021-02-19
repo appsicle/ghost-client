@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { REVIEWEE_NAV_OPTIONS } from './revieweeTabNavSlice';
-import RevieweeDashboardNewRequest from './RevieweeDashboardNewRequest';
+import RevieweeDashboardNewRequest from './newRequest/RevieweeDashboardNewRequest';
 import RevieweeDashboard from './RevieweeDashboard';
 
 // toggle between diff contents depending on clicked state

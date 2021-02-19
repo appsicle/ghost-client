@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 import { FormTextarea, Button, FormInput } from 'shards-react';
 
 import { useSelector } from 'react-redux';
-import { REVIEWEE_NEW_REQUEST_NAV_OPTIONS } from './revieweeTabNavSlice';
+import { REVIEWEE_NEW_REQUEST_NAV_OPTIONS } from '../revieweeTabNavSlice';
 
-import Uploader from '../common/Uploader';
-import TipBubble from '../common/TipBubble';
-import postTextMsgs from '../services/TextMsgs';
-import { textUpload } from '../icons/links';
+import Uploader from '../../common/Uploader';
+import TipBubble from '../../common/TipBubble';
+import postTextMsgs from '../../services/TextMsgs';
+import { textUpload } from '../../icons/links';
 import './reviewee-new-request-form.scss';
 
 function RevieweeForm() {

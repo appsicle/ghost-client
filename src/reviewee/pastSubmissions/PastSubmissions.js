@@ -3,15 +3,15 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { uuid } from 'uuidv4';
-import config from '../config';
-import ContentDisplay from './pastSubmissions/Carousel';
-import './RevieweeDashboard.scss';
-import RevieweeSidebarItem from './pastSubmissions/RevieweeSidebarItem';
+import config from '../../config';
+import Submission from './Submission';
+import './PastSubmissions.scss';
+import RevieweeSidebarItem from './RevieweeSidebarItem';
 
 const displaySelectedTab = (displayId, pastSubmissions) =>
   pastSubmissions.map((submission) =>
     (submission._id === displayId ? (
-      <ContentDisplay
+      <Submission
         submission={submission}
       />
     ) : null));

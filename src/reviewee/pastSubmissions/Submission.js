@@ -1,7 +1,7 @@
-import './Carousel.scss';
+import './Submission.scss';
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
-import { empty } from '../icons/links';
+import { empty } from '../../icons/links';
 
 const ReviewsDisplay = ({ reviews }) => (
   <>

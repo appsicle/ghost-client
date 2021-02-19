@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import { pending, flagged, reviewed } from '../icons/links';
+import { pending, flagged, reviewed } from '../../icons/links';
 import './RevieweeSidebarItem.scss';
 
 const RevieweeSidebarItem = ({ submission, displayId, onClick }) => {
