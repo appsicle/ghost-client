@@ -25,7 +25,9 @@ const RevieweeSidebarItem = ({ submission, displayId, onClick }) => {
     >
       <img src={icon} alt={submission.status} />
       <div className="sidebar-item-title-container">
-        <h5 className="sidebar-item-title">Coversation with Jessica</h5>
+        <h5 className="sidebar-item-title">
+          {submission.title ? submission.title : 'Coversation with Jessica'}
+        </h5>
       </div>
       <h5 className="sidebar-item-date">10/23/20</h5>
     </button>

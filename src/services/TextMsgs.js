@@ -1,12 +1,12 @@
 import axios from 'axios';
 import config from '../config';
 
-export const postTextMsgs = (additionalInfo, imageURLs) =>
+const postTextMsgs = (title, type, additionalInfo, imageURLs) =>
   new Promise((resolve, reject) => {
-    if (!additionalInfo || !imageURLs) {
+    if (!title || !type || !additionalInfo || !imageURLs) {
       reject(
         new Error(
-          `Null fields found: additionalInfo: ${additionalInfo}, imageURLs: ${imageURLs}`,
+          `Null fields found: title: ${title}, type: ${type} additionalInfo: ${additionalInfo}, imageURLs: ${imageURLs}`,
         ),
       );
       return;
@@ -15,12 +15,16 @@ export const postTextMsgs = (additionalInfo, imageURLs) =>
     const apiEndpoint = `${config.apiUrl}/api/textMsgs/submit`;
 
     console.log({
+      title,
+      type,
       additionalInfo,
       imageURLs,
     });
 
     axios
       .post(`${apiEndpoint}`, {
+        title,
+        type,
         additionalInfo,
         imageURLs,
       })
@@ -28,8 +32,4 @@ export const postTextMsgs = (additionalInfo, imageURLs) =>
       .catch((err) => reject(err));
   });
 
-export const getTextMsgs = (id) => {
-  const apiEndpoint = `${config.apiUrl}/api/textMsgs/retrieve`;
-
-  axios.get(`${apiEndpoint}/${id}`);
-};
+export default { postTextMsgs };

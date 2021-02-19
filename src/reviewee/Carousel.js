@@ -20,7 +20,9 @@ const ReviewsDisplay = ({ reviews }) => (
   </>
 );
 
-const ContentDisplay = ({ images, additionalInfo, reviews }) => {
+const ContentDisplay = ({
+  title, images, additionalInfo, reviews,
+}) => {
   const items = images.map((url) => (
     <img
       style={{ marginBottom: images.length <= 1 ? '20px' : '0' }}
@@ -30,7 +32,9 @@ const ContentDisplay = ({ images, additionalInfo, reviews }) => {
   ));
   return (
     <div className="carousel-container">
-      <h4 className="carousel-title">Convo with Jessica</h4>
+      <h4 className="carousel-title">
+        {title || 'Conversation with Jessica'}
+      </h4>
       <h4 className="carousel-your-submission">Your Submission</h4>
       <h4 className="carousel-submission-type">Text Submission</h4>
       <AliceCarousel

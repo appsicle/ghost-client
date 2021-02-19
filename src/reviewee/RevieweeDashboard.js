@@ -12,6 +12,7 @@ const displaySelectedTab = (displayId, pastSubmissions) =>
   pastSubmissions.map((submission) =>
     (submission._id === displayId ? (
       <ContentDisplay
+        title={submission.title}
         images={submission.imageURLs}
         additionalInfo={submission.additionalInfo}
         reviews={submission.reviews}

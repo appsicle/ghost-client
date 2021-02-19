@@ -7,17 +7,22 @@ import { REVIEWEE_NEW_REQUEST_NAV_OPTIONS } from './revieweeTabNavSlice';
 
 import Uploader from '../common/Uploader';
 import TipBubble from '../common/TipBubble';
-import { postTextMsgs } from '../services/TextMsgs';
+import postTextMsgs from '../services/TextMsgs';
 import { textUpload } from '../icons/links';
 import './reviewee-new-request-form.scss';
 
 function RevieweeForm() {
+  const [title, setTitle] = useState('');
   const [additionalInfo, setAdditionalInfo] = useState('');
   const [imageURLs, setImageURLs] = useState([]);
 
   const newRequestNav = useSelector(
     (state) => state.revieweeTabNavSlice.newRequestNav,
   );
+
+  const requestType = newRequestNav === REVIEWEE_NEW_REQUEST_NAV_OPTIONS.TEXT_MSG
+    ? 'TEXT_MSG'
+    : 'DATING_PROFILE';
 
   return (
     <div className="form-card-container">
@@ -37,7 +42,11 @@ function RevieweeForm() {
               (ex: convo with Jen)
             </span>
           </label>
-          <FormInput placeholder="Text Submission" />
+          <FormInput
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Text Submission"
+          />
         </div>
         <div className="uploader-container">
           <div className="uploader-title-container">
@@ -76,7 +85,7 @@ function RevieweeForm() {
             className="explanation-submit"
             disabled={!additionalInfo}
             onClick={() =>
-              postTextMsgs(additionalInfo, imageURLs)
+              postTextMsgs(title, requestType, additionalInfo, imageURLs)
                 .then((res) => {
                   // TODO: a better confirmation of success
                   alert('success');
