@@ -1,7 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import pending from './pending.svg';
-import flagged from './flagged.svg';
-import reviewed from './reviewed.svg';
+import { pending, flagged, reviewed } from '../icons/links';
 import './RevieweeSidebarItem.scss';
 
 const RevieweeSidebarItem = ({ submission, displayId, onClick }) => {

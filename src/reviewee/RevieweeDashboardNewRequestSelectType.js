@@ -2,10 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import './reviewee-dashboard-new-request-select-type.scss';
 import { toNewRequestTextMsg, toNewRequestDating } from './revieweeTabNavSlice';
-
-// TODO: use s3
-import TextMsgImg from './asset1.png';
-import DatingImg from './asset2.png';
+import { submitText, submitProfile } from '../icons/links';
 
 const RevieweeDashboardNewRequestSelectType = () => {
   const dispatch = useDispatch();
@@ -19,7 +16,7 @@ const RevieweeDashboardNewRequestSelectType = () => {
           className="reviewee-dashboard-new-request-select-type-card"
           onClick={() => dispatch(toNewRequestTextMsg())}
         >
-          <img src={TextMsgImg} alt="text" />
+          <img src={submitText} alt="text" />
           <h5>Text Message</h5>
         </button>
         <button
@@ -27,7 +24,7 @@ const RevieweeDashboardNewRequestSelectType = () => {
           className="reviewee-dashboard-new-request-select-type-card"
           onClick={() => dispatch(toNewRequestDating())}
         >
-          <img src={DatingImg} alt="dating profile" />
+          <img src={submitProfile} alt="dating profile" />
           <h5>Dating Profile</h5>
         </button>
       </div>
