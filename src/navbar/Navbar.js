@@ -1,87 +1,11 @@
 import './Navbar.scss';
-import { Link, useHistory } from 'react-router-dom';
-import { Button } from 'shards-react';
-import { useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { openLoginModal, openSignupModal } from '../signinModal/signInModalSlice';
-import RoleSelectionModal from './RoleSelectionModal';
-import SigninModal from '../signinModal/SigninModal';
-import Profile from './Profile';
-import './GoogleButton.css';
-import UserService from '../user/userService';
-import { guestUser, logo } from '../icons/links';
+import { Link } from 'react-router-dom';
+import Profile from '../Profile/Profile';
+import { logo } from '../icons/links';
 
 function AppNavbar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [name, setName] = useState(undefined);
-  const [profileURL, setProfileURL] = useState(guestUser);
-  const dispatch = useDispatch();
-  const history = useHistory();
-
-  useEffect(() => {
-    setIsLoggedIn(localStorage.getItem('isLoggedIn'));
-    setName(localStorage.getItem('name'));
-    setProfileURL(localStorage.getItem('profile'));
-  }, []);
-
-  // TODO: feels sus that it could fail after saying it succeeded
-  const onLogoutSuccess = async () => {
-    console.log('successful logout');
-    await UserService.logout();
-    localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('name');
-    localStorage.removeItem('profile');
-    setIsLoggedIn(false);
-    history.push('/');
-  };
-
-  const loginAndSignup = (
-    <div className="account-controls">
-      <ul className="account-controls-list">
-        {/* <li className="account-controls-list-item">
-          <Button
-            onClick={() => {
-              history.push('/login');
-            }}
-          >
-            Log in
-          </Button>
-        </li>
-        <li className="account-controls-list-item">
-          <Button
-            onClick={() => {
-              dispatch(toggleModal());
-            }}
-          >
-            Sign Up
-          </Button>
-        </li> */}
-        <li className="account-controls-list-item">
-          <Button
-            onClick={() => {
-              dispatch(openLoginModal());
-            }}
-          >
-            Log in
-          </Button>
-        </li>
-        <li className="account-controls-list-item">
-          <Button
-            onClick={() => {
-              dispatch(openSignupModal());
-            }}
-          >
-            Sign up
-          </Button>
-        </li>
-      </ul>
-    </div>
-  );
-
   return (
     <header>
-      <RoleSelectionModal />
-      <SigninModal />
       <div className="navbar-container">
         <div className="branding-container">
           <img className="branding" src={logo} alt="" />
@@ -100,15 +24,7 @@ function AppNavbar() {
             </li>
           </ul>
         </div>
-        {isLoggedIn ? (
-          <Profile
-            name={name}
-            profileURL={profileURL}
-            onLogoutSuccess={onLogoutSuccess}
-          />
-        ) : (
-          loginAndSignup
-        )}
+        <Profile />
       </div>
     </header>
   );

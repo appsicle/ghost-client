@@ -1,25 +1,35 @@
 /* eslint-disable no-alert */
-import 'react-dropzone-uploader/dist/styles.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'shards-ui/dist/css/shards.min.css';
-import './RevieweeForm.scss';
-
 import React, { useState } from 'react';
 import { FormTextarea, Button, FormInput } from 'shards-react';
+
+import { useSelector } from 'react-redux';
+import { REVIEWEE_NEW_REQUEST_NAV_OPTIONS } from './revieweeTabNavSlice';
+
 import Uploader from '../common/Uploader';
-import { postTextMsgs } from '../services/TextMsgs';
 import TipBubble from '../common/TipBubble';
+import { postTextMsgs } from '../services/TextMsgs';
 import { textUpload } from '../icons/links';
+import './reviewee-new-request-form.scss';
 
 function RevieweeForm() {
   const [additionalInfo, setAdditionalInfo] = useState('');
   const [imageURLs, setImageURLs] = useState([]);
 
+  const newRequestNav = useSelector(
+    (state) => state.revieweeTabNavSlice.newRequestNav,
+  );
+
   return (
     <div className="form-card-container">
       <div className="form-group-container">
         <div className="uploader-form-title-container">
-          <h5 className="uploader-form-title">Submit a Text Message</h5>
+          <h5 className="uploader-form-title">
+            Submit a
+            {' '}
+            {newRequestNav === REVIEWEE_NEW_REQUEST_NAV_OPTIONS.TEXT_MSG
+              ? 'Text Message'
+              : 'Dating Profile'}
+          </h5>
           <label className="uploader-form-title-label">
             Name of Submission
             {' '}

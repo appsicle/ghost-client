@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Form, FormInput, FormGroup } from 'shards-react';
 import { useHistory } from 'react-router-dom';
-import GoogleLoginButton from './GoogleLoginButton';
+import GoogleLoginButton from '../Profile/GoogleLoginButton';
 import UserService from '../user/userService';
 
 import Uploader from '../common/Uploader';
@@ -34,10 +34,7 @@ function SignUp() {
     })
       .then((response) => {
         console.log(response);
-        const { role, name, profilePic } = response.data;
-        localStorage.setItem('name', name);
-        localStorage.setItem('profile', profilePic);
-        localStorage.setItem('isLoggedIn', true);
+        const { role } = response.data;
         if (role === constants.REVIEWER) {
           history.push('/reviewerDashboard');
         } else if (role === constants.REVIEWEE) {

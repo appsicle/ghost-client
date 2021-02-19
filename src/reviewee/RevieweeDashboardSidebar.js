@@ -1,19 +1,18 @@
 /* eslint-disable react/button-has-type */
-/* eslint-disable jsx-a11y/alt-text */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   toHome,
   toNewRequest,
   toPastSubmissions,
-  TAB_STATE,
+  REVIEWEE_NAV_OPTIONS,
 } from './revieweeTabNavSlice';
 import { logo } from '../icons/links';
 import './reviewee-dashboard-sidebar.scss';
 
 const RevieweeDashboardSidebar = () => {
   const dispatch = useDispatch();
-  const tab = useSelector((state) => state.revieweeTabNavSlice.tab);
+  const nav = useSelector((state) => state.revieweeTabNavSlice.nav);
 
   return (
     <div className="reviewee-dashboard-sidebar-container">
@@ -23,35 +22,37 @@ const RevieweeDashboardSidebar = () => {
       </div>
       <button
         className={`reviewee-dashboard-sidebar-item ${
-          tab === TAB_STATE.HOME ? 'reviewee-dashboard-sidebar-item-active' : ''
+          nav === REVIEWEE_NAV_OPTIONS.HOME
+            ? 'reviewee-dashboard-sidebar-item-active'
+            : ''
         }`}
         onClick={() => dispatch(toHome())}
       >
-        <img src="https://via.placeholder.com/25" />
+        <img src="https://via.placeholder.com/25" alt="home" />
         <span className="reviewee-dashboard-sidebar-item-text">Home</span>
       </button>
       <button
         className={`reviewee-dashboard-sidebar-item ${
-          tab === TAB_STATE.NEW_REQUEST
+          nav === REVIEWEE_NAV_OPTIONS.NEW_REQUEST
             ? 'reviewee-dashboard-sidebar-item-active'
             : ''
         }`}
         onClick={() => dispatch(toNewRequest())}
       >
-        <img src="https://via.placeholder.com/25" />
+        <img src="https://via.placeholder.com/25" alt="new" />
         <span className="reviewee-dashboard-sidebar-item-text">
           New Request
         </span>
       </button>
       <button
         className={`reviewee-dashboard-sidebar-item ${
-          tab === TAB_STATE.PAST_SUBMISSIONS
+          nav === REVIEWEE_NAV_OPTIONS.PAST_SUBMISSIONS
             ? 'reviewee-dashboard-sidebar-item-active'
             : ''
         }`}
         onClick={() => dispatch(toPastSubmissions())}
       >
-        <img src="https://via.placeholder.com/25" />
+        <img src="https://via.placeholder.com/25" alt="history" />
         <span className="reviewee-dashboard-sidebar-item-text">
           Past Submissions
         </span>

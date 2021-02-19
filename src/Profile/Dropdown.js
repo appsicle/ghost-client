@@ -1,17 +1,24 @@
 import React, { useRef, useEffect, useState } from 'react';
 import './Dropdown.scss';
+import {
+  dropdownDashboard,
+  dropdownSettings,
+  dropdownLogout,
+} from '../icons/links';
 import useDetectOutsideClick from '../hooks/useDetectOutsideClick';
-import Logout from '../navbar/Logout';
-import { dropdownDashboard, dropdownSettings } from '../icons/links';
-import useRole from '../hooks/useRole';
+import useProfile from '../hooks/useProfile';
+import useLogout from '../hooks/useLogout';
 
-function Dropdown({ name, profileURL, onLogoutSuccess }) {
+function Dropdown() {
+  const {
+    role, name, profilePic, profileError,
+  } = useProfile();
+  const logout = useLogout();
+  const [dashboardLink, setDashboardLink] = useState('/');
+
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const onClick = () => setIsActive(!isActive);
-
-  const { role, roleError } = useRole();
-  const [dashboardLink, setDashboardLink] = useState('/');
 
   useEffect(() => {
     switch (role) {
@@ -24,9 +31,7 @@ function Dropdown({ name, profileURL, onLogoutSuccess }) {
       default:
         setDashboardLink('/');
     }
-  }, [role, roleError]);
-
-  // TODO: convert to higher order component
+  }, [role, profileError]);
 
   return (
     <div className="dropdown-container">
@@ -37,7 +42,7 @@ function Dropdown({ name, profileURL, onLogoutSuccess }) {
           className="dropdown-menu-trigger"
         >
           <span>{name}</span>
-          <img className="profile-image" src={profileURL} alt="User avatar" />
+          <img className="profile-image" src={profilePic} alt="User avatar" />
         </button>
         <nav
           ref={dropdownRef}
@@ -66,7 +71,14 @@ function Dropdown({ name, profileURL, onLogoutSuccess }) {
               </a>
             </li>
             <li>
-              <Logout onLogoutSuccess={onLogoutSuccess} />
+              <button type="button" onClick={logout}>
+                <img
+                  className="dropdown-icon"
+                  src={dropdownLogout}
+                  alt="logout"
+                />
+                Logout
+              </button>
             </li>
           </ul>
         </nav>

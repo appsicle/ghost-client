@@ -8,14 +8,15 @@ import ContentDisplay from './Carousel';
 import './RevieweeDashboard.scss';
 import RevieweeSidebarItem from './RevieweeSidebarItem';
 
-const displaySelectedTab = (displayId, pastSubmissions) => pastSubmissions.map((submission) =>
-  (submission._id === displayId ? (
-    <ContentDisplay
-      images={submission.imageURLs}
-      additionalInfo={submission.additionalInfo}
-      reviews={submission.reviews}
-    />
-  ) : null));
+const displaySelectedTab = (displayId, pastSubmissions) =>
+  pastSubmissions.map((submission) =>
+    (submission._id === displayId ? (
+      <ContentDisplay
+        images={submission.imageURLs}
+        additionalInfo={submission.additionalInfo}
+        reviews={submission.reviews}
+      />
+    ) : null));
 
 const revieweeDashboard = () => {
   const [displayId, setDisplayId] = useState(null);
@@ -39,14 +40,30 @@ const revieweeDashboard = () => {
       <div className="sidebar-container">
         <ul className="sidebar">
           <h4 className="sidebar-subtitle">Pending</h4>
-          {pastSubmissions.length ? pastSubmissions.map((submission) => (
-            <RevieweeSidebarItem
-              onClick={() => setDisplayId(submission._id)}
-              key={uuid()}
-              submission={submission}
-              displayId={displayId}
-            />
-          )) : null }
+          {pastSubmissions.length
+            ? pastSubmissions.map((submission) =>
+              (submission.status === 'pending'
+                || submission.status === 'flagged_context' ? (
+                  <RevieweeSidebarItem
+                    onClick={() => setDisplayId(submission._id)}
+                    key={uuid()}
+                    submission={submission}
+                    displayId={displayId}
+                  />
+                ) : null))
+            : null}
+          <h4 className="sidebar-subtitle">Reviewed</h4>
+          {pastSubmissions.length
+            ? pastSubmissions.map((submission) =>
+              (submission.status === 'reviewed' ? (
+                <RevieweeSidebarItem
+                  onClick={() => setDisplayId(submission._id)}
+                  key={uuid()}
+                  submission={submission}
+                  displayId={displayId}
+                />
+              ) : null))
+            : null}
         </ul>
       </div>
       <div className="reviewee-dashboard-content">

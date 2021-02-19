@@ -7,10 +7,10 @@ import './RevieweeSidebarItem.scss';
 const RevieweeSidebarItem = ({ submission, displayId, onClick }) => {
   let icon;
   switch (submission.status) {
-    case 'Not Reviewed':
+    case 'pending':
       icon = pending;
       break;
-    case 'FLAGGED':
+    case 'flagged_context':
       icon = flagged;
       break;
     default:

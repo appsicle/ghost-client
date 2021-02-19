@@ -1,10 +1,10 @@
 import axios from 'axios';
 import config from '../config';
 
-const getRole = () =>
+const getProfile = () =>
   new Promise((resolve, reject) => {
     axios
-      .get(`${config.apiUrl}/api/user/role`)
+      .get(`${config.apiUrl}/api/user/getProfile`)
       .then((res) => resolve(res))
       .catch((err) => reject(err));
   });
@@ -42,7 +42,7 @@ const login = (body) =>
   });
 
 export default {
-  getRole,
+  getProfile,
   logout,
   loginWithGoogle,
   signUpWithGoogle,
