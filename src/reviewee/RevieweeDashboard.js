@@ -5,17 +5,17 @@ import { uuid } from 'uuidv4';
 import config from '../config';
 import ContentDisplay from './Carousel';
 import './RevieweeDashboard.scss';
-import RevieweeForm from './RevieweeForm';
+// import RevieweeForm from './RevieweeForm';
 
 const DATING_PROFILE = 'DATING_PROFILE';
 const TEXT = 'TEXT';
 
 const displaySelectedTab = (displayId, pastSubmissions) => {
   switch (displayId) {
-    case DATING_PROFILE:
-      return <RevieweeForm />;
-    case TEXT:
-      return <RevieweeForm />;
+    // case DATING_PROFILE:
+    //   return <RevieweeForm />;
+    // case TEXT:
+    //   return <RevieweeForm />;
     default:
       return pastSubmissions.map((submission) =>
         (submission._id === displayId ? (

@@ -5,14 +5,14 @@ import {
   toHome,
   toNewRequest,
   toPastSubmissions,
-  TAB_STATE,
+  REVIEWEE_NAV_OPTIONS,
 } from './revieweeTabNavSlice';
 import { logo } from '../icons/links';
 import './reviewee-dashboard-sidebar.scss';
 
 const RevieweeDashboardSidebar = () => {
   const dispatch = useDispatch();
-  const tab = useSelector((state) => state.revieweeTabNavSlice.tab);
+  const nav = useSelector((state) => state.revieweeTabNavSlice.nav);
 
   return (
     <div className="reviewee-dashboard-sidebar-container">
@@ -22,7 +22,9 @@ const RevieweeDashboardSidebar = () => {
       </div>
       <button
         className={`reviewee-dashboard-sidebar-item ${
-          tab === TAB_STATE.HOME ? 'reviewee-dashboard-sidebar-item-active' : ''
+          nav === REVIEWEE_NAV_OPTIONS.HOME
+            ? 'reviewee-dashboard-sidebar-item-active'
+            : ''
         }`}
         onClick={() => dispatch(toHome())}
       >
@@ -31,7 +33,7 @@ const RevieweeDashboardSidebar = () => {
       </button>
       <button
         className={`reviewee-dashboard-sidebar-item ${
-          tab === TAB_STATE.NEW_REQUEST
+          nav === REVIEWEE_NAV_OPTIONS.NEW_REQUEST
             ? 'reviewee-dashboard-sidebar-item-active'
             : ''
         }`}
@@ -44,7 +46,7 @@ const RevieweeDashboardSidebar = () => {
       </button>
       <button
         className={`reviewee-dashboard-sidebar-item ${
-          tab === TAB_STATE.PAST_SUBMISSIONS
+          nav === REVIEWEE_NAV_OPTIONS.PAST_SUBMISSIONS
             ? 'reviewee-dashboard-sidebar-item-active'
             : ''
         }`}

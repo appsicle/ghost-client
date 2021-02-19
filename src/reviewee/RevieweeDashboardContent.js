@@ -1,17 +1,17 @@
 import { useSelector } from 'react-redux';
-import { TAB_STATE } from './revieweeTabNavSlice';
+import { REVIEWEE_NAV_OPTIONS } from './revieweeTabNavSlice';
 import RevieweeDashboardNewRequest from './RevieweeDashboardNewRequest';
 
 // toggle between diff contents depending on clicked state
 const RevieweeDashboardContent = () => {
-  const tab = useSelector((state) => state.revieweeTabNavSlice.tab);
+  const nav = useSelector((state) => state.revieweeTabNavSlice.nav);
 
-  switch (tab) {
-    case TAB_STATE.HOME:
+  switch (nav) {
+    case REVIEWEE_NAV_OPTIONS.HOME:
       return <p>HOME</p>;
-    case TAB_STATE.NEW_REQUEST:
+    case REVIEWEE_NAV_OPTIONS.NEW_REQUEST:
       return <RevieweeDashboardNewRequest />;
-    case TAB_STATE.PAST_SUBMISSIONS:
+    case REVIEWEE_NAV_OPTIONS.PAST_SUBMISSIONS:
       return <p>PAST_SUBMISSIONS</p>;
     default:
       return <p>default</p>;

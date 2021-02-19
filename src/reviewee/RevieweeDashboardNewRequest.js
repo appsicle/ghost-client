@@ -1,25 +1,22 @@
 import React from 'react';
-import './reviewee-dashboard-new-request.scss';
+import { useSelector } from 'react-redux';
 
-// TODO: use s3
-import TextMsgImg from './asset1.png';
-import DatingImg from './asset2.png';
+import RevieweeDashboardNewRequestSelectType from './RevieweeDashboardNewRequestSelectType';
+import RevieweeNewRequestForm from './RevieweeNewRequestForm';
+import { REVIEWEE_NEW_REQUEST_NAV_OPTIONS } from './revieweeTabNavSlice';
 
 const RevieweeDashboardNewRequest = () => {
-  return (
-    <div className="reviewee-dashboard-new-request-container">
-      <h2>Submit a new Request</h2>
-      <div className="reviewee-dashboard-new-request-card-container">
-        <button className="reviewee-dashboard-new-request-card">
-          <img src={TextMsgImg} />
-          <h5>Text Message</h5>
-        </button>
-        <button className="reviewee-dashboard-new-request-card">
-          <img src={DatingImg} />
-          <h5>Dating Profile</h5>
-        </button>
-      </div>
-    </div>
+  const newRequestNav = useSelector(
+    (state) => state.revieweeTabNavSlice.newRequestNav,
   );
+
+  switch (newRequestNav) {
+    case REVIEWEE_NEW_REQUEST_NAV_OPTIONS.TEXT_MSG:
+      return <RevieweeNewRequestForm />;
+    case REVIEWEE_NEW_REQUEST_NAV_OPTIONS.DATING_PROFILE:
+      return <RevieweeNewRequestForm />;
+    default:
+      return <RevieweeDashboardNewRequestSelectType />;
+  }
 };
 export default RevieweeDashboardNewRequest;
