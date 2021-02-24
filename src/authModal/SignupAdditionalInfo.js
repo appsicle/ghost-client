@@ -11,6 +11,7 @@ import constants from '../constants';
 
 import './SignupAdditionalInfo.scss';
 
+// TODO: move to another file
 const ReviewerForm = ({ nextStep }) => {
   const [bio, setBio] = useState('');
   const [profilePic, setProfilePic] = useState([]);
@@ -45,6 +46,7 @@ const ReviewerForm = ({ nextStep }) => {
   );
 };
 
+// TODO: move to another file
 const RevieweeForm = ({ nextStep }) => {
   const [profilePic, setProfilePic] = useState([]);
   const [age, setAge] = useState(null);
@@ -112,8 +114,22 @@ const SignupAdditionalInfo = ({ nextStep }) => {
     >
       <ModalBody className="signup-modal">
         <div className="signup-roles-container">
-          <Button active={role === constants.REVIEWEE} pill outline className="signup-roles-btn" onClick={() => setRole(constants.REVIEWEE)}>Reviewee</Button>
-          <Button active={role === constants.REVIEWER} pill outline className="signup-roles-btn" onClick={() => setRole(constants.REVIEWER)}>Reviewer</Button>
+          <Button
+            active={role === constants.REVIEWEE}
+            pill
+            outline
+            onClick={() => setRole(constants.REVIEWEE)}
+          >
+            Reviewee
+          </Button>
+          <Button
+            active={role === constants.REVIEWER}
+            pill
+            outline
+            onClick={() => setRole(constants.REVIEWER)}
+          >
+            Reviewer
+          </Button>
         </div>
         <hr />
         {role === constants.REVIEWEE

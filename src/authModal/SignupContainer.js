@@ -78,6 +78,7 @@ const SignupContainer = () => {
     setStep((prev) => prev + 1);
   };
 
+  // TODO: how to handle errors
   switch (step) {
     case STEPS.INITIAL:
       return <Signup nextStep={nextStep} />;
