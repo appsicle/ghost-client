@@ -3,11 +3,10 @@ import './GoogleButton.css';
 
 import { Button } from 'shards-react';
 import { useDispatch } from 'react-redux';
-import SigninModal from '../signinModal/SigninModal';
+import AuthModal from '../authModal/AuthModal';
 import {
-  openLoginModal,
-  openSignupModal,
-} from '../signinModal/signInModalSlice';
+  openModal, switchToSignin, switchToSignup,
+} from '../authModal/AuthModalSlice';
 import Dropdown from './Dropdown';
 
 import useProfile from '../hooks/useProfile';
@@ -22,7 +21,8 @@ function Profile() {
         <li className="account-controls-list-item">
           <Button
             onClick={() => {
-              dispatch(openLoginModal());
+              dispatch(switchToSignin());
+              dispatch(openModal());
             }}
           >
             Log in
@@ -31,7 +31,8 @@ function Profile() {
         <li className="account-controls-list-item">
           <Button
             onClick={() => {
-              dispatch(openSignupModal());
+              dispatch(switchToSignup());
+              dispatch(openModal());
             }}
           >
             Sign up
@@ -43,7 +44,7 @@ function Profile() {
 
   return (
     <>
-      <SigninModal />
+      <AuthModal />
       {isLoggedIn ? (
         <div className="nav-profile-container">
           <Dropdown />

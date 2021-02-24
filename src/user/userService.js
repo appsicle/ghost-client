@@ -41,10 +41,19 @@ const login = (body) =>
       .catch((err) => reject(err));
   });
 
+const signUpWithEmail = (body) =>
+  new Promise((resolve, reject) => {
+    axios
+      .post(`${config.apiUrl}/api/auth/signup`, body)
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
+  });
+
 export default {
   getProfile,
   logout,
   loginWithGoogle,
   signUpWithGoogle,
   login,
+  signUpWithEmail,
 };

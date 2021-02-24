@@ -1,0 +1,25 @@
+
+
+.signup {
+    &-modal {
+        display: flex;
+        flex-flow: column;
+        align-items: stretch;
+        justify-content: center;
+    }
+    &-or{
+        align-self: center;
+        margin: 10px;
+    }
+    &-form{
+        display:flex;
+        flex-flow: column;
+        align-items: stretch;
+    } 
+    &-field{
+        margin: 8px 0px 8px 0px;
+    } 
+    &-submit{
+        margin: 16px 0px 16px 0px;
+    }
+}

@@ -3,12 +3,12 @@ import {
   combineReducers,
 } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
-import signinModalReducer from '../signinModal/signInModalSlice';
+import authModalSlice from '../authModal/AuthModalSlice';
 import revieweeTabNavSlice from '../reviewee/revieweeTabNavSlice';
 
 const store = configureStore({
   reducer: combineReducers({
-    signinModalReducer,
+    authModalSlice,
     revieweeTabNavSlice,
     /* favoriteCards: favoriteCardsSlice */
   }),
