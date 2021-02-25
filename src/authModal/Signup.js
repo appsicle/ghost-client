@@ -12,7 +12,7 @@ import './Signup.scss';
 
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
-const Signup = ({ nextStep }) => {
+const Signup = ({ nextStep, appendToSignupData }) => {
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state.authModalSlice.isOpen);
 
@@ -31,9 +31,15 @@ const Signup = ({ nextStep }) => {
       <ModalBody className="signup-modal">
         <GoogleLogin
           buttonText="Sign up with Google"
-          // TODO: add validation before calling nextStep
-          onSuccess={(res) => nextStep({ idToken: res.tokenObj.id_token, type: 'google' })}
-          onFailure={() => alert('google failure')}
+          onSuccess={(res) => {
+            // TODO: validate if there is already a google account
+            appendToSignupData({ idToken: res.tokenObj.id_token, type: 'google' });
+            nextStep();
+          }}
+          onFailure={(err) => {
+            // TODO: add better warning for failure
+            console.error(err);
+          }}
           clientId={clientId}
           accessType="offline"
         />
@@ -44,9 +50,10 @@ const Signup = ({ nextStep }) => {
           onSubmit={(event) => {
             event.preventDefault();
             // TODO: add validation before calling nextStep
-            nextStep({
+            appendToSignupData({
               email, password, type: 'email', name,
             });
+            nextStep();
           }}
         >
           <FormInput

@@ -23,48 +23,55 @@ const SignupContainer = () => {
   const [signupData, setSignupData] = useState({});
   const [step, setStep] = useState(STEPS.INITIAL);
 
+  const signUpWithGoogle = () => {
+    UserService.signUpWithGoogle({
+      ...signupData,
+    })
+      .then((response) => {
+        dispatch(closeModal());
+        console.log(response);
+        const { role } = response.data;
+        if (role === constants.REVIEWER) {
+          history.push('/reviewerDashboard'); // Bug: wont refresh if already on page
+        } else if (role === constants.REVIEWEE) {
+          history.push('/revieweeDashboard'); // Bug: wont refresh if already on page
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setStep(STEPS.INITIAL);
+      });
+  };
+
+  const signUpWithEmail = () => {
+    UserService.signUpWithEmail({
+      ...signupData,
+    })
+      .then((response) => {
+        dispatch(closeModal());
+        console.log(response);
+        const { role } = response.data;
+        if (role === constants.REVIEWER) {
+          history.push('/reviewerDashboard');
+        } else if (role === constants.REVIEWEE) {
+          history.push('/revieweeDashboard');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setStep(STEPS.INITIAL);
+      });
+  };
+
   useEffect(() => {
     // signup when reached end of signup flow
     if (step === STEPS.FINISHED) {
       switch (signupData.type) {
         case 'google':
-          UserService.signUpWithGoogle({
-            ...signupData,
-          })
-            .then((response) => {
-              dispatch(closeModal());
-              console.log(response);
-              const { role } = response.data;
-              if (role === constants.REVIEWER) {
-                history.push('/reviewerDashboard');
-              } else if (role === constants.REVIEWEE) {
-                history.push('/revieweeDashboard');
-              }
-            })
-            .catch((err) => {
-              console.log(err);
-              history.push('/');
-            });
+          signUpWithGoogle();
           break;
         case 'email':
-          UserService.signUpWithEmail({
-            ...signupData,
-          })
-            .then((response) => {
-              dispatch(closeModal());
-              console.log(response);
-              const { role } = response.data;
-              if (role === constants.REVIEWER) {
-                history.push('/reviewerDashboard');
-              } else if (role === constants.REVIEWEE) {
-                history.push('/revieweeDashboard');
-              }
-            })
-            .catch((err) => {
-              console.log(err);
-              history.push('/');
-              history.go();
-            });
+          signUpWithEmail();
           break;
         default:
           break;
@@ -72,18 +79,22 @@ const SignupContainer = () => {
     }
   }, [step]);
 
-  // update data object from every step in the signup flow
-  const nextStep = (data) => {
-    setSignupData((prev) => ({ ...prev, ...data }));
-    setStep((prev) => prev + 1);
-  };
-
   // TODO: how to handle errors
   switch (step) {
     case STEPS.INITIAL:
-      return <Signup nextStep={nextStep} />;
+      return (
+        <Signup
+          appendToSignupData={(data) => setSignupData((prev) => ({ ...prev, ...data }))}
+          nextStep={() => setStep((prev) => prev + 1)}
+        />
+      );
     case STEPS.ADDITIONAL_INFO:
-      return <SignupAdditionalInfo nextStep={nextStep} />;
+      return (
+        <SignupAdditionalInfo
+          appendToSignupData={(data) => setSignupData((prev) => ({ ...prev, ...data }))}
+          nextStep={() => setStep((prev) => prev + 1)}
+        />
+      );
     default:
       return 'processing...';
   }

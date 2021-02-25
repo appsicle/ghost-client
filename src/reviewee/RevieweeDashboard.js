@@ -26,7 +26,7 @@ const revieweeDashboard = () => {
       console.log('here');
       console.log(response.data);
       setPastSubmissions(response.data);
-      if (response.data) {
+      if (response.data && response.data.length !== 0) {
         setDisplayId(response.data[0]._id);
       }
     };
