@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import UserService from '../user/userService';
+import UserService from '../services/UserService';
 import { guestUser } from '../icons/links';
 
 const useProfile = () => {

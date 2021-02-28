@@ -8,7 +8,7 @@ import {
   REVIEWEE_NAV_OPTIONS,
 } from './revieweeTabNavSlice';
 import { logo } from '../icons/links';
-import './reviewee-dashboard-sidebar.scss';
+import './RevieweeDashboardSidebar.scss';
 
 const RevieweeDashboardSidebar = () => {
   const dispatch = useDispatch();

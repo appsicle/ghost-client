@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { closeModal } from './AuthModalSlice';
 import Signup from './Signup';
 import SignupAdditionalInfo from './SignupAdditionalInfo';
-import UserService from '../user/userService';
+import UserService from '../services/UserService';
 import constants from '../constants';
 
 const STEPS = Object.freeze({

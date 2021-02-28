@@ -9,7 +9,7 @@ import {
 import { GoogleLogin } from 'react-google-login';
 import { closeModal, switchToSignup } from './AuthModalSlice';
 
-import UserService from '../user/userService';
+import UserService from '../services/UserService';
 import constants from '../constants';
 
 import './Signin.scss';

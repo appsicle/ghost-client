@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { FormTextarea, Form, Button } from 'shards-react';
 import { uuid } from 'uuidv4';
 import { Carousel } from 'react-responsive-carousel';
-import config from '../config';
+import config from '../../config';
 import './ReviewerDashboard.css';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 

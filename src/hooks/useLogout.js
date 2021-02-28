@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
 import { useGoogleLogout } from 'react-google-login';
-import UserService from '../user/userService';
+import UserService from '../services/UserService';
 
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 

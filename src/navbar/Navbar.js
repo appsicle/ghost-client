@@ -3,9 +3,16 @@ import { Link } from 'react-router-dom';
 import Profile from '../Profile/Profile';
 import { logo } from '../icons/links';
 
+const Test = ({ a }) => {
+  console.log('test', a === true);
+  return '';
+};
+
 function AppNavbar() {
+  const a = false;
   return (
     <header>
+      <Test a />
       <div className="navbar-container">
         <div className="branding-container">
           <img className="branding" src={logo} alt="" />

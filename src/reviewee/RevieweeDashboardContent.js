@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { REVIEWEE_NAV_OPTIONS } from './revieweeTabNavSlice';
 import RevieweeDashboardNewRequest from './newRequest/RevieweeDashboardNewRequest';
-import RevieweeDashboard from './RevieweeDashboard';
+import PastSubmissions from './pastSubmissions/PastSubmissions';
 
 // toggle between diff contents depending on clicked state
 const RevieweeDashboardContent = () => {
@@ -13,7 +13,7 @@ const RevieweeDashboardContent = () => {
     case REVIEWEE_NAV_OPTIONS.NEW_REQUEST:
       return <RevieweeDashboardNewRequest />;
     case REVIEWEE_NAV_OPTIONS.PAST_SUBMISSIONS:
-      return <RevieweeDashboard />;
+      return <PastSubmissions />;
     default:
       return <p>default</p>;
   }

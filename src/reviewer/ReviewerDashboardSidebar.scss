@@ -1,0 +1,37 @@
+@use '../base';
+
+.reviewer-dashboard-sidebar {
+    &-container {
+        display: flex;
+        flex-flow: column;
+        align-items: stretch;
+    }
+
+    &-branding {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 20px 20px 100px 20px;
+    }
+
+    &-item {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        border-radius: 8px;
+        background-color: white;
+        border: 1;
+        padding: 18px;
+        margin-bottom: 25px;
+
+        &-active {
+            background-color: #3f3d56;
+            color: white;
+        }
+
+        &-text {
+            padding-left: 25px;
+        }
+    }
+}

@@ -9,15 +9,14 @@ import axios from 'axios';
 import Home from './home/Home';
 import constants from './constants';
 import RoleProtectedRoute from './routes/roleProtectedRoute';
-import SignupReviewee from './navbar/SignupReviewee';
 import Layout from './common/Layout';
-import SignUpReviewer from './navbar/SignupReviewer';
-import ReviewerDashboard from './reviewer/ReviewerDashboard';
-import Main from './reviewee/RevieweeDashboard';
+// import ReviewerDashboard from './reviewer/ReviewerDashboard';
 import config from './config';
 import SHCLayout from './common/SHCLayout';
 import RevieweeDashboardSidebar from './reviewee/RevieweeDashboardSidebar';
 import RevieweeDashboardContent from './reviewee/RevieweeDashboardContent';
+import ReviewerDashboardSidebar from './reviewer/ReviewerDashboardSidebar';
+import ReviewerDashboardContent from './reviewer/ReviewerDashboardContent';
 import Profile from './Profile/Profile';
 
 ReactHeap.initialize(config.heapUrl);
@@ -27,27 +26,16 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/signupReviewee">
-          <SignupReviewee />
-        </Route>
-        <Route exact path="/signupReviewer">
-          <SignUpReviewer />
-        </Route>
-        <Route exact path="/test">
-          <SHCLayout
-            Sidebar={<RevieweeDashboardSidebar />}
-            Header={<Profile />}
-            Content={<RevieweeDashboardContent />}
-          />
-        </Route>
         <RoleProtectedRoute
           desiredRole={constants.REVIEWEE}
           path="/revieweeDashboard"
         >
           <>
-            <Layout>
-              <Main />
-            </Layout>
+            <SHCLayout
+              Sidebar={<RevieweeDashboardSidebar />}
+              Header={<Profile />}
+              Content={<RevieweeDashboardContent />}
+            />
           </>
         </RoleProtectedRoute>
         <RoleProtectedRoute
@@ -55,9 +43,11 @@ function App() {
           path="/reviewerDashboard"
         >
           <>
-            <Layout>
-              <ReviewerDashboard />
-            </Layout>
+            <SHCLayout
+              Sidebar={<ReviewerDashboardSidebar />}
+              Header={<Profile />}
+              Content={<ReviewerDashboardContent />}
+            />
           </>
         </RoleProtectedRoute>
         <Layout>

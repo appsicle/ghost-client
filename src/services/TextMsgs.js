@@ -32,4 +32,4 @@ const postTextMsgs = (title, type, additionalInfo, imageURLs) =>
       .catch((err) => reject(err));
   });
 
-export default { postTextMsgs };
+export default postTextMsgs;
